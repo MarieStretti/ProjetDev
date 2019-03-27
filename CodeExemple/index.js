@@ -3,6 +3,7 @@ require([
     "esri/Map",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
+    "esri/core/promiseUtils",
     "dojo/domReady!"
   ], function(Map, MapView,FeatureLayer) {
 
@@ -12,49 +13,49 @@ require([
 
   //*** ADD ***//
 // Define a unique value renderer and symbols
-// ttributs de la rando
-var trailsRenderer = {
+var gareRenderer = {
   "type": "unique-value",
-  "field": "USE_BIKE",
+  "field": "mode",
   "uniqueValueInfos": [
     {
-      "value": "Yes",
+      "value": "RER",
       "symbol": {
-        "color": [26, 26, 26, 255],
-        "width": 0.9,
-        "type": "simple-line",
-        "style": "dot"
+        "color": [20, 26, 26, 255],
+        "size": 20,
+        "type": "simple-marker",
+        //"style": "dot"
       },
-      "label": "Bikes"
+    //  "label": "Bikes"
     },
     {
-      "value": "No",
+      "value": "Metro",
       "symbol": {
         "color": [230, 0, 0, 255],
         "width": 0.9,
-        "type": "simple-line",
-        "style": "dot"
+        "type": "simple-marker",
+        //"style": "dot"
       },
-      "label": "No Bikes"
+    //  "label": "No Bikes"
     }
   ]
-}
+};
 
 // Create the layer and set the renderer
-// couche rando
-var trails = new FeatureLayer({
-  url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0",
-  renderer: trailsRenderer // style def au dessus
+var gare = new FeatureLayer({
+  portalItem: {
+    id: "7898dc0c69f848f08c0ccb720b96bd95",
+  },
+  renderer: gareRenderer
 });
 
 // Add the layer
-map.add(trails,0);
+map.add(gare,0);
 
 // creation map
   var view = new MapView({
     container: "viewDiv",
     map: map,
-    center: [-118.71511,34.09042], //longlats
+    center: [2.4,48.8], //longlats
     zoom: 11
   });
 
