@@ -1,4 +1,4 @@
-
+// import modules d'esri et fcts
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -7,11 +7,12 @@ require([
   ], function(Map, MapView,FeatureLayer) {
 
   var map = new Map({
-    basemap: "topo-vector"
+    basemap: "topo-vector" //fond de carte
   });
 
   //*** ADD ***//
 // Define a unique value renderer and symbols
+// ttributs de la rando
 var trailsRenderer = {
   "type": "unique-value",
   "field": "USE_BIKE",
@@ -40,14 +41,16 @@ var trailsRenderer = {
 }
 
 // Create the layer and set the renderer
+// couche rando
 var trails = new FeatureLayer({
   url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0",
-  renderer: trailsRenderer
+  renderer: trailsRenderer // style def au dessus
 });
 
 // Add the layer
 map.add(trails,0);
 
+// creation map
   var view = new MapView({
     container: "viewDiv",
     map: map,
