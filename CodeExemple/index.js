@@ -15,10 +15,10 @@ require([
 // Define a unique value renderer and symbols
 var gareRenderer = {
   "type": "unique-value",
-  "field": "mode",
+  "field": "etat_lib",
   "uniqueValueInfos": [
     {
-      "value": "RER",
+      "value": "en cours",
       "symbol": {
         "color": [20, 26, 26, 255],
         "size": 20,
@@ -28,7 +28,7 @@ var gareRenderer = {
     //  "label": "Bikes"
     },
     {
-      "value": "Metro",
+      "value": "programmé",
       "symbol": {
         "color": [230, 0, 0, 255],
         "width": 0.9,
@@ -36,6 +36,15 @@ var gareRenderer = {
         //"style": "dot"
       },
     //  "label": "No Bikes"
+  },
+    {
+      "value": "à l'étude",
+      "symbol": {
+        "color": [20, 26, 26, 255],
+        "size": 20,
+        "type": "simple-marker",
+        //"style": "dot"
+      },
     }
   ]
 };
@@ -43,7 +52,7 @@ var gareRenderer = {
 // Create the layer and set the renderer
 var gare = new FeatureLayer({
   portalItem: {
-    id: "7898dc0c69f848f08c0ccb720b96bd95",
+    id: "b05b3483219442c58309462bc477fb5f",
   },
   renderer: gareRenderer
 });
