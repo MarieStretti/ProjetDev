@@ -1,3 +1,6 @@
+// choose language
+annyang.setLanguage('fr-FR');
+
 
 if (!annyang) {
   console.log("Speech Recognition is not supported");
@@ -5,8 +8,10 @@ if (!annyang) {
 if (annyang) {
   // Add our commands to annyang
   annyang.addCommands({
-    'hello': function() { alert('Hello world!'); }
+    'bonjour': function() { alert('Hello world!'); }
   });
+
+
 
   // Tell KITT to use annyang
   SpeechKITT.annyang();
