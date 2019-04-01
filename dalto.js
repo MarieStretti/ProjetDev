@@ -20,7 +20,7 @@ var areaRenderer = {
     {
       "value": "en cours",
       "symbol": {
-        "color": [20, 255, 255, 255],
+        "color": [152,210,23, 255],
         "size": 20,
         "type": "simple-fill",
         //"style": "dot"
@@ -30,7 +30,7 @@ var areaRenderer = {
     {
       "value": "programmé",
       "symbol": {
-        "color": [230, 0, 0, 255],
+        "color": [255,251,165, 255],
         "width": 0.9,
         "type": "simple-fill",
         //"style": "dot"
@@ -40,7 +40,7 @@ var areaRenderer = {
     {
       "value": "à l'étude",
       "symbol": {
-        "color": [20, 26, 26, 255],
+        "color": [251,114,0,255],
         "size": 20,
         "type": "simple-fill",
         //"style": "dot"
