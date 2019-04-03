@@ -1,11 +1,14 @@
 // import modules d'esri et fcts
+var zoomlevel = 11;
+
 require([
     "esri/Map",
     "esri/views/MapView",
     "esri/layers/FeatureLayer",
+    "esri/widgets/Zoom",
     "esri/core/promiseUtils",
     "dojo/domReady!"
-  ], function(Map, MapView,FeatureLayer) {
+  ], function CreateMap(Map, MapView,FeatureLayer,Zoom,domReady) {
 
   var map = new Map({
     basemap: "topo-vector" //fond de carte
@@ -65,8 +68,11 @@ map.add(area,0);
     container: "viewDiv",
     map: map,
     center: [2.4,48.8], //longlats
-    zoom: 11
+    zoom: zoomlevel,
   });
+
+  view.zoom=zoomlevel;
+  zoomlevel = view.zoom;
 
 //*** Add div element to show coordates ***//
   var coordsWidget = document.createElement("div");
@@ -93,4 +99,54 @@ map.add(area,0);
     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
   });
 
+
+
+
+
+annyang.setLanguage('fr-FR');
+
+//document.cookie = 'zoomlevel=3';
+
+if (!annyang) {
+  console.log("Speech Recognition is not supported");
+}
+
+if (annyang) {
+  // Add our commands to annyang
+  annyang.addCommands({
+    'bonjour': function() { alert('Hello world!'); }
+  });
+
+  // Add our commands to annyang
+  annyang.addCommands({
+    'plus': function() {
+      console.log("tu as dit plus");
+      console.log(zoomlevel);
+      zoomlevel = view.zoom+1;
+      console.log(zoomlevel);
+      view.zoom= zoomlevel
+      }
+  });
+
+
+  annyang.addCommands({
+    'moins': function() {
+      console.log("tu as dit moins");
+      console.log(zoomlevel);
+      zoomlevel = view.zoom-1;
+      console.log(zoomlevel);
+      view.zoom= zoomlevel
+      }
+  });
+
+
+  // Tell KITT to use annyang
+  SpeechKITT.annyang();
+
+  // Define a stylesheet for KITT to use
+  SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css');
+
+  // Render KITT's interface
+  SpeechKITT.vroom();
+}
 });
