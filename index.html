@@ -5,28 +5,35 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>ArcGIS</title>
 
-    <style>
-      html, body, #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-
     <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+    <link rel="stylesheet" href="dalto.css">
     <script src="https://js.arcgis.com/4.10/"></script>
     <script src="dalto.js"></script>
 
   </head>
   <body>
-    <h1> Projet CAMAYeux </h1>
 
     <div id="viewDiv">
-      <div id="button">
-        <button type="button">Click Me!</button>
+
+      <div id="volet_clos">
+        <div id="volet">
+          <div id="button">
+            <button id="btnD" class="btn">Deutéranopie</button>
+            <button id="btnP" class="btn">Protanopie</button>
+            <button id="btnT" class="btn">Tritanopie</button>
+            <button id="btnPP" class="btn">Paramètres personnalisables</button>
+            <div id="PP">
+              <form id="form"></form>
+            </div>
+          </div>
+
+          <a href="#volet" class="ouvrir" aria-hidden="true">Ouvrir !</a>
+          <a href="#volet_clos" class="fermer" aria-hidden="true">Fermer !</a>
+        </div>
       </div>
     </div>
+
+
 <!--
 <style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="TestARCGIS" src="//ensggeomatique.maps.arcgis.com/apps/Embed/index.html?webmap=e2017899f2444494aea4fe0d9e98fe58&extent=0.8995,48.0922,4.135,49.1739&zoom=true&previewImage=false&scale=true&legendlayers=true&disable_scroll=false&theme=light"></iframe></div>    <div id="viewDiv"></div>
 -->
