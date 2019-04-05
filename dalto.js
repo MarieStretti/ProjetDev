@@ -62,7 +62,7 @@ require([
     map.remove(area,0);
     map.remove(deuter,0);
     map.remove(tritan,0);
-  map.add(protan,0);
+    map.add(protan,0);
   });
 
   // Couche tritanopie
@@ -76,7 +76,7 @@ require([
     map.remove(area,0);
     map.remove(deuter,0);
     map.remove(protan,0);
-  map.add(tritan,0);
+    map.add(tritan,0);
   });
 
 
@@ -132,9 +132,24 @@ require([
     document.getElementById("ProjProg").innerHTML = "<input type='color' id='prog' class='btnparam'>";
     document.getElementById("ProjEtude").innerHTML = "<input type='color' id='etude' class='btnparam'>";
 
+
+    // function chgColors(){
+    //   colorC = document.getElementById("cours").value;
+    //   colorCours = hexToRGB(colorC);
+    //
+    //   colorP = document.getElementById("prog").value;
+    //   colorProg = hexToRGB(colorP);
+    //
+    //   colorE = document.getElementById("etude").value;
+    //   colorEtude = hexToRGB(colorE);
+    //
+    //   maj(colorCours,colorProg,colorEtude);
+    // }
+
     var items = document.getElementsByClassName('btnparam');
     for (var i = 0; i < items.length; i++) {
       items[i].addEventListener("change",function(){
+
         colorC = document.getElementById("cours").value;
         colorCours = hexToRGB(colorC);
 
@@ -146,13 +161,13 @@ require([
 
         param = maj(colorCours,colorProg,colorEtude);
 
-        
         var paramPerso = new FeatureLayer({
           portalItem: {
             id: "fdf1a27e48eb4308b58f28adf1d08fc9",
           },
           renderer: param
         });
+
         map.remove(area,0);
         map.remove(deuter,0);
         map.remove(protan,0);
