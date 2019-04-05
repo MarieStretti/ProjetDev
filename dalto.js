@@ -1,11 +1,11 @@
 // import modules d'esri et fcts
 require([
-    "esri/Map",
-    "esri/views/MapView",
-    "esri/layers/FeatureLayer",
-    "esri/core/promiseUtils",
-    "dojo/domReady!"
-  ], function(Map, MapView,FeatureLayer) {
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/FeatureLayer",
+  "esri/core/promiseUtils",
+  "dojo/domReady!"
+], function(Map, MapView,FeatureLayer) {
 
   var map = new Map({
     basemap: "topo-vector" //fond de carte
@@ -38,164 +38,105 @@ require([
   });
 
   // Couche deuteranopie
-  var deuter = new FeatureLayer({
-    portalItem: {
-      id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-    },
-    renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
-  });
   document.getElementById("btnD").addEventListener("click", function(){
-    map.remove(area,0);
-    map.remove(protan,0);
-    map.remove(tritan,0);
+    var deuter = new FeatureLayer({
+      portalItem: {
+        id: "fdf1a27e48eb4308b58f28adf1d08fc9",
+      },
+      renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
+    });
+    map.removeAll();
+    // map.remove(area,0);
+    // map.remove(protan,0);
+    // map.remove(tritan,0);
     map.add(deuter,0);
   });
 
   // Couche protanopie
-  var protan = new FeatureLayer({
-    portalItem: {
-      id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-    },
-    renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
-  });
   document.getElementById("btnP").addEventListener("click", function(){
-    map.remove(area,0);
-    map.remove(deuter,0);
-    map.remove(tritan,0);
+    var protan = new FeatureLayer({
+      portalItem: {
+        id: "fdf1a27e48eb4308b58f28adf1d08fc9",
+      },
+      renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
+    });
+    map.removeAll();
+    // map.remove(area,0);
+    // map.remove(deuter,0);
+    // map.remove(tritan,0);
     map.add(protan,0);
   });
 
   // Couche tritanopie
-  var tritan = new FeatureLayer({
-    portalItem: {
-      id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-    },
-    renderer: maj([12,140,236,255],[255,255,255,255],[236,12,12,255])
-  });
   document.getElementById("btnT").addEventListener("click", function(){
-    map.remove(area,0);
-    map.remove(deuter,0);
-    map.remove(protan,0);
+    var tritan = new FeatureLayer({
+      portalItem: {
+        id: "fdf1a27e48eb4308b58f28adf1d08fc9",
+      },
+      renderer: maj([12,140,236,255],[255,255,255,255],[236,12,12,255])
+    });
+    map.removeAll();
+    // map.remove(area,0);
+    // map.remove(deuter,0);
+    // map.remove(protan,0);
     map.add(tritan,0);
   });
 
+  //################################### COULEURS CHANGEES DIRECTEMENT ###############################################
 
   var colorCours;
   var colorProg;
   var colorEtude;
   var param;
 
-  // document.getElementById("btnPP").addEventListener("click", function(){
-  //   document.getElementById("PP").innerHTML =
-  //   "<p>Projets en cours :</p>"+"<div id='ProjCours'></div>"+"<p>Projets programmés</p>"+"<div id='ProjProg'></div>"+"<p>Projets à l'étude</p>"+"<div id='ProjEtude'></div>"+"<div id='Submit'></div>";
-  //
-  //   document.getElementById("ProjCours").innerHTML = "<input type='color' id='cours' class='btnparam'>";
-  //   document.getElementById("ProjProg").innerHTML = "<input type='color' id='prog' class='btnparam'>";
-  //   document.getElementById("ProjEtude").innerHTML = "<input type='color' id='etude' class='btnparam'>";
-  //   document.getElementById("Submit").innerHTML = "<input type='button' id='btnSubmit' value='Envoyer'>";
-  //
-  //   var items = document.getElementsByClassName('btnparam');
-  //   for (var i = 0; i < items.length; i++) {
-  //     items[i].addEventListener("change",function(){
-  //       colorC = document.getElementById("cours");
-  //       colorCours = hexToRGB(colorC.value);
-  //
-  //       colorP = document.getElementById("prog").value;
-  //       colorProg = hexToRGB(colorP);
-  //
-  //       colorE = document.getElementById("etude").value;
-  //       colorEtude = hexToRGB(colorE);
-  //
-  //     });
-  //   };
-  //
-  //   document.getElementById('btnSubmit').addEventListener('click',function(){
-  //     param = maj(colorCours,colorProg,colorEtude);
-  //     var paramPerso = new FeatureLayer({
-  //       portalItem: {
-  //         id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-  //       },
-  //       renderer: param
-  //     });
-  //     map.remove(area,0);
-  //     map.remove(deuter,0);
-  //     map.remove(protan,0);
-  //     map.remove(tritan,0);
-  //     map.add(paramPerso,0);
-  //   });
-
   document.getElementById("btnPP").addEventListener("click", function(){
-    document.getElementById("PP").innerHTML =
-    "<p>Projets en cours :</p>"+"<div id='ProjCours'></div>"+"<p>Projets programmés</p>"+"<div id='ProjProg'></div>"+"<p>Projets à l'étude</p>"+"<div id='ProjEtude'></div>";
+    var pp = document.getElementById("PP");
+    if (pp.style.display == "block") {
+      pp.style.display = "none";
+    }
+    else {
+      pp.style.display = "block";
+    }
+  });
 
-    document.getElementById("ProjCours").innerHTML = "<input type='color' id='cours' class='btnparam'>";
-    document.getElementById("ProjProg").innerHTML = "<input type='color' id='prog' class='btnparam'>";
-    document.getElementById("ProjEtude").innerHTML = "<input type='color' id='etude' class='btnparam'>";
 
+  var items = document.getElementsByClassName('btnparam');
+  for (var i = 0; i < items.length; i++) {
+    items[i].addEventListener("change",function() {
 
-    // function chgColors(){
-    //   colorC = document.getElementById("cours").value;
-    //   colorCours = hexToRGB(colorC);
-    //
-    //   colorP = document.getElementById("prog").value;
-    //   colorProg = hexToRGB(colorP);
-    //
-    //   colorE = document.getElementById("etude").value;
-    //   colorEtude = hexToRGB(colorE);
-    //
-    //   maj(colorCours,colorProg,colorEtude);
-    // }
+      colorC = document.getElementById("cours").value;
+      colorCours = hexToRGB(colorC);
 
-    var items = document.getElementsByClassName('btnparam');
-    for (var i = 0; i < items.length; i++) {
-      items[i].addEventListener("change",function(){
+      colorP = document.getElementById("prog").value;
+      colorProg = hexToRGB(colorP);
 
-        colorC = document.getElementById("cours").value;
-        colorCours = hexToRGB(colorC);
+      colorE = document.getElementById("etude").value;
+      colorEtude = hexToRGB(colorE);
 
-        colorP = document.getElementById("prog").value;
-        colorProg = hexToRGB(colorP);
+      param = maj(colorCours,colorProg,colorEtude);
 
-        colorE = document.getElementById("etude").value;
-        colorEtude = hexToRGB(colorE);
+      map.remove(paramPerso,0);
 
-        param = maj(colorCours,colorProg,colorEtude);
-
-        var paramPerso = new FeatureLayer({
-          portalItem: {
-            id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-          },
-          renderer: param
-        });
-
-        map.remove(area,0);
-        map.remove(deuter,0);
-        map.remove(protan,0);
-        map.remove(tritan,0);
-        map.add(paramPerso,0);
+      var paramPerso = new FeatureLayer({
+        portalItem: {
+          id: "fdf1a27e48eb4308b58f28adf1d08fc9",
+        },
+        renderer: param
       });
+      map.removeAll();
+
+      map.add(paramPerso,0);
+    });
+  };
 
 
-    };
-
-
-    // document.getElementById("cours").addEventListener('change', function(){
-    //   colorC = document.getElementById("cours").value;
-    //   colorCours = hexToRGB(colorC,255);
-    //   // console.log(colorCours);
-    // });
-    // document.getElementById("prog").addEventListener('change', function(){
-    //   colorP = document.getElementById("prog").value;
-    //   colorProg = hexToRGB(colorP,255);
-    //   // console.log(colorProg);
-    // });
-    // document.getElementById("etude").addEventListener('change', function(){
-    //   colorE = document.getElementById("etude").value;
-    //   colorEtude = hexToRGB(colorE,255);
-    // });
-
-});
-
+  /*
+  * Met a jour les couleurs des surfaces representant les amenagements (renderer)
+  * param color0 = couleur des projets 'en cours'
+  * param color1 = couleur des projets 'programmes'
+  * param color2 = couleur des projets 'a l'etude'
+  * return le renderer modifie
+  */
   function maj(color0,color1,color2){
     var param = {
       "type": "unique-value",
@@ -216,7 +157,7 @@ require([
             "width": 0.9,
             "type": "simple-fill"
           },
-      },
+        },
         {
           "value": "à l'étude",
           "symbol": {
@@ -227,22 +168,29 @@ require([
         }
       ]
     };
-  return param;
+    return param;
   };
 
+  /*
+  * Convertir les couleurs en hexadecimales en rgb +- la transparence
+  * param hex = couleur en hexadecimales
+  * param alpha = transparence
+  * return la liste rgb +- la transparence
+  */
   function hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),
-        g = parseInt(hex.slice(3, 5), 16),
-        b = parseInt(hex.slice(5, 7), 16);
+    g = parseInt(hex.slice(3, 5), 16),
+    b = parseInt(hex.slice(5, 7), 16);
     if (alpha) {
       var list = [r,g,b,alpha];
-        return list;
+      return list;
     } else {
       var list = [r,g,b];
-        return list;
+      return list;
     }
   }
 });
+
 
 // //*** Add div element to show coordates ***//
 //   var coordsWidget = document.createElement("div");
