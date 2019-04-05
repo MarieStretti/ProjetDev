@@ -1,3 +1,9 @@
+//initialisation du niveau de zoom
+var zoomlevel = 11;
+var lng_c = 2.4;
+var lat_c = 48.8;
+
+// import modules d'esri et fcts
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -13,7 +19,7 @@ require([
     "esri/Color",
     "dojo/domReady!"
   ], function(Map, MapView, FeatureLayer, domReady, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
-        UniqueValueRenderer, Color) {
+        UniqueValueRenderer, Color, Zoom) {
 
   var map = new Map({
     basemap: "topo-vector"
@@ -95,13 +101,21 @@ map.add(gare1);
 
 
 // On défini la vue initiale de la carte et on la place dans la div
-
+// creation map
   var view = new MapView({
     container: "viewDiv",
     map: map,
-    center: [2.4,48.8], //longlats
-    zoom: 11
+    center: [lng_c,lat_c], //longlats
+    zoom: zoomlevel
   });
+
+  view.zoom=zoomlevel;
+  zoomlevel = view.zoom;
+
+  view.center.longitude = lng_c;
+  lng_c = view.center.longitude;
+  view.center.latitude = lat_c;
+  lat_c = view.center.latitude;
 
 
 // Add div element to show coordates
@@ -216,6 +230,9 @@ function clignoter(){
   }
 
 }
+
+  commande_voc (view,map);
+
 
 });
 

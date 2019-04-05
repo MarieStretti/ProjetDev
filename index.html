@@ -14,17 +14,36 @@
       }
     </style>
 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
-    <script src="https://js.arcgis.com/4.10/"></script>
-    <script src="dalto.js"></script>
+
 
   </head>
   <body>
-    <h1> Projet CAMAYeux </h1>
+    <h1> Projet CAMAYeux - PARTIE SURBRILLANCE</h1>
+
+
 
      <div id="viewDiv"></div>
+
+     <div id="blinker">Blink! Blink! Blink!</div>
+
+
+       <label> Ligne RER <input id="ligneRER"> </label>
+       <p></p>
+       <input id="bouton" type="submit" value="Lancer la recherche !"/>
+
 <!--
 <style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="TestARCGIS" src="//ensggeomatique.maps.arcgis.com/apps/Embed/index.html?webmap=e2017899f2444494aea4fe0d9e98fe58&extent=0.8995,48.0922,4.135,49.1739&zoom=true&previewImage=false&scale=true&legendlayers=true&disable_scroll=false&theme=light"></iframe></div>    <div id="viewDiv"></div>
 -->
+
+<!--Script nécéssaire à l'aide vocale   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/speechkitt.min.js"></script>
+
+<script src="annyang.js"></script>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+<script src="https://js.arcgis.com/4.11/"></script>
+<script src="surbrillance.js"></script>
+
   </body>
 </html>
