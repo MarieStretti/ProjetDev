@@ -1,6 +1,9 @@
-// import modules d'esri et fcts
+//initialisation du niveau de zoom
 var zoomlevel = 11;
+var lng_c = 2.4;
+var lat_c = 48.8;
 
+// import modules d'esri et fcts
 require([
     "esri/Map",
     "esri/views/MapView",
@@ -67,12 +70,17 @@ map.add(area,0);
   var view = new MapView({
     container: "viewDiv",
     map: map,
-    center: [2.4,48.8], //longlats
-    zoom: zoomlevel,
+    center: [lng_c,lat_c], //longlats
+    zoom: zoomlevel
   });
 
   view.zoom=zoomlevel;
   zoomlevel = view.zoom;
+
+  view.center.longitude = lng_c;
+  lng_c = view.center.longitude;
+  view.center.latitude = lat_c;
+  lat_c = view.center.latitude;
 
 //*** Add div element to show coordates ***//
   var coordsWidget = document.createElement("div");
@@ -99,54 +107,8 @@ map.add(area,0);
     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
   });
 
+ //utiliser la commande vocale
+  commande_voc (view,map);
 
 
-
-
-annyang.setLanguage('fr-FR');
-
-//document.cookie = 'zoomlevel=3';
-
-if (!annyang) {
-  console.log("Speech Recognition is not supported");
-}
-
-if (annyang) {
-  // Add our commands to annyang
-  annyang.addCommands({
-    'bonjour': function() { alert('Hello world!'); }
-  });
-
-  // Add our commands to annyang
-  annyang.addCommands({
-    'plus': function() {
-      console.log("tu as dit plus");
-      console.log(zoomlevel);
-      zoomlevel = view.zoom+1;
-      console.log(zoomlevel);
-      view.zoom= zoomlevel
-      }
-  });
-
-
-  annyang.addCommands({
-    'moins': function() {
-      console.log("tu as dit moins");
-      console.log(zoomlevel);
-      zoomlevel = view.zoom-1;
-      console.log(zoomlevel);
-      view.zoom= zoomlevel
-      }
-  });
-
-
-  // Tell KITT to use annyang
-  SpeechKITT.annyang();
-
-  // Define a stylesheet for KITT to use
-  SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css');
-
-  // Render KITT's interface
-  SpeechKITT.vroom();
-}
 });
