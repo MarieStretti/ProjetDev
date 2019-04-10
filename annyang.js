@@ -7,14 +7,15 @@
    }
 
    if (annyang) {
-     // Ajout commande
+     // Ajout des commandes vocales
      annyang.addCommands({
        'bonjour': function() { alert('Hello world!'); }
      });
 
+     //Zoom d'un niveau
      annyang.addCommands({
        'plus': function() {
-         console.log("tu as dit plus");
+         console.log("plus");
          console.log(zoomlevel);
          zoomlevel = view.zoom+1;
          console.log(zoomlevel);
@@ -22,9 +23,10 @@
          }
      });
 
+     //DéZoom d'un niveau
      annyang.addCommands({
        'moins': function() {
-         console.log("tu as dit moins");
+         console.log("moins");
          console.log(zoomlevel);
          zoomlevel = view.zoom-1;
          console.log(zoomlevel);
@@ -32,16 +34,67 @@
          }
      });
 
+     //Déplacement de la vue pour voir la partie plus à gauche
      annyang.addCommands({
        'gauche': function() {
-         console.log("tu as dit gauche");
-         lng_c = view.center.longitude - 1;
-         view.center.longitude = lng_c;
+         console.log("gauche");
+         var xmin = view.extent.xmin.toFixed(2);
+         var xmax = view.extent.xmax.toFixed(2);
+         var x_range = xmax - xmin;
+         var x_new = xmin - (x_range/6);
+         view.center.x = x_new;
          view.goTo({
            target: view.center,
          });
          }
      });
+
+     //Déplacement de la vue pour voir la partie plus à droite
+     annyang.addCommands({
+      'droite': function() {
+        console.log("droite");
+        var xmin = view.extent.xmin.toFixed(2);
+        var xmax = view.extent.xmax.toFixed(2);
+        var x_range = xmax - xmin;
+        var x_new = xmax + (x_range/6);
+        view.center.x = x_new;
+        view.goTo({
+          target: view.center,
+        });
+        }
+     });
+
+
+  //Déplacement de la vue pour voir la partie plus en haut
+     annyang.addCommands({
+      'monte': function() {
+        console.log("haut");
+        var ymin = view.extent.ymin.toFixed(2);
+        var ymax = view.extent.ymax.toFixed(2);
+        var y_range = ymax - ymin;
+        var y_new = ymax + (y_range/6);
+        view.center.y = y_new;
+        view.goTo({
+          target: view.center,
+        });
+        }
+     });
+
+  //Déplacement de la vue pour voir la partie plus à gauche
+     annyang.addCommands({
+        'descend': function() {
+          console.log("bas");
+          var ymin = view.extent.ymin.toFixed(2);
+          var ymax = view.extent.ymax.toFixed(2);
+          var y_range = ymax - ymin;
+          var y_new = ymin - (y_range/6);
+          view.center.y = y_new;
+          view.goTo({
+            target: view.center,
+          });
+          }
+      });
+
 
 
 

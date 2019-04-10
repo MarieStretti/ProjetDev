@@ -112,11 +112,6 @@ map.add(gare1);
   view.zoom=zoomlevel;
   zoomlevel = view.zoom;
 
-  view.center.longitude = lng_c;
-  lng_c = view.center.longitude;
-  view.center.latitude = lat_c;
-  lat_c = view.center.latitude;
-
 
 // Add div element to show coordates
   var coordsWidget = document.createElement("div");
