@@ -1,49 +1,43 @@
 
 html, body, #viewDiv {
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    align-content: center;
-    display: flex;
-  
-  }
-  
-  
-  h1{
-      background : lightgreen;
-  }
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  align-content: center;
 
-  #viewDiv{
-    order:2;
-  }
-  .NSContainer{
-      
-      flex-direction: column;
-  }  
-  .EOContainer{
-    justify-content: center;
-    flex-direction: row;
-}  
-  
-  #cadreNord{
-      order:1;
-      background : gold;
-  }
-  
-  #cadreOuest{
-    order:2;
-      background : red;
-  }
-  
-  #cadreEst{
-    order:3;
-      background : pink;
-  }
-  
-  #cadreSud{
-    order:4;
-      background : blueviolet;
-  }
-  
+}
+#viewDiv{
+    height: 90%;
+    width: 95%;
+}
+
+
+
+
+#cadreNord{
+    margin-left: 3%;
+    height : 3%;
+    width : 95%;
+    background : lightgoldenrodyellow;
+}
+
+#cadreOuest{
+    float: left;
+    background : lightgoldenrodyellow;
+    height : 90%;
+}
+
+#cadreEst{
+    float: right;
+    background : lightgoldenrodyellow;
+    height : 90%;
+}
+
+#cadreSud{
+    margin-left: 3%;
+    width : 95%;
+    height : 3%;
+    background : lightgoldenrodyellow;
+}

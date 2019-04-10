@@ -1,178 +1,295 @@
 
 require([
-  "esri/Map",
-  "esri/views/MapView",
-  "esri/layers/FeatureLayer",
-  "esri/tasks/support/Query",
-  "esri/tasks/QueryTask",
-  "esri/Graphic",
-  "dojo/domReady!"
-], function(Map, MapView,FeatureLayer,Query, QueryTask, Graphic) {
+    "esri/Map",
+    "esri/views/MapView",
+    "esri/layers/FeatureLayer",
+    "esri/tasks/support/Query",
+    "esri/geometry/SpatialReference",
+    "esri/geometry/projection",
+    "esri/tasks/QueryTask",
+    "esri/Graphic",
+    "esri/geometry/Point",
+    "dojo/domReady!"
+    
+  ], function(Map, MapView,FeatureLayer,Query,SpatialReference,projection,QueryTask, Graphic,Point) {
 
-var map = new Map({
-  basemap: "topo-vector"
-});
-
-
-//*** ADD ***//
-// Define query SQL expression
-var query = new Query();
-query.where = "TRL_NAME like '%backbone%'"
-query.outFields = ["*"];
-query.returnGeometry = true;
-
-// Define the query task
-var queryTask = new QueryTask({
-  url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0"
-});
-
-// Execute the query
-queryTask.execute(query)
-  .then(function(result){
-    console.log(result.features.length)
-  })
-  .otherwise(function(e){
-    console.log(e);
+  var map = new Map({
+    basemap: "topo-vector"
   });
 
 
-//*** ADD ***//
-// Define query SQL expression
-var query = new Query();
-query.where = "TRL_NAME like '%backbone%'"
-query.outFields = ["*"];
-query.returnGeometry = true;
-
-// Define the query task
-var queryTask = new QueryTask({
-  url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0"
-});
-
-// Execute the query
-queryTask.execute(query)
-  .then(function(result){
-    console.log(result.features.length)
-  })
-  .otherwise(function(e){
-    console.log(e);
-  });
-
-
-  // Execute the query
-queryTask.execute(query)
-  .then(function(result){
-    //console.log(result.features.length)
-
-    //*** ADD ***//
-    result.features.forEach(function(item){
-       var g = new Graphic({
-         geometry: item.geometry,
-         attributes: item.attributes,
-         symbol: {
-           type: "simple-line",
-           color: "black",
-           width: 1.2,
-           style: "short-dot"
-         },
-         popupTemplate: {
-           title: "{TRL_NAME}",
-           content: "{*}"  // All of the fields
-         }
-       });
-       view.graphics.add(g);
-    });
-
-    // Zoom to the features
-    view.goTo({
-      target: view.graphics
-    });
-
-   })
-
-  .otherwise(function(e){
-    console.log(e);
-  });
-
-
-
-// Define a unique value renderer and symbols
-var trailsRenderer = {
-"type": "unique-value",
-"field": "USE_BIKE",
-"uniqueValueInfos": [
-  {
-    "value": "Yes",
-    "symbol": {
-      "color": [26, 26, 26, 255],
-      "width": 0.9,
-      "type": "simple-line",
-      "style": "dot"
+  //*** ADD ***//
+  // Define a unique value renderer and symbols
+  var gareRenderer = {
+    "type": "unique-value",
+    "field": "mode",
+    "uniqueValueInfos": [
+      {
+        "value": "Metro",
+        "symbol": {
+          "color": [150, 0, 0, 200],
+          "size": 5,
+          "type": "simple-marker",
+          //"style": "dot"
+        },
+      //  "label": "Bikes"
+      },
+      {
+        "value": "Tramway",
+        "symbol": {
+          "color": [0, 150, 0, 255],
+          "size": 5,
+          "type": "simple-marker",
+          //"style": "dot"
+        },
+      //  "label": "No Bikes"
     },
-    "label": "Bikes"
-  },
-  {
-    "value": "No",
-    "symbol": {
-      "color": [230, 0, 0, 255],
-      "width": 0.9,
-      "type": "simple-line",
-      "style": "dot"
+      {
+        "value": "RER",
+        "symbol": {
+          "color": [0, 0, 150, 255],
+          "size": 5,
+          "type": "simple-marker",
+          //"style": "dot"
+        },
+      }
+    ]
+  };
+
+
+  // Create the layer and set the renderer
+  var gares = new FeatureLayer({
+    portalItem: {
+      id: "2ee97649b65244ccbb4f3377c5a55497",
     },
-    "label": "No Bikes"
+    renderer: gareRenderer
+  });
+
+
+  // Add the layer
+  map.add(gares,0);
+
+  // creation map
+  var view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [2.34,48.85], //longlats
+    zoom: 12
+  });
+
+
+  /// CADRE DE COULEUR
+  var cadreNord  = document.getElementById('cadreNord');
+  var cadreOuest = document.getElementById('cadreOuest');
+  var cadreEst   = document.getElementById('cadreEst');
+  var cadreSud   = document.getElementById('cadreSud');
+
+
+
+  /// on stocke les coordonnées de TOUS LES POINTS
+  var query = gares.createQuery();
+  query.outFields = ["x","y"];
+  gares.queryFeatures(query).features;
+  var liste_points = [];
+  gares.queryFeatures(query).then(function(response){
+    response.features.forEach(function(item){
+        liste_points.push([item.attributes.x,item.attributes.y]); // on rajoute les couples [x,y] aux coordonnées
+    });
+  });
+
+/*
+  var size   =  view.size; // emprise en pixels de la carte
+  var width  = size[0]; // longueur de la carte
+  var height = size[1]; // largeur de la carte
+  var x_center = height/2;
+  var y_center = width/2;
+
+  console.log("center: ",x_center, y_center);
+
+
+  // dimensions du polygone d'emprise
+  var dx = 0.5*(height/2);
+  var dy = 0.5*(width/2);
+
+  console.log("dx, dy : ",dx, dy);
+*/
+ 
+
+  ///////// au clic : activation du cadre ///////////////////////:
+  view.on(['pointer-down'], function() {
+
+    console.log('start!');
+  /*
+    var x_ouest = x_center - dx;
+    var x_est = x_center + dx;
+    var y_nord = y_center - dy; /// pixels != lon/lat !!!!!
+    var y_sud = y_center + dy;
+
+    var lat_nord = view.toMap({x: x_est, y:y_nord}).latitude;
+    var lat_sud = view.toMap({x: x_est, y:y_sud}).latitude;
+    var lon_ouest = view.toMap({x: x_ouest, y:y_nord}).longitude;
+    var lon_est = view.toMap({x: x_est, y:y_nord}).longitude;
+*/
+
+
+    var lon_ouest = 2.282; // données rentrées à la main
+    var lat_sud = 48.830;
+    var lon_est = 2.313;
+    var lat_nord = 48.890;
+
+    console.log("lat_N : ",lat_nord);
+    console.log("lat_S : ",lat_sud);
+    console.log("lon_E : ",lon_est);
+    console.log("lon_O : ",lon_ouest);
+
+    projection.load() /// on 'charge' le module projection  pour pouvoir projeter?
+    if (!projection.isSupported()) { // vérification du chargement du module
+      console.error("projection is not supported");
+      return;
+    }else{
+      console.log("bien chargé");
+    
+      var wgs84 = SpatialReference.WGS84;
+      var outSpatialReference = {
+        wkid : 27571
+      }
+
+
+
+      var pt_NO = new Point({
+        x: lat_nord,
+        y: lon_ouest
+      });
+      var pt_NE = new Point({
+        x: lat_nord,
+        y: lon_est
+      });
+      var pt_SO = new Point({
+        x: lat_sud,
+        y: lon_ouest
+      });
+      var pt_SE = new Point({
+        x: lat_sud,
+        y: lon_est
+      });
+
+      wgspts = [pt_NO,pt_NE,pt_SE,pt_SO]; // array des points à transformer dans la fonction project
+      console.log("points avant : ",wgspts);
+
+
+      // projects an array of points
+      console.log('projection : ',projection);
+      console.log('outSpatialReference',outSpatialReference);
+      console.log('points : ',wgspts);
+      var projectedPoints = projection.project(wgspts, outSpatialReference);  ////// TypeError: Cannot read property '_getTransformation' of null
+
+      projectedPoints.forEach(function(point) {
+        console.log("AH",point.x, point.y);
+      });
+    };
+
+  
+    var y_nord  = projectedPoints[0];
+    var y_sud   = projectedPoints[1];
+    var x_est   = projectedPoints[2];
+    var x_ouest = projectedPoints[3];
+
+
+  /* comment trouver les coordonnées du centre de la carte ???
+    // étendue de l'emprise de la carte
+    var x_ouest = view.extent.xmin;
+    var y_sud = view.extent.ymin;
+    var x_est = view.extent.xmax;
+    var y_nord = view.extent.ymax;
+
+    console.log("O > ",x_ouest);
+    console.log("E > ",x_est);
+    console.log("N > ",y_nord);
+    console.log("S > ",y_sud);
+
+    */
+
+    // conteneurs du nombre des points dans chaque direction
+    var points_NSEO = [0,0,0,0];
+    var cadres_NSEO = [cadreNord, cadreSud, cadreEst,cadreOuest];
+
+//////// DETECTION DE LA POSITION DES POINTS     /////////
+    for (var i = 0; i < liste_points.length; i++) {  
+
+      var x = liste_points[i][0]; /// EN LAMBERT 1
+      var y = liste_points[i][1]; /// EN LAMBERT 1
+
+      if (x < x_ouest){ // point à gauche
+        points_NSEO[3] +=1;
+      }
+      if (x > x_est){ // point à droite
+        points_NSEO[2] +=1;
+      }
+      if (y < y_nord){ // point en haut
+        points_NSEO[0] +=1;
+      }
+      if (y < y_sud){ // point en bas
+        points_NSEO[1] +=1;
+      }
+    }
+
+    console.log("N : ",points_NSEO[0]);
+    console.log("S : ",points_NSEO[1]);
+    console.log("E : ",points_NSEO[2]);
+    console.log("O : ",points_NSEO[3]);
+
+
+    //////// modification de la couleur des cadres   //////////////////:
+    
+    for (var i = 0; i<4 ; i++){
+      cadres_NSEO[i].innerHTML = points_NSEO[i];
+      if (points_NSEO[i] >= 500){
+        cadres_NSEO[i].style.background = "purple";
+      }else if (points_NSEO[i] >= 400){
+        cadres_NSEO[i].style.background = "pink";
+      }else if (points_NSEO[i] >= 300){
+        cadres_NSEO[i].style.background = "red";
+      }else if (points_NSEO[i] >= 200){
+        cadres_NSEO[i].style.background = "orange";
+      }else if (points_NSEO[i] >= 100){
+        cadres_NSEO[i].style.background = "gold";
+      }else if (points_NSEO[i] >= 50){
+        cadres_NSEO[i].style.background = "lightgreen";
+      }else{
+        cadres_NSEO[i].style.background = "lightgrey";
+      };
+    };
+    console.log('bg : ',cadreNord.style.background);
+  });
+
+
+
+  ///////////////// WIDGET D'INFOS EN BAS DE LA CARTE /////////
+
+
+  //*** Add div element to show coordates ***//
+  var coordsWidget = document.createElement("div");
+  coordsWidget.id = "coordsWidget";
+  coordsWidget.className = "esri-widget esri-component";
+  coordsWidget.style.padding = "7px 15px 5px";
+  view.ui.add(coordsWidget, "bottom-right");
+
+  //*** Update lat, lon, zoom and scale ***//
+  function showCoordinates(pt) {
+    var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
+        " | Scale 1:" + Math.round(view.scale * 1) / 1 +
+        " | Zoom " + view.zoom;
+    coordsWidget.innerHTML = coords;
   }
-]
-}
 
-// Create the layer and set the renderer
-var trails = new FeatureLayer({
-  url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0",
-  renderer: trailsRenderer
-});
+  //*** Add event and show center coordinates after the view is finished moving e.g. zoom, pan ***//
+  view.watch(["stationary"], function() {
+    showCoordinates(view.center);
+  });
 
-// Add the layer
-// map.add(trails,0);
-
-var view = new MapView({
-  container: "viewDiv",
-  map: map,
-  center: [-118.71511,34.09042], //longlats
-  zoom: 11
-});
-
-//*** Add div element to show coordates ***//
-var coordsWidget = document.createElement("div");
-coordsWidget.id = "coordsWidget";
-coordsWidget.className = "esri-widget esri-component";
-coordsWidget.style.padding = "7px 15px 5px";
-view.ui.add(coordsWidget, "bottom-right");
-
-//*** Update lat, lon, zoom and scale ***//
-function showCoordinates(pt) {
-  var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
-      " | Scale 1:" + Math.round(view.scale * 1) / 1 +
-      " | Zoom " + view.zoom;
-  coordsWidget.innerHTML = coords;
-}
-
-//*** Add event and show center coordinates after the view is finished moving e.g. zoom, pan ***//
-view.watch(["stationary"], function() {
-  showCoordinates(view.center);
-});
-
-//*** Add event to show mouse coordinates on click and move ***//
-view.on(["pointer-down","pointer-move"], function(evt) {
-  showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
-});
-
-
-var cadreNord  = document.getElementById('cadreNord');
-var cadreOuest = document.getElementById('cadreOuest');
-var cadreEst   = document.getElementById('cadreEst');
-var cadreSud   = document.getElementById('cadreSud');
-
-//cadreSud.style.background = 'purple';
+  //*** Add event to show mouse coordinates on click and move ***//
+  view.on(["pointer-down","pointer-move"], function(evt) {
+    showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
+  });
 
 });
-
-
-
