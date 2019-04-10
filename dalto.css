@@ -3,6 +3,14 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
+  /* font-family: 'Open Sans Condensed', sans-serif; */
+  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
+}
+
+.esri-widget--button {
+  color: white;
+  background-color: black;
 }
 
 #viewDiv {
@@ -27,20 +35,32 @@ h2 {
   border: none;
   background-color: inherit;
   padding: 14px 28px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
+  font-family: 'Open Sans Condensed', sans-serif;
+  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  /* font-family: 'Julius Sans One', sans-serif; */
 }
 
 .btn:hover {background: #eee;}
+
+hr {
+  width: 250px;
+  /* border-top: 100px; */
+  background-color: black;
+  border-color: black;
+  size: 10;
+}
 
 
 
 /*################################### CSS VOLET ##########################################*/
 
 #volet {
-			width: 500px;
+			width: 400px;
       height: 650px;
-			background: white; color: black;
+			background: white;
+      color: black;
       border-style: solid;
       border-width: 3px;
       border-color: black;
@@ -48,14 +68,16 @@ h2 {
 		#volet a.ouvrir,
 		#volet a.fermer {
 			padding: 10px 25px; /*padding du bouton ouvrir et fermer*/
-			background: #555;
-			color: #fff;
+			background: black;
+			color: white;
+      font-weight: bold;
+      font-size: 20px;
 			text-decoration: none;
 		}
 
 		#volet {
 			position: absolute;
-			left: -506px; top: 50px;
+			left: -408px; top: 50px;
 			-webkit-transition: all .5s ease-in;
 			-moz-transition: all .5s ease-in;
 			transition: all .5s ease-in;
@@ -63,8 +85,8 @@ h2 {
 		#volet a.ouvrir,
 		#volet a.fermer {
 			position: absolute;
-			right: -76px;
-			top: 50px;
+			right: -106px;
+			top: 59px;
 			-webkit-transform: rotate(270deg);
 			-moz-transform: rotate(270deg);
 			-o-transform: rotate(270deg);
@@ -88,5 +110,5 @@ h2 {
 			display: none;
 		}
 		#volet_clos:target #volet {
-			left: -505px;
+			left: -408px;
 		}

@@ -4,13 +4,26 @@ require([
   "esri/views/MapView",
   "esri/layers/FeatureLayer",
   "esri/core/promiseUtils",
-  "dojo/domReady!"
-], function(Map, MapView,FeatureLayer) {
+  "dojo/domReady!",
+  "esri/widgets/BasemapToggle"
+], function(Map, MapView,FeatureLayer,BasemapToggle) {
 
   var map = new Map({
     basemap: "topo-vector" //fond de carte
   });
 
+  // creation map
+  var view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [2.4,48.8], //longlats
+    zoom: 11,
+    slider: false,
+    sliderStyle: 'large',
+    smartNavigation: false
+  });
+
+  view.ui.move([ "zoom", map ], "top-right");
 
   //*** ADD ***//
   // Define a unique value renderer and symbols
@@ -26,16 +39,6 @@ require([
   // Add the layer
   map.add(area,0);
 
-  // creation map
-  var view = new MapView({
-    container: "viewDiv",
-    map: map,
-    center: [2.4,48.8], //longlats
-    zoom: 11,
-    slider: false,
-    sliderStyle: 'large',
-    smartNavigation: false
-  });
 
   // Couche deuteranopie
   document.getElementById("btnD").addEventListener("click", function(){
