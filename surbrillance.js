@@ -1,6 +1,7 @@
 require([
     "esri/Map",
     "esri/views/MapView",
+     "esri/WebMap",
     "esri/layers/FeatureLayer",
     "esri/core/promiseUtils",
     "esri/tasks/support/Query",
@@ -13,11 +14,23 @@ require([
     "esri/Color",
     "dojo/domReady!"
   ], function(Map, MapView, FeatureLayer, domReady, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
+  ], function(Map, MapView, WebMap, FeatureLayer, domReady, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
         UniqueValueRenderer, Color) {
+
+
+  var map = new WebMap({
+    portalItem: {
+      id: "9c41116150794b6d899503bb1dc2af2f"
+    }
+  });
+
+/*
 
   var map = new Map({
     basemap: "topo-vector"
   });
+
+  */
 
 // Définition du style d'affichage des gares
 
@@ -93,7 +106,7 @@ map.add(gare1);
 
   view.ui.move(["zoom","map"],"top-right");
 
-/*
+
 
 // Add div element to show coordates
   var coordsWidget = document.createElement("div");
@@ -120,7 +133,7 @@ map.add(gare1);
     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
   });
 
-*/
+
 
   // On récupère l'id de l'ensemble des élements de la carte
 
@@ -213,6 +226,21 @@ map.add(gare1);
 
 nom_gares.addEventListener("input", nomDeGare, false)
 
+var p1 = document.getElementById("p1");
+var p2 = document.getElementById("p2");
+var p3 = document.getElementById("p3");
+
+p1.addEventListener("click", changerNomGare, false);
+p2.addEventListener("click", changerNomGare, false);
+p3.addEventListener("click", changerNomGare, false);
+
+
+function changerNomGare(event){
+  nom_gares.value = event.target.innerHTML;
+}
+
+var p = [p1,p2,p3];
+
 function nomDeGare(event){
   liste = [];
   var query = gare.createQuery();
@@ -225,8 +253,23 @@ function nomDeGare(event){
   gare.queryFeatures(query).then(function(response){
     response.features.forEach(function(item){
         liste.push(item.attributes.nom_long);
+
       });
       console.log(liste);
+
+      for (var i = 0; i < 3; i++) {
+        if (liste[i] == undefined){
+          p[i].innerHTML = "";
+        }
+
+        else{
+          p[i].innerHTML = liste[i];
+        }
+
+      }
+
+
+
     });
 
 }
@@ -234,10 +277,13 @@ function nomDeGare(event){
 
 boutonGares.addEventListener("click", trouverGare, false);
 
+
 function trouverGare(event){
   liste = [];
   var query = gare.createQuery();
+  console.log(nom_gares.value);
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
+  console.log(query.where);
   query.outFields = ["id_ref_zdl"];
   gare.queryFeatures(query).features;
 
@@ -320,7 +366,6 @@ function clignoter(){
 
 var rer = document.getElementById("RER");
 var metro = document.getElementById("METRO");
-var metros = document.getElementById("metros");
 var rech = document.getElementById("RECHERCHE");
 
 var boutonRER = document.getElementById("boutonRER");
@@ -342,24 +387,24 @@ document.getElementById("boutonRER").addEventListener("click", function(){
   }
   else {
     rer.style.display = "flex";
-    // rer.style.padding = "0px";
+    rer.style.padding = "0px";
     boutonMetro.style.display ="none";
     boutonRecherche.style.display ="none";
 
   }
 });
 
+
 document.getElementById("boutonMetro").addEventListener("click", function(){
+
   if (metro.style.display == "flex") {
     metro.style.display = "none";
     boutonRER.style.display ="block";
     boutonRecherche.style.display ="block";
-    boutonMetro.style.overflowY = "none";
   }
   else {
     metro.style.display = "flex";
-    metros.style.overflowY = "scroll";
-    boutonMetro.style.overflowY = "none";
+    metro.style.overflowY = "scroll";
 
     boutonRER.style.display ="none";
     boutonRecherche.style.display ="none";
