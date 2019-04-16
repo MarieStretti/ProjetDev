@@ -16,26 +16,84 @@
 
 
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href=index.css >
+
     <script src="https://js.arcgis.com/4.11/"></script>
     <script src="surbrillance.js"></script>
 
   </head>
   <body>
-    <h1> Projet CAMAYeux - PARTIE SURBRILLANCE</h1>
-
-
 
      <div id="viewDiv"></div>
 
-     <div id="blinker">Blink! Blink! Blink!</div>
+
+     <div id="volet_clos">
+       <div id="volet">
+         <div id="button">
+
+           <button id="boutonRER" class="btn"><img src="pictures/RER.png" alt="404" height="150" width="150" ></button>
+           <div id="RER" style="display:none">
+
+              <div id=RER1>
+               <input type=image src="pictures/RERA.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER A">
+               <input type=image src="pictures/RERC.png" alt="404" height="100" width="100"  class="classRER btn" value="RER C">
+               <input type=image src="pictures/RERE.png" alt="404" height="100" width="100"  class="classRER btn" value="RER E">
+
+             </div>
+
+             <div id=RER2>
+               <input type=image src="pictures/RERB.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER B">
+               <input type=image src="pictures/RERD.png" alt="404" height="100" width="100"  class="classRER btn" value="RER D">
+              </div>
+
+           </div>
+
+            <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
+            <div id="METRO" style="display:none">
+
+              <div id=METRO1>
+                <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
+                <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
+                <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
+                <input type=image src="pictures/metro7.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M7">
+                <input type=image src="pictures/metro9.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M9">
+                <input type=image src="pictures/metro11.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M11">
+                <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
+              </div>
+
+              <div id=METRO2>
+                <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
+                <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
+                <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
+                <input type=image src="pictures/metro8.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M8">
+                <input type=image src="pictures/metro10.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M10">
+                <input type=image src="pictures/metro12.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M12">
+                <input type=image src="pictures/metro14.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M14">
+              </div>
+            </div>
+
+            <button id="boutonRecherche" class="btn"><img src="pictures/gare.png" alt="404" height="150" width="150" ></button>
 
 
-       <label> Ligne RER <input id="ligneRER"> </label>
-       <p></p>
-       <input id="bouton" type="submit" value="Lancer la recherche !"/>
+            <div id="RECHERCHE" style="display:none">
 
-<!--
-<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="TestARCGIS" src="//ensggeomatique.maps.arcgis.com/apps/Embed/index.html?webmap=e2017899f2444494aea4fe0d9e98fe58&extent=0.8995,48.0922,4.135,49.1739&zoom=true&previewImage=false&scale=true&legendlayers=true&disable_scroll=false&theme=light"></iframe></div>    <div id="viewDiv"></div>
--->
+
+
+                <input id="nom_gares" />
+                <input id="boutonGares" class="btn" type="submit" value="GO !"/>
+
+            </div>
+
+
+         </div>
+
+                  <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
+                  <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
+
+       </div>
+
+     </div>
+
   </body>
 </html>

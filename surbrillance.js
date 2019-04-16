@@ -55,23 +55,11 @@ var gareRenderer = {
   "field": "",
   "uniqueValueInfos": [],
 };
-/*
-console.log(gareRenderer.uniqueValueInfos.push({
-  "value": "Metro",
-  "symbol": {
-    "color": [230, 0, 0, 255],
-    "size": 10,
-    "type": "simple-marker",
-  }}
-)
-);
-*/
 
 
+var boutonGares = document.getElementById("boutonGares");
+var nom_gares = document.getElementById("nom_gares");
 
-
-var ligneRER = document.getElementById("ligneRER");
-var formulaire = document.getElementById("formulaire");
 
 // Crée la couche des gares et y applique le style d'affichage
 var gare1 = new FeatureLayer({
@@ -103,6 +91,9 @@ map.add(gare1);
     zoom: 11
   });
 
+  view.ui.move(["zoom","map"],"top-right");
+
+/*
 
 // Add div element to show coordates
   var coordsWidget = document.createElement("div");
@@ -129,7 +120,7 @@ map.add(gare1);
     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
   });
 
-
+*/
 
   // On récupère l'id de l'ensemble des élements de la carte
 
@@ -141,6 +132,7 @@ map.add(gare1);
       gare.queryFeatures(query).features;
 
       var liste = [];
+      var liste_RER = [];
       gare.queryFeatures(query).then(function(response){
         response.features.forEach(function(item){
             liste.push(item.attributes.id_ref_zdl);
@@ -150,18 +142,39 @@ map.add(gare1);
 
 
   // On crée une requête SQL sur la couche gare
-  bouton.addEventListener("click", requeteSQL,false);
 
-  function requeteSQL(event){
+  var classRER = document.getElementsByClassName("classRER");
+
+  for (var i = 0; i < classRER.length; i++) {
+    classRER[i].addEventListener("click", requeteSQLRER, false);
+
+  }
+
+
+  var classMETRO = document.getElementsByClassName("classMETRO");
+
+  for (var i = 0; i < classMETRO.length; i++) {
+    classMETRO[i].addEventListener("click", requeteSQLRER, false);
+
+  }
+
+  function requeteSQLRER(event){
+    console.log(event.target.value);
     var L = [];
     var query = gare.createQuery();
-    query.where = "res_com LIKE '%RER " + ligneRER.value +"%'";
-    console.log(query.where);
+    if (event.target.value == "M1"){
+      query.where = "res_com LIKE '%" + event.target.value +" /%' OR res_com LIKE '%" + event.target.value +"' ";
+    }
+    else {
+      query.where = "res_com LIKE '%" + event.target.value +"%'";
+    }
+
     query.outFields = ["id_ref_zdl"];
     gare.queryFeatures(query).features;
 
     gareRenderer_s1.uniqueValueInfos = [];
     var liste = [];
+
     gare.queryFeatures(query).then(function(response){
       response.features.forEach(function(item){
           liste.push(item.attributes.id_ref_zdl);
@@ -178,7 +191,6 @@ map.add(gare1);
             )
 
           }
-
 
           gareRenderer_s2.uniqueValueInfos = JSON.parse(JSON.stringify(gareRenderer_s1.uniqueValueInfos));
 
@@ -199,6 +211,67 @@ map.add(gare1);
 
   }
 
+nom_gares.addEventListener("input", nomDeGare, false)
+
+function nomDeGare(event){
+  liste = [];
+  var query = gare.createQuery();
+  query.where = "nom_long LIKE '" + nom_gares.value +"%'";
+  console.log(query.where);
+  query.outFields = ["nom_long"];
+  console.log(query.outFields);
+  gare.queryFeatures(query).features;
+
+  gare.queryFeatures(query).then(function(response){
+    response.features.forEach(function(item){
+        liste.push(item.attributes.nom_long);
+      });
+      console.log(liste);
+    });
+
+}
+
+
+boutonGares.addEventListener("click", trouverGare, false);
+
+function trouverGare(event){
+  liste = [];
+  var query = gare.createQuery();
+  query.where = "nom_long LIKE '" + nom_gares.value +"%'";
+  query.outFields = ["id_ref_zdl"];
+  gare.queryFeatures(query).features;
+
+  gareRenderer_s1.uniqueValueInfos = [];
+  gare.queryFeatures(query).then(function(response){
+    response.features.forEach(function(item){
+        liste.push(item.attributes.id_ref_zdl);
+      });
+
+      console.log(liste);
+      gareRenderer_s1.uniqueValueInfos.push({
+        "value":liste[0],
+        "symbol": {
+          "color": [0, 255, 0, 255],
+          "size": 30,
+          "type": "simple-marker",
+        }}
+      )
+
+        gareRenderer_s2.uniqueValueInfos = JSON.parse(JSON.stringify(gareRenderer_s1.uniqueValueInfos));
+        gareRenderer_s2.uniqueValueInfos[0].symbol.color = [255,255,0,255];
+
+                      map.add(gare);
+                      renderer1 = gareRenderer_s1;
+                      renderer2 = gareRenderer_s2;
+                      renderer_encours = 1;
+                      clearInterval(setInterVar);
+                      setInterVar = setInterval(clignoter,1000);
+
+
+    });
+
+}
+
 setInterVar = 0;
 renderer_encours = 0;
 
@@ -217,10 +290,98 @@ function clignoter(){
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var rer = document.getElementById("RER");
+var metro = document.getElementById("METRO");
+var rech = document.getElementById("RECHERCHE");
+
+var boutonRER = document.getElementById("boutonRER");
+var boutonMetro= document.getElementById("boutonMetro");
+var boutonRecherche= document.getElementById("boutonRecherche");
+
+var volet = document.getElementById("volet");
+
+
+
+
+document.getElementById("boutonRER").addEventListener("click", function(){
+
+  if (rer.style.display == "flex") {
+    rer.style.display = "none";
+    boutonMetro.style.display ="block";
+    boutonRecherche.style.display ="block";
+
+  }
+  else {
+    rer.style.display = "flex";
+    rer.style.padding = "0px";
+    boutonMetro.style.display ="none";
+    boutonRecherche.style.display ="none";
+
+  }
 });
 
-// Faire clignoter une div 'blinker'
-var blink_speed = 500;
-var t = setInterval(function () {
-  var ele = document.getElementById('blinker');
-  ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden'); }, blink_speed);
+
+document.getElementById("boutonMetro").addEventListener("click", function(){
+
+  if (metro.style.display == "flex") {
+    metro.style.display = "none";
+    boutonRER.style.display ="block";
+    boutonRecherche.style.display ="block";
+  }
+  else {
+    metro.style.display = "flex";
+    metro.style.overflowY = "scroll";
+
+
+    boutonRER.style.display ="none";
+    boutonRecherche.style.display ="none";
+  }
+});
+
+
+
+document.getElementById("boutonRecherche").addEventListener("click", function(){
+  if (rech.style.display == "block") {
+    rech.style.display = "none";
+    boutonRER.style.display ="block";
+    boutonMetro.style.display ="block";
+  }
+  else {
+  rech.style.display = "block";
+  boutonRER.style.display ="none";
+  boutonMetro.style.display ="none";
+  }
+});
+
+
+
+
+});
