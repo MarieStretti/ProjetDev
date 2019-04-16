@@ -131,13 +131,6 @@ hr {
 		background-color: #060D9D;
 	}
 
-
-#metros {
-  display: flex;
-  flex-direction: column;
-}
-
-
 #METRO1  {
     display: flex;
     flex-direction: column;
@@ -148,7 +141,6 @@ hr {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center
   	}
 
 #METRO {
@@ -172,4 +164,26 @@ hr {
 #RER {
   display: flex;
   justify-content: space-around;
+}
+
+#RER {
+  display: flex;
+  flex-direction: column;
+}
+
+#propositionGare{
+  display: flex;
+  flex-direction: column;
+}
+
+#p1:hover {
+  background-color: gold;
+}
+
+#p2:hover {
+  background-color: gold;
+}
+
+#p3:hover {
+  background-color: gold;
 }
