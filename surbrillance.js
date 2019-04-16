@@ -226,13 +226,13 @@ function nomDeGare(event){
     response.features.forEach(function(item){
         liste.push(item.attributes.nom_long);
       });
-      console.log(liste);
     });
 
 }
 
 
 boutonGares.addEventListener("click", trouverGare, false);
+
 
 function trouverGare(event){
   liste = [];
@@ -289,6 +289,8 @@ function clignoter(){
   }
 
 }
+
+
 
 
 
