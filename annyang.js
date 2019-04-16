@@ -64,10 +64,7 @@
      function droiteFunction(){
         console.log("droite");
         var xmin = view.extent.xmin.toFixed(2);
-        console.log("xmin");
-        console.log(xmin);
         var xmax = view.extent.xmax.toFixed(2);
-        console.log(xmax);
         var x_range = xmax - xmin;
         var x_new = xmax + (x_range/6);
         view.center.x = x_new;
