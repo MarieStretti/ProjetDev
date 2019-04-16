@@ -96,7 +96,7 @@ var gare = new FeatureLayer({
 });
 
 
-// On ajoute la couche à la gare
+// On ajoute la couche à la carte
 map.add(gare1);
 
 
@@ -111,7 +111,6 @@ map.add(gare1);
 
   view.zoom=zoomlevel;
   zoomlevel = view.zoom;
-
 
 // Add div element to show coordates
   var coordsWidget = document.createElement("div");
@@ -210,6 +209,8 @@ map.add(gare1);
 
 setInterVar = 0;
 renderer_encours = 0;
+
+//gareRenderer_s1.onclick(console.log(uniqueValueInfos.)
 
 function clignoter(){
   //console.log("renderer en cours " + renderer_encours);
