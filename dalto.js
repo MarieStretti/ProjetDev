@@ -1,32 +1,36 @@
 // import modules d'esri et fcts
 require([
   "esri/Map",
+  "esri/WebMap",
   "esri/views/MapView",
   "esri/layers/FeatureLayer",
   "esri/core/promiseUtils",
   "dojo/domReady!",
   "esri/widgets/BasemapToggle"
-], function(Map, MapView,FeatureLayer,BasemapToggle) {
+], function(Map,WebMap,MapView,FeatureLayer,BasemapToggle) {
 
-  var map = new Map({
-    basemap: "topo-vector" //fond de carte
+
+  var webmap = new WebMap({
+    portalItem: {
+      id: "9c41116150794b6d899503bb1dc2af2f"
+    }
   });
+
 
   // creation map
   var view = new MapView({
     container: "viewDiv",
-    map: map,
+    map: webmap,
     center: [2.4,48.8], //longlats
     zoom: 11,
-    slider: false,
-    sliderStyle: 'large',
-    smartNavigation: false
+    constraints: {
+      maxZoom: 15,
+      minZoom: 9,
+    }
   });
+console.log(view);
+  view.ui.move([ "zoom", webmap ], "top-right");
 
-  view.ui.move([ "zoom", map ], "top-right");
-
-  //*** ADD ***//
-  // Define a unique value renderer and symbols
 
   // Create the layer and set the renderer
   var area = new FeatureLayer({
@@ -36,8 +40,7 @@ require([
     renderer: maj([237,81,81,255],[20,158,206,255],[167,198,54,255])
   });
 
-  // Add the layer
-  map.add(area,0);
+  webmap.add(area,0);
 
 
   // Couche deuteranopie
@@ -48,11 +51,8 @@ require([
       },
       renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
     });
-    map.removeAll();
-    // map.remove(area,0);
-    // map.remove(protan,0);
-    // map.remove(tritan,0);
-    map.add(deuter,0);
+    webmap.removeAll();
+    webmap.add(deuter,0);
   });
 
   // Couche protanopie
@@ -63,11 +63,8 @@ require([
       },
       renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
     });
-    map.removeAll();
-    // map.remove(area,0);
-    // map.remove(deuter,0);
-    // map.remove(tritan,0);
-    map.add(protan,0);
+    webmap.removeAll();
+    webmap.add(protan,0);
   });
 
   // Couche tritanopie
@@ -78,11 +75,8 @@ require([
       },
       renderer: maj([12,140,236,255],[255,255,255,255],[236,12,12,255])
     });
-    map.removeAll();
-    // map.remove(area,0);
-    // map.remove(deuter,0);
-    // map.remove(protan,0);
-    map.add(tritan,0);
+    webmap.removeAll();
+    webmap.add(tritan,0);
   });
 
   //################################### COULEURS CHANGEES DIRECTEMENT ###############################################
@@ -92,13 +86,15 @@ require([
   var colorEtude;
   var param;
 
-  document.getElementById("btnPP").addEventListener("click", function(){
+  var btnPP =   document.getElementById("btnPP");
+  btnPP.addEventListener("click", function(){
     var pp = document.getElementById("PP");
-    if (pp.style.display == "block") {
+    if (pp.style.display == "flex") {
       pp.style.display = "none";
     }
     else {
-      pp.style.display = "block";
+      pp.style.display = "flex";
+      btnPP.style.margin = '0px 0px';
     }
   });
 
@@ -118,7 +114,7 @@ require([
 
       param = maj(colorCours,colorProg,colorEtude);
 
-      map.remove(paramPerso,0);
+      webmap.remove(paramPerso,0);
 
       var paramPerso = new FeatureLayer({
         portalItem: {
@@ -126,9 +122,9 @@ require([
         },
         renderer: param
       });
-      map.removeAll();
+      webmap.removeAll();
 
-      map.add(paramPerso,0);
+      webmap.add(paramPerso,0);
     });
   };
 
