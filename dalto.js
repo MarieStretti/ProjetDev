@@ -45,38 +45,17 @@ console.log(view);
 
   // Couche deuteranopie
   document.getElementById("btnD").addEventListener("click", function(){
-    var deuter = new FeatureLayer({
-      portalItem: {
-        id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-      },
-      renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
-    });
-    webmap.removeAll();
-    webmap.add(deuter,0);
+    webmap.findLayerById(area.id).renderer = maj([152,210,23,255],[255,255,255,255],[132,12,236,255]);
   });
 
   // Couche protanopie
   document.getElementById("btnP").addEventListener("click", function(){
-    var protan = new FeatureLayer({
-      portalItem: {
-        id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-      },
-      renderer: maj([152,210,23,255],[255,255,255,255],[132,12,236,255])
-    });
-    webmap.removeAll();
-    webmap.add(protan,0);
+    webmap.findLayerById(area.id).renderer = maj([152,210,23,255],[255,255,255,255],[132,12,236,255]);
   });
 
   // Couche tritanopie
   document.getElementById("btnT").addEventListener("click", function(){
-    var tritan = new FeatureLayer({
-      portalItem: {
-        id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-      },
-      renderer: maj([12,140,236,255],[255,255,255,255],[236,12,12,255])
-    });
-    webmap.removeAll();
-    webmap.add(tritan,0);
+    webmap.findLayerById(area.id).renderer = maj([12,140,236,255],[255,255,255,255],[236,12,12,255]);
   });
 
   //################################### COULEURS CHANGEES DIRECTEMENT ###############################################
@@ -114,17 +93,7 @@ console.log(view);
 
       param = maj(colorCours,colorProg,colorEtude);
 
-      webmap.remove(paramPerso,0);
-
-      var paramPerso = new FeatureLayer({
-        portalItem: {
-          id: "fdf1a27e48eb4308b58f28adf1d08fc9",
-        },
-        renderer: param
-      });
-      webmap.removeAll();
-
-      webmap.add(paramPerso,0);
+      webmap.findLayerById(area.id).renderer = param;
     });
   };
 
