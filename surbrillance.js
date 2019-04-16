@@ -226,13 +226,13 @@ function nomDeGare(event){
     response.features.forEach(function(item){
         liste.push(item.attributes.nom_long);
       });
+      console.log(liste);
     });
 
 }
 
 
 boutonGares.addEventListener("click", trouverGare, false);
-
 
 function trouverGare(event){
   liste = [];
@@ -318,10 +318,9 @@ function clignoter(){
 
 
 
-
-
 var rer = document.getElementById("RER");
 var metro = document.getElementById("METRO");
+var metros = document.getElementById("metros");
 var rech = document.getElementById("RECHERCHE");
 
 var boutonRER = document.getElementById("boutonRER");
@@ -343,25 +342,24 @@ document.getElementById("boutonRER").addEventListener("click", function(){
   }
   else {
     rer.style.display = "flex";
-    rer.style.padding = "0px";
+    // rer.style.padding = "0px";
     boutonMetro.style.display ="none";
     boutonRecherche.style.display ="none";
 
   }
 });
 
-
 document.getElementById("boutonMetro").addEventListener("click", function(){
-
   if (metro.style.display == "flex") {
     metro.style.display = "none";
     boutonRER.style.display ="block";
     boutonRecherche.style.display ="block";
+    boutonMetro.style.overflowY = "none";
   }
   else {
     metro.style.display = "flex";
-    metro.style.overflowY = "scroll";
-
+    metros.style.overflowY = "scroll";
+    boutonMetro.style.overflowY = "none";
 
     boutonRER.style.display ="none";
     boutonRecherche.style.display ="none";
@@ -371,13 +369,13 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
-  if (rech.style.display == "block") {
+  if (rech.style.display == "flex") {
     rech.style.display = "none";
     boutonRER.style.display ="block";
     boutonMetro.style.display ="block";
   }
   else {
-  rech.style.display = "block";
+  rech.style.display = "flex";
   boutonRER.style.display ="none";
   boutonMetro.style.display ="none";
   }

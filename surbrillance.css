@@ -131,6 +131,13 @@ hr {
 		background-color: #060D9D;
 	}
 
+
+#metros {
+  display: flex;
+  flex-direction: column;
+}
+
+
 #METRO1  {
     display: flex;
     flex-direction: column;
@@ -141,6 +148,7 @@ hr {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center
   	}
 
 #METRO {
