@@ -99,7 +99,7 @@ var gare = new FeatureLayer({
 });
 
 
-// On ajoute la couche à la gare
+// On ajoute la couche à la carte
 map.add(gare1);
 
 
@@ -115,6 +115,7 @@ map.add(gare1);
   view.zoom=zoomlevel;
   zoomlevel = view.zoom;
 
+
   view.center.longitude = lng_c;
   lng_c = view.center.longitude;
   view.center.latitude = lat_c;
@@ -122,6 +123,35 @@ map.add(gare1);
 
 
   view.ui.move(["zoom","map"],"top-right");
+
+// Add div element to show coordates
+  var coordsWidget = document.createElement("div");
+  coordsWidget.id = "coordsWidget";
+  coordsWidget.className = "esri-widget esri-component";
+  coordsWidget.style.padding = "7px 15px 5px";
+  view.ui.add(coordsWidget, "bottom-right");
+
+  // Update lat, lon, zoom and scale
+  function showCoordinates(pt) {
+    var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
+        " | Scale 1:" + Math.round(view.scale * 1) / 1 +
+        " | Zoom " + view.zoom;
+    coordsWidget.innerHTML = coords;
+  }
+
+  // Add event and show center coordinates after the view is finished moving e.g. zoom, pan
+  view.watch(["stationary"], function() {
+    showCoordinates(view.center);
+  });
+
+  //Add event to show mouse coordinates on click and move
+  view.on(["pointer-down","pointer-move"], function(evt) {
+    showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
+  });
+
+commande_voc (view,map);
+
+
 
   // On récupère l'id de l'ensemble des élements de la carte
 
@@ -332,6 +362,8 @@ function trouverGare(event){
 
 setInterVar = 0;
 renderer_encours = 0;
+
+//gareRenderer_s1.onclick(console.log(uniqueValueInfos.)
 
 function clignoter(){
   //console.log("renderer en cours " + renderer_encours);

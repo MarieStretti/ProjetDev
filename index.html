@@ -20,14 +20,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href=surbrillance.css >
 
-    <script src="https://js.arcgis.com/4.11/"></script>
-    <script src="surbrillance.js"></script>
 
   </head>
   <body>
 
      <div id="viewDiv"></div>
 
+     <div id="audio"></div>
 
      <div id="volet_clos">
        <div id="volet">
@@ -96,14 +95,40 @@
 
 
          </div>
+         <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
+         <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
 
-                  <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
-                  <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
+        </div>
 
-       </div>
+        </div>
 
-     </div>
 
+      <fieldset>
+        <legend>Veuillez sélectionner vos outils :</legend>
+        <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)"> cadre
+        <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)"> commande vocale
+        <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)" > surbrillance
+      </fieldset>
+
+
+
+<!--Script nécéssaire à la  commande vocale   -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/speechkitt.min.js"></script> -->
+<script src="annyang.js"></script>
+
+
+<!--Script nécéssaire à la lecture vocale   -->
+<input id="btn" type="button" name="button" value="click">
+
+<script type="text/javascript" src="mespeak.js"></script>
+<script type="text/javascript" src="texttospeech.js"></script>
+
+
+<!--Script nécéssaire au chargement de la carte   -->
+<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+<script src="https://js.arcgis.com/4.11/"></script>
+<script src="surbrillance.js"></script>
 
   </body>
 </html>
