@@ -14,7 +14,7 @@
       }
     </style>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href=surbrillance.css >
@@ -49,22 +49,46 @@
 
            </div>
 
+           <div id="metros">
+             <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
+             <div id="METRO" style="display:none">
 
+       <div id=METRO1>
+         <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
+         <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
+         <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
+         <input type=image src="pictures/metro7.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M7">
+         <input type=image src="pictures/metro9.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M9">
+         <input type=image src="pictures/metro11.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M11">
+         <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
+       </div>
+
+       <div id=METRO2>
+         <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
+         <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
+         <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
+         <input type=image src="pictures/metro8.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M8">
+         <input type=image src="pictures/metro10.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M10">
+         <input type=image src="pictures/metro12.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M12">
+         <input type=image src="pictures/metro14.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M14">
+       </div>
+     </div>
+   </div>
             <button id="boutonRecherche" class="btn"><img src="pictures/gare.png" alt="404" height="150" width="150" ></button>
 
 
             <div id="RECHERCHE" style="display:none">
 
 
-
                 <input id="nom_gares" />
-                <input id="boutonGares" class="btn" type="submit" value="GO !"/>
 
                 <div id=propositionGare>
                   <div id=p1></div>
                   <div id=p2></div>
                   <div id=p3></div>
                 </div>
+
+                <input id="boutonGares" class="btn" type="submit" value="Rechercher !"/>
 
 
             </div>
@@ -78,6 +102,7 @@
        </div>
 
      </div>
+
 
   </body>
 </html>

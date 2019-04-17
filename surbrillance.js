@@ -1,22 +1,26 @@
 require([
     "esri/Map",
     "esri/views/MapView",
-     "esri/WebMap",
+    "esri/WebMap",
     "esri/layers/FeatureLayer",
     "esri/core/promiseUtils",
     "esri/tasks/support/Query",
-    "esri/tasks/QueryTask",
     "esri/Graphic",
     "esri/layers/GraphicsLayer",
     "esri/symbols/SimpleLineSymbol",
     "esri/symbols/SimpleFillSymbol",
     "esri/renderers/UniqueValueRenderer",
     "esri/Color",
+    "esri/symbols/WebStyleSymbol",
     "dojo/domReady!"
-  ], function(Map, MapView, FeatureLayer, domReady, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
-  ], function(Map, MapView, WebMap, FeatureLayer, domReady, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
-        UniqueValueRenderer, Color) {
 
+  ], function(Map, MapView, WebMap, FeatureLayer, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
+        UniqueValueRenderer, Color, WebStyleSymbol) {
+
+
+var wgs84 = proj4.Proj('EPSG:4326');
+proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+var lambert93 = proj4.Proj("EPSG:2154");
 
   var map = new WebMap({
     portalItem: {
@@ -24,22 +28,20 @@ require([
     }
   });
 
-/*
 
-  var map = new Map({
-    basemap: "topo-vector"
-  });
+  var symbolTrain = new WebStyleSymbol({
+  name: "Train",
+  styleName: "EsriIconsStyle"
+});
 
-  */
+
 
 // Définition du style d'affichage des gares
-
-
 var gareRenderer_defaut = {
   "type": "simple",
   "field": "",
   "uniqueValueInfos": [],
-  "symbol" : {
+  "symbol" :{
      type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
      size: 5,
      color: "black"
@@ -104,36 +106,9 @@ map.add(gare1);
     zoom: 11
   });
 
+  console.log(view);
+
   view.ui.move(["zoom","map"],"top-right");
-
-
-
-// Add div element to show coordates
-  var coordsWidget = document.createElement("div");
-  coordsWidget.id = "coordsWidget";
-  coordsWidget.className = "esri-widget esri-component";
-  coordsWidget.style.padding = "7px 15px 5px";
-  view.ui.add(coordsWidget, "bottom-right");
-
-  // Update lat, lon, zoom and scale
-  function showCoordinates(pt) {
-    var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
-        " | Scale 1:" + Math.round(view.scale * 1) / 1 +
-        " | Zoom " + view.zoom;
-    coordsWidget.innerHTML = coords;
-  }
-
-  // Add event and show center coordinates after the view is finished moving e.g. zoom, pan
-  view.watch(["stationary"], function() {
-    showCoordinates(view.center);
-  });
-
-  //Add event to show mouse coordinates on click and move
-  view.on(["pointer-down","pointer-move"], function(evt) {
-    showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
-  });
-
-
 
   // On récupère l'id de l'ensemble des élements de la carte
 
@@ -172,7 +147,6 @@ map.add(gare1);
   }
 
   function requeteSQLRER(event){
-    console.log(event.target.value);
     var L = [];
     var query = gare.createQuery();
     if (event.target.value == "M1"){
@@ -224,7 +198,8 @@ map.add(gare1);
 
   }
 
-nom_gares.addEventListener("input", nomDeGare, false)
+nom_gares.addEventListener("input", nomDeGare, false);
+nom_gares.addEventListener("click", voletRecherche, false);
 
 var p1 = document.getElementById("p1");
 var p2 = document.getElementById("p2");
@@ -239,15 +214,21 @@ function changerNomGare(event){
   nom_gares.value = event.target.innerHTML;
 }
 
+
+function voletRecherche(event){
+
+    volet.style.width = "1300px";
+}
+
+
 var p = [p1,p2,p3];
 
 function nomDeGare(event){
+  nom_gares.value = nom_gares.value.toUpperCase();
   liste = [];
   var query = gare.createQuery();
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
-  console.log(query.where);
   query.outFields = ["nom_long"];
-  console.log(query.outFields);
   gare.queryFeatures(query).features;
 
   gare.queryFeatures(query).then(function(response){
@@ -255,7 +236,6 @@ function nomDeGare(event){
         liste.push(item.attributes.nom_long);
 
       });
-      console.log(liste);
 
       for (var i = 0; i < 3; i++) {
         if (liste[i] == undefined){
@@ -279,18 +259,23 @@ boutonGares.addEventListener("click", trouverGare, false);
 
 
 function trouverGare(event){
+
   liste = [];
   var query = gare.createQuery();
   console.log(nom_gares.value);
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
   console.log(query.where);
-  query.outFields = ["id_ref_zdl"];
+  query.outFields = ["id_ref_zdl","x","y"];
   gare.queryFeatures(query).features;
 
   gareRenderer_s1.uniqueValueInfos = [];
+  var new_coord1 =[];
   gare.queryFeatures(query).then(function(response){
     response.features.forEach(function(item){
         liste.push(item.attributes.id_ref_zdl);
+        new_coord1 = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y]);
+
+
       });
 
       console.log(liste);
@@ -306,15 +291,29 @@ function trouverGare(event){
         gareRenderer_s2.uniqueValueInfos = JSON.parse(JSON.stringify(gareRenderer_s1.uniqueValueInfos));
         gareRenderer_s2.uniqueValueInfos[0].symbol.color = [255,255,0,255];
 
-                      map.add(gare);
-                      renderer1 = gareRenderer_s1;
-                      renderer2 = gareRenderer_s2;
-                      renderer_encours = 1;
-                      clearInterval(setInterVar);
-                      setInterVar = setInterval(clignoter,1000);
+        map.add(gare);
+        renderer1 = gareRenderer_s1;
+        renderer2 = gareRenderer_s2;
+        renderer_encours = 1;
+        clearInterval(setInterVar);
+        setInterVar = setInterval(clignoter,1000);
+
+
+        view.center.latitude = new_coord1[1];
+        view.center.longitude = new_coord1[0];
+
+        view.goTo({
+          target: view.center
+        });
 
 
     });
+    volet.style.width = "400px";
+    nom_gares.value ="";
+    p1.innerHTML ="";
+    p2.innerHTML ="";
+    p3.innerHTML ="";
+
 
 }
 
@@ -336,34 +335,7 @@ function clignoter(){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var metros = document.getElementById("metros");
 var rer = document.getElementById("RER");
 var metro = document.getElementById("METRO");
 var rech = document.getElementById("RECHERCHE");
@@ -384,10 +356,10 @@ document.getElementById("boutonRER").addEventListener("click", function(){
     boutonMetro.style.display ="block";
     boutonRecherche.style.display ="block";
 
+
   }
   else {
     rer.style.display = "flex";
-    rer.style.padding = "0px";
     boutonMetro.style.display ="none";
     boutonRecherche.style.display ="none";
 
@@ -401,10 +373,12 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
     metro.style.display = "none";
     boutonRER.style.display ="block";
     boutonRecherche.style.display ="block";
+    boutonMetro.style.overflowY = "none";
   }
   else {
     metro.style.display = "flex";
-    metro.style.overflowY = "scroll";
+    metros.style.overflowY = "scroll";
+    boutonMetro.style.overflowY = "none";
 
 
     boutonRER.style.display ="none";
@@ -416,11 +390,14 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
   if (rech.style.display == "flex") {
+    volet.style.width = "400px";
     rech.style.display = "none";
     boutonRER.style.display ="block";
     boutonMetro.style.display ="block";
   }
+
   else {
+  volet.style.width = "1300px"
   rech.style.display = "flex";
   boutonRER.style.display ="none";
   boutonMetro.style.display ="none";
@@ -428,6 +405,32 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
 });
 
 
+
+ //*** Add div element to show coordates ***//
+   var coordsWidget = document.createElement("div");
+   coordsWidget.id = "coordsWidget";
+   coordsWidget.className = "esri-widget esri-component";
+   coordsWidget.style.padding = "7px 15px 5px";
+   view.ui.add(coordsWidget, "bottom-right");
+
+   //*** Update lat, lon, zoom and scale ***//
+   function showCoordinates(pt) {
+     var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
+         " | Scale 1:" + Math.round(view.scale * 1) / 1 +
+        " | Zoom " + view.zoom;
+    coordsWidget.innerHTML = coords;
+   }
+
+  //*** Add event and show center coordinates after the view is finished moving e.g. zoom, pan ***//
+   view.watch(["stationary"], function() {
+    showCoordinates(view.center);
+  });
+
+   //*** Add event to show mouse coordinates on click and move ***//
+   view.on(["pointer-down","pointer-move"], function(evt) {
+     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
+
+});
 
 
 });

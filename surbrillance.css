@@ -122,19 +122,32 @@ hr {
 		left: -408px;
 	}
 
+
+
+
+
 	#nom_gares {
 		height: 100%;
 		weight: 100%;
-		font-size: 50px;
+		font-size: 70px;
 		color: white;
 		font-weight: bold;
 		background-color: #060D9D;
 	}
 
+
+
+  #metros {
+    display: flex;
+    flex-direction: column;
+  }
+
+
 #METRO1  {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: centerss
 	}
 
 #METRO2 {
@@ -166,14 +179,12 @@ hr {
   justify-content: space-around;
 }
 
-#RER {
-  display: flex;
-  flex-direction: column;
-}
 
 #propositionGare{
   display: flex;
   flex-direction: column;
+  font-size: 70px;
+  font-weight: bold;
 }
 
 #p1:hover {
@@ -186,4 +197,15 @@ hr {
 
 #p3:hover {
   background-color: gold;
+}
+
+#RECHERCHE {
+  display: flex;
+  flex-direction: column;
+}
+
+#boutonGares {
+  background-color: green;
+  font-weight: bold;
+  font-size: 70px;
 }
