@@ -28,9 +28,7 @@ var gareRenderer = {
         "color": [150, 0, 0, 200],
         "size": 5,
         "type": "simple-marker",
-        //"style": "dot"
       },
-    //  "label": "Bikes"
     },
     {
       "value": "Tramway",
@@ -38,9 +36,7 @@ var gareRenderer = {
         "color": [0, 150, 0, 255],
         "size": 5,
         "type": "simple-marker",
-        //"style": "dot"
       },
-    //  "label": "No Bikes"
   },
     {
       "value": "RER",
@@ -48,7 +44,6 @@ var gareRenderer = {
         "color": [0, 0, 150, 255],
         "size": 5,
         "type": "simple-marker",
-        //"style": "dot"
       },
     }
   ]
@@ -105,10 +100,11 @@ gares.queryFeatures(query).then(function(response){
   });
 });
 
-
+var boutonCadre = document.getElementById("boutonCadre");
+boutonCadre.addEventListener("click", RefreshCadre);
 
 ///////// au clic : activation du cadre ///////////////////////:
-view.on(['pointer-down'], function() {
+function RefreshCadre() {
 
   console.log('start!');
 
@@ -123,8 +119,8 @@ view.on(['pointer-down'], function() {
 
   console.log("center : ",view.toMap({x: pix_x_center, y:pix_y_center}));
   // dimensions du polygone d'emprise
-  var dx = 0.8*(height/2);
-  var dy = 0.8*(width/2);
+  var dx = (height/2);
+  var dy = (width/2);
 
   console.log("dx, dy : ",dx, dy);
   var pix_x_ouest = pix_x_center - dx;
@@ -138,16 +134,11 @@ view.on(['pointer-down'], function() {
   var lon_ouest = view.toMap({x: pix_x_ouest, y:pix_y_nord}).longitude; console.log('lon_ouest',lon_ouest);
   var lon_est = view.toMap({x: pix_x_est, y:pix_y_nord}).longitude; console.log('lon_est',lon_est);
 
-  // étendue de l'emprise de la carte
-  var view_x_ouest = view.extent.xmin; ///// lambert 93?
-  var view_y_sud = view.extent.ymin;
-  var view_x_est = view.extent.xmax;
-  var view_y_nord = view.extent.ymax;
   console.log("###### Emprise de la view ######");
-  console.log("O > ",view_x_ouest);
-  console.log("E > ",view_x_est);
-  console.log("N > ",view_y_nord);
-  console.log("S > ",view_y_sud);
+  console.log("O > ",lon_ouest);
+  console.log("E > ",lon_est);
+  console.log("N > ",lat_nord);
+  console.log("S > ",lat_sud);
 
 //// CONVERSION DE COORDONNES D'EMPRISE AVEC PROJ4 //////
 
@@ -192,7 +183,7 @@ view.on(['pointer-down'], function() {
 
 
   //////// modification de la couleur des cadres   //////////////////:
-  var couleurs_croissantes = ["lightgrey","lightgreen","gold","orange","red","pink","purple","blue","darkblue"];
+  var couleurs_croissantes = ["lightgrey","lightgreen","gold","orange","tomato","fuchsia","purple","blue","darkblue"];
 
   for (var i = 0; i<4 ; i++){
     cadres_NSEO[i].innerHTML = points_NSEO[i];
@@ -217,7 +208,7 @@ view.on(['pointer-down'], function() {
     };
   };
   console.log('bg : ',cadreNord.style.background);
-});
+};
 
 
 
