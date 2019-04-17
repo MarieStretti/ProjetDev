@@ -23,19 +23,36 @@
 
   </head>
   <body>
+    <div class="choooose">
 
+
+    <fieldset>
+      <legend>Veuillez sélectionner vos outils :</legend>
+      <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)"> cadre
+      <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)"> commande vocale
+      <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)" > surbrillance
+    </fieldset>
+   </div>
+
+    <div id="viewDiv"></div>
+
+
+<div id="cadrediv" style="display:none">
     <div id='cadreNord'>Nord</div>
     <div id='cadreEst'>Est</div>
     <div id='cadreOuest'>West</div>
-    <div id="viewDiv"></div>
     <div id='cadreSud'>Sud</div>
     <button id="boutonCadre">Rafraichir le cadre</button>
+</div>
+
+
+     <div id="audio">
+       <input id="btn" type="button" name="button" value="click">
+     </div>
 
 
 
-     <div id="audio"></div>
-
-     <div id="volet_clos">
+     <div id="volet_clos" style="display:none">
        <div id="volet">
          <div id="button">
 
@@ -107,37 +124,25 @@
 
         </div>
 
-        </div>
-
-
-      <fieldset>
-        <legend>Veuillez sélectionner vos outils :</legend>
-        <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)"> cadre
-        <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)"> commande vocale
-        <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)" > surbrillance
-      </fieldset>
+      </div>
 
 
 
-<!--Script nécéssaire à la  commande vocale   -->
+
+
+
+<!--Script nécéssaires -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/SpeechKITT/1.0.0/speechkitt.min.js"></script> -->
 <script src="annyang.js"></script>
-
-
-<!--Script nécéssaire à la lecture vocale   -->
-<input id="btn" type="button" name="button" value="click">
-
 <script type="text/javascript" src="mespeak.js"></script>
 <script type="text/javascript" src="texttospeech.js"></script>
 
 
-<!--Script nécéssaire au chargement de la carte   -->
 <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
 <script src="https://js.arcgis.com/4.11/"></script>
+<script src="index.js"></script>
 <script src="surbrillance.js"></script>
-
-    <script src="cadre.js"></script>
+<script src="cadre.js"></script>
 
   </body>
 </html>
