@@ -126,19 +126,16 @@
     annyang.addCommands(commandebas5);
     annyang.addCommands(commandebas6);
 
-
-
-
-
-
-     // Utilisation du visuel KITT pour l'aide vocale annyang utilisé
-     SpeechKITT.annyang();
-
-     // Definition de stylesheet pour KITT
-     SpeechKITT.setStylesheet('//cdnjs.cloudflare.com/ajax/libs/SpeechKITT/0.3.0/themes/flat.css');
-
-     // Render KITT's interface
-     SpeechKITT.vroom();
    }
 
  }
+
+ function alertannyang(checkboxElem) {
+  if (checkboxElem.checked) {
+    annyang.start();
+    console.log('started');
+  } else {
+    annyang.pause();
+    console.log('stoped');
+  }
+}

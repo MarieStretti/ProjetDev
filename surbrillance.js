@@ -227,7 +227,9 @@ function clignoter(){
 
 }
 
+  
   commande_voc (view,map);
+
 
 
 });
