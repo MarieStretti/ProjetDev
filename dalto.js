@@ -15,6 +15,7 @@ require([
       id: "9c41116150794b6d899503bb1dc2af2f"
     }
   });
+  console.log(webmap);
 
 
   // creation map
@@ -31,7 +32,6 @@ require([
 console.log(view);
   view.ui.move([ "zoom", webmap ], "top-right");
 
-
   // Create the layer and set the renderer
   var area = new FeatureLayer({
     portalItem: {
@@ -39,7 +39,8 @@ console.log(view);
     },
     renderer: maj([237,81,81,255],[20,158,206,255],[167,198,54,255])
   });
-
+  console.log("area",area);
+  area.popupEnabled = "false";
   webmap.add(area,0);
 
 
@@ -65,7 +66,7 @@ console.log(view);
   var colorEtude;
   var param;
 
-  var btnPP =   document.getElementById("btnPP");
+  var btnPP = document.getElementById("btnPP");
   btnPP.addEventListener("click", function(){
     var pp = document.getElementById("PP");
     if (pp.style.display == "flex") {
@@ -96,6 +97,15 @@ console.log(view);
       webmap.findLayerById(area.id).renderer = param;
     });
   };
+
+  document.getElementById('loupe').addEventListener('click', function(){
+    if (view.magnifier.visible == "true") {
+        view.magnifier.visible = "false";
+    }
+    else {
+      view.magnifier.visible = "true";
+    }
+  })
 
 
   /*
