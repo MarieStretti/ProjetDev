@@ -99,11 +99,12 @@ console.log(view);
   };
 
   document.getElementById('loupe').addEventListener('click', function(){
-    if (view.magnifier.visible == "true") {
-        view.magnifier.visible = "false";
+    console.log(view.magnifier);
+    if (view.magnifier.visible == true) {
+        view.magnifier.visible = false;
     }
     else {
-      view.magnifier.visible = "true";
+      view.magnifier.visible = true;
     }
   })
 
