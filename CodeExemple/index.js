@@ -100,8 +100,6 @@ gares.queryFeatures(query).then(function(response){
   });
 });
 
-var boutonCadre = document.getElementById("boutonCadre");
-boutonCadre.addEventListener("click", RefreshCadre);
 
 ///////// au clic : activation du cadre ///////////////////////:
 function RefreshCadre() {
@@ -117,7 +115,9 @@ function RefreshCadre() {
   var pix_x_center = height/2;
   var pix_y_center = width/2;
 
-  console.log("center : ",view.toMap({x: pix_x_center, y:pix_y_center}));
+  lat_center = view.toMap({x: pix_x_center, y:pix_y_center}).latitude;
+  lon_center = view.toMap({x: pix_x_center, y:pix_y_center}).longitude;
+  console.log("centre : ",lat_center,", ",lon_center);
   // dimensions du polygone d'emprise
   var dx = (height/2);
   var dy = (width/2);
@@ -141,75 +141,148 @@ function RefreshCadre() {
   console.log("S > ",lat_sud);
 
 //// CONVERSION DE COORDONNES D'EMPRISE AVEC PROJ4 //////
+  var coord_conv_centre = proj4(firstProjection,secondProjection,[lon_center,lat_center]);
+  var coord_conv_SO = proj4(firstProjection,secondProjection,[lon_ouest,lat_sud]); // lon lat : point sud ouest
+  var coord_conv_NE = proj4(firstProjection,secondProjection,[lon_est,lat_nord]); // lon lat : point nord est
+  
+  var x_center = coord_conv_centre[0];
+  var y_center = coord_conv_centre[1];
+  var y_nord  = coord_conv_SO[1];
+  var x_est   = coord_conv_SO[0];
+  var y_sud   = coord_conv_NE[1];
+  var x_ouest = coord_conv_NE[0];
 
-  var new_coord1 = proj4(firstProjection,secondProjection,[lon_ouest,lat_sud]); // lon lat : point sud ouest
-  var new_coord2 = proj4(firstProjection,secondProjection,[lon_est,lat_nord]); // lon lat : point nord est
+  ////////// CONDITIONS DE DISTANCE SUR LES POINTS
+  var emprise_x = Math.abs(x_est-x_ouest);
+  var emprise_y = Math.abs(y_nord-y_sud);
 
-  var y_nord  = new_coord2[1];
-  var x_est   = new_coord2[0];
-  var y_sud   = new_coord1[1];
-  var x_ouest = new_coord1[0];
+  /// les points à un certain rayon du centre de la carte ne sont pas pris en compte
+  // ici on pose le rayon à 3 fois l'emprise actuelle de la carte
+  var rayon_max = Math.max(3*emprise_x, 3*emprise_y);
+
 
   // initialisation des conteneurs du nombre des points dans chaque direction
   var points_NSEO = [0,0,0,0];
   var cadres_NSEO = [cadreNord, cadreSud, cadreEst,cadreOuest];
 
 
-//////// DETECTION DE LA POSITION DES POINTS     /////////
+//////// DETECTION DE LA POSITION DES POINTS   /////////
   for (var i = 0; i < liste_points.length; i++) {
 
     var x = liste_points[i][0]; /// EN LAMBERT 93
     var y = liste_points[i][1]; /// EN LAMBERT 93
 
-    if (x < x_ouest){ // point à gauche
-      points_NSEO[3] +=1;
-    }
-    if (x > x_est){ // point à droite
-      points_NSEO[2] +=1;
-    }
-    if (y > y_nord){ // point en haut
-      points_NSEO[0] +=1;
-    }
-    if (y < y_sud){ // point en bas
-      points_NSEO[1] +=1;
+    //filtre sur la distance : variable rayon_max
+    if (Math.abs(x_center-x) <= rayon_max && Math.abs(y_center-y) <= rayon_max){ 
+      
+      /*
+      var dnord  = Math.abs(y-y_center)/Math.abs(y_nord-y_center);
+      var dsud   = Math.abs(y-y_center)/Math.abs(y_sud-y_center);
+      var dest   = Math.abs(x-x_center)/Math.abs(x_est-x_center);
+      var douest = Math.abs(x-x_center)/Math.abs(x_ouest-x_center);
+      */
+
+     var dnord  = Math.abs(y-y_nord);
+     var dsud   = Math.abs(y-y_sud);
+     var dest   = Math.abs(x-x_est);
+     var douest = Math.abs(x-x_ouest);
+
+      /*
+      console.log("dnord: ",dnord);
+      console.log("dsud: ",dsud);
+      console.log("dest: ",dest);
+      console.log("douest: ",douest);
+*/
+      if (x < x_ouest){
+         if (y > y_nord){ // NORD-OUEST
+
+            if ( dnord > douest) { 
+              points_NSEO[3]+=1;//point attribué à l'ouest
+            } 
+            else { 
+              points_NSEO[0] += 1 // point attribué au nord
+            }; 
+
+         }else if (y < y_sud) { // SUD-OUEST
+          
+          if (dsud > douest){ 
+            points_NSEO[3] +=1 ;//point attribué à l'ouest
+          } 
+          else { 
+            points_NSEO[1] += 1;// point attribué au sud
+          }
+        }else{ // OUEST
+          points_NSEO[3] +=1;
+        }
+      }
+
+      else if (x > x_est){
+        if (y > y_nord){ // NORD-EST
+          if (dnord < dest) {
+            points_NSEO[2] +=1; //point attribué à l'est
+          } 
+          else {
+            points_NSEO[0] += 1; // point attribué au nord
+          }; 
+        }else if (y < y_sud) { // SUD-EST
+          if (dsud < dest) {
+            points_NSEO[2] += 1;//point attribué à l'est
+          } 
+          else {
+            points_NSEO[1] += 1// point attribué au sud
+          }; 
+        }else{
+          points_NSEO[2] +=1; // EST
+        }
+      }
+
+      else if (y > y_nord){ // NORD
+        points_NSEO[0] +=1;
+      }
+
+      else if (y < y_sud){ // SUD
+        points_NSEO[1] +=1;
+      }
+
     }
   }
-  console.log("####### nombre de points détectés dans les quadrants #######")
-  console.log("N : ",points_NSEO[0]);
-  console.log("S : ",points_NSEO[1]);
-  console.log("E : ",points_NSEO[2]);
-  console.log("O : ",points_NSEO[3]);
-  console.log("total : ",points_NSEO[3]+points_NSEO[1]+points_NSEO[2]+points_NSEO[0])
+
+
+  // nombre de points détectés dans l'emprise actuelle
+  var nb_total_points = points_NSEO[0]+ points_NSEO[1]+points_NSEO[2]+ points_NSEO[3];
+
 
 
   //////// modification de la couleur des cadres   //////////////////:
-  var couleurs_croissantes = ["lightgrey","lightgreen","gold","orange","tomato","fuchsia","purple","blue","darkblue"];
 
+  var couleurs_croissantes = ["lightgoldenrodyellow","gold","orange","red","purple","black"];
+  var nb_paliers = 4; /////////// nb de paliers de couleur ( à changer à la main)
+  var taille_palier = nb_total_points/nb_paliers;
+  var paliers = [taille_palier,2*taille_palier,3*taille_palier,4*taille_palier,5*taille_palier,6*taille_palier];
+
+  // attribution des couleurs (pour 4 paliers)
   for (var i = 0; i<4 ; i++){
     cadres_NSEO[i].innerHTML = points_NSEO[i];
-    if (points_NSEO[i] >= 700){
-      cadres_NSEO[i].style.background = couleurs_croissantes[8];
-    }else if (points_NSEO[i] >= 600){
-      cadres_NSEO[i].style.background = couleurs_croissantes[7];
-    }else if (points_NSEO[i] >= 500){
-      cadres_NSEO[i].style.background = couleurs_croissantes[6];
-    }else if (points_NSEO[i] >= 400){
-      cadres_NSEO[i].style.background = couleurs_croissantes[5];
-    }else if (points_NSEO[i] >= 300){
-      cadres_NSEO[i].style.background = couleurs_croissantes[4];
-    }else if (points_NSEO[i] >= 200){
+    if (points_NSEO[i] >= paliers[2]){ // rouge
       cadres_NSEO[i].style.background = couleurs_croissantes[3];
-    }else if (points_NSEO[i] >= 100){
+    }else if (points_NSEO[i] >= paliers[1]){ // orange
       cadres_NSEO[i].style.background = couleurs_croissantes[2];
-    }else if (points_NSEO[i] >= 50){
+    }else if (points_NSEO[i] >= paliers[0]){ // jaune
       cadres_NSEO[i].style.background = couleurs_croissantes[1];
     }else{
-      cadres_NSEO[i].style.background = couleurs_croissantes[0];
+      cadres_NSEO[i].style.background = couleurs_croissantes[0]; // gris pâle
     };
   };
-  console.log('bg : ',cadreNord.style.background);
 };
 
+view.on(["pointer-move"], function(evt) {
+  showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
+});
+
+view.on(["drag","double-click","mouse-wheel"], function() {
+  console.log("drag");
+  RefreshCadre();
+});
 
 
 ///////////////// WIDGET D'INFOS EN BAS DE LA CARTE /////////

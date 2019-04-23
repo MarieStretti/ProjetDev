@@ -24,12 +24,14 @@ html, body, #viewDiv {
 }
 
 #cadreOuest{
+    width : 2%;
     float: left;
     background : lightgoldenrodyellow;
     height : 90%;
 }
 
 #cadreEst{
+    width : 2%;
     float: right;
     background : lightgoldenrodyellow;
     height : 90%;
