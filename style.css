@@ -19,6 +19,14 @@ html, body {
 #viewDiv {
   height: 80%;
   width: 80%;
+  position: absolute;
+  z-index: 0;
+}
+
+#cadrediv {
+  position: relative;
+  z-index: 1;
+  height: 100%;
 }
 
 h2 {
@@ -213,27 +221,32 @@ hr {
 }
 
 #cadreNord{
-    margin-left: 3%;
     height : 3%;
-    width : 95%;
+    width : 100%;
     background : lightgoldenrodyellow;
 }
 
 #cadreOuest{
     float: left;
     background : lightgoldenrodyellow;
-    height : 90%;
+    height: 79%;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
 }
 
 #cadreEst{
     float: right;
     background : lightgoldenrodyellow;
-    height : 90%;
+    height: 79%;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
 }
 
 #cadreSud{
-    margin-left: 3%;
-    width : 95%;
+    width : 100%;
     height : 3%;
     background : lightgoldenrodyellow;
+    margin-top: 550px;
 }
