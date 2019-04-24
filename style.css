@@ -269,3 +269,23 @@ hr {
     height : 3%;
     background : lightgoldenrodyellow;
 }
+
+#loupe {
+  position:absolute;
+  top:14px;
+  right:70px;
+  background-color: black;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  z-index: 1;
+  /* transition-duration: 0.2s; */
+}
+
+#loupe:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}

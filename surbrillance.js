@@ -375,6 +375,18 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
 
 
 
+document.getElementById('loupe').addEventListener('click', function(){
+  console.log(view.magnifier);
+  if (view.magnifier.visible == true) {
+      view.magnifier.visible = false;
+  }
+  else {
+    view.magnifier.visible = true;
+  }
+})
+
+
+
  //*** Add div element to show coordates ***//
    var coordsWidget = document.createElement("div");
    coordsWidget.id = "coordsWidget";
