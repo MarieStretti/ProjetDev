@@ -43,12 +43,10 @@ require([
 
           /// préparation des projections de coordonnées avec proj4
           var wgs84 = proj4.Proj('EPSG:4326');
-          console.log(wgs84);
 
           proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 
           var lambert93 = proj4.Proj("EPSG:2154");
-          console.log(lambert93);
 
           var firstProjection = wgs84 ;
           var secondProjection = lambert93;
@@ -68,7 +66,6 @@ require([
           ///////// au clic : activation du cadre ///////////////////////:
           function RefreshCadre() {
 
-            console.log('start!');
 
 
           ////  coordonnées d'emprise actuelle de la carte /////
@@ -79,22 +76,22 @@ require([
             var pix_x_center = height/2;
             var pix_y_center = width/2;
 
-            console.log("center : ",view.toMap({x: pix_x_center, y:pix_y_center}));
+            var lat_center = view.toMap({x: pix_x_center, y:pix_y_center}).latitude;
+            var lon_center = view.toMap({x: pix_x_center, y:pix_y_center}).longitude;
             // dimensions du polygone d'emprise
             var dx = (height/2);
             var dy = (width/2);
 
-            console.log("dx, dy : ",dx, dy);
             var pix_x_ouest = pix_x_center - dx;
             var pix_x_est = pix_x_center + dx;
             var pix_y_nord = pix_y_center - dy; /// pixels != lon/lat !!!!!
             var pix_y_sud = pix_y_center + dy;
 
             // coordonnées des 'coins' de la carte en pixels > 80% de l'emprise environ
-            var lat_nord = view.toMap({x: pix_x_est, y:pix_y_nord}).latitude; console.log('lat_nord',lat_nord);
-            var lat_sud = view.toMap({x: pix_x_est, y:pix_y_sud}).latitude; console.log('lat_sud',lat_sud);
-            var lon_ouest = view.toMap({x: pix_x_ouest, y:pix_y_nord}).longitude; console.log('lon_ouest',lon_ouest);
-            var lon_est = view.toMap({x: pix_x_est, y:pix_y_nord}).longitude; console.log('lon_est',lon_est);
+            var lat_nord = view.toMap({x: pix_x_est, y:pix_y_nord}).latitude;
+            var lat_sud = view.toMap({x: pix_x_est, y:pix_y_sud}).latitude;
+            var lon_ouest = view.toMap({x: pix_x_ouest, y:pix_y_nord}).longitude;
+            var lon_est = view.toMap({x: pix_x_est, y:pix_y_nord}).longitude;
 
 
 
@@ -111,6 +108,11 @@ require([
             var x_ouest = coord_conv_SO[0];
 
 
+            ////////// CONDITIONS DE DISTANCE SUR LES POINTS
+            var emprise_x = Math.abs(x_est-x_ouest);
+            var emprise_y = Math.abs(y_nord-y_sud);
+
+            
             /// les points à un certain rayon du centre de la carte ne sont pas pris en compte
             // ici on pose le rayon à 3 fois l'emprise actuelle de la carte
             var rayon_max = Math.max(3*emprise_x, 3*emprise_y);
@@ -196,7 +198,6 @@ require([
 
           // mises à jour du cadre
           view.on(["drag","double-click","click","mouse-wheel"], function() {
-            console.log("drag");
             RefreshCadre();
           });
 
