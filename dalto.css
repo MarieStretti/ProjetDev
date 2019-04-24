@@ -1,0 +1,154 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  /* font-family: 'Open Sans Condensed', sans-serif; */
+  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
+}
+
+.esri-widget--button {
+  color: white;
+  background-color: black;
+}
+
+#loupe {
+  position:absolute;
+  top:14px;
+  right:70px;
+  background-color: black;
+  color: white;
+  border: none;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  z-index: 1;
+  /* transition-duration: 0.2s; */
+}
+
+#loupe:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+#viewDiv {
+  height: 100%;
+  width: 100%;
+}
+
+h2 {
+  padding-left: 10px;
+}
+
+#button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#btnD {
+  margin-top: 20px;
+}
+
+#btnPP {
+  margin-bottom: 20px;
+}
+
+#txt {
+  margin-top: 0px;
+}
+
+.btn {
+  color: black;
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 25px;
+  cursor: pointer;
+  font-family: 'Open Sans Condensed', sans-serif;
+  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  /* font-family: 'Julius Sans One', sans-serif; */
+}
+
+.btn:hover {background: #eee;}
+
+hr {
+  width: 250px;
+  /* border-top: 100px; */
+  background-color: black;
+  border-color: black;
+  size: 10;
+}
+
+#PP {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+/*################################### CSS VOLET ##########################################*/
+
+#volet {
+			width: 300px;
+      height: 99%;
+			background: white;
+      color: black;
+      border-style: solid;
+      border-width: 3px;
+      border-color: black;
+		}
+		#volet a.ouvrir,
+		#volet a.fermer {
+			padding: 10px 25px; /*padding du bouton ouvrir et fermer*/
+			background: black;
+			color: white;
+      font-weight: bold;
+      font-size: 20px;
+			text-decoration: none;
+		}
+
+		#volet {
+			position: absolute;
+			left: -308px; top: 0px;
+			-webkit-transition: all .5s ease-in;
+			-moz-transition: all .5s ease-in;
+			transition: all .5s ease-in;
+		}
+		#volet a.ouvrir,
+		#volet a.fermer {
+			position: absolute;
+			right: -106px;
+			top: 58px;
+			-webkit-transform: rotate(270deg);
+			-moz-transform: rotate(270deg);
+			-o-transform: rotate(270deg);
+			-ms-transform: rotate(270deg);
+			-moz-radius: 0 0 8px 8px;
+			border-radius: 0 0 8px 8px;
+		}
+		#volet a.fermer {
+			display: none;
+		}
+		#volet:target {
+			left: 0px;
+		}
+
+		/* code pour la fermeture */
+
+		#volet:target a.fermer {
+			display: block;
+		}
+		#volet:target a.ouvrir {
+			display: none;
+		}
+		#volet_clos:target #volet {
+			left: -308px;
+		}
