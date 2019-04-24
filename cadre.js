@@ -97,10 +97,11 @@ require([
             var lon_est = view.toMap({x: pix_x_est, y:pix_y_nord}).longitude; console.log('lon_est',lon_est);
 
 
-          //// CONVERSION DE COORDONNES D'EMPRISE AVEC PROJ4 //////
 
-            var new_coord1 = proj4(firstProjection,secondProjection,[lon_ouest,lat_sud]); // lon lat : point sud ouest
-            var new_coord2 = proj4(firstProjection,secondProjection,[lon_est,lat_nord]); // lon lat : point nord est
+            //// CONVERSION DE COORDONNES D'EMPRISE AVEC PROJ4 //////
+            var coord_conv_centre = proj4(firstProjection,secondProjection,[lon_center,lat_center]);
+            var coord_conv_SO = proj4(firstProjection,secondProjection,[lon_ouest,lat_sud]); // lon lat : point sud ouest
+            var coord_conv_NE = proj4(firstProjection,secondProjection,[lon_est,lat_nord]); // lon lat : point nord est
 
             var x_center = coord_conv_centre[0];
             var y_center = coord_conv_centre[1];
