@@ -213,27 +213,29 @@ hr {
 }
 
 #cadreNord{
-    margin-left: 3%;
-    height : 3%;
-    width : 95%;
-    background : lightgoldenrodyellow;
+  margin-left: 3%;
+  height : 3%;
+  width : 95%;
+  background : lightgoldenrodyellow;
 }
 
 #cadreOuest{
-    float: left;
-    background : lightgoldenrodyellow;
-    height : 90%;
+  width : 2%;
+  float: left;
+  background : lightgoldenrodyellow;
+  height : 90%;
 }
 
 #cadreEst{
-    float: right;
-    background : lightgoldenrodyellow;
-    height : 90%;
+  width : 2%;
+  float: right;
+  background : lightgoldenrodyellow;
+  height : 90%;
 }
 
 #cadreSud{
-    margin-left: 3%;
-    width : 95%;
-    height : 3%;
-    background : lightgoldenrodyellow;
+  margin-left: 3%;
+  width : 95%;
+  height : 3%;
+  background : lightgoldenrodyellow;
 }
