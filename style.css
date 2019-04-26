@@ -3,8 +3,6 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
-  text-align: center;
-  align-content: center;
   /* font-family: 'Open Sans Condensed', sans-serif; */
   /* font-family: 'Saira Extra Condensed', sans-serif; */
   font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
@@ -17,7 +15,7 @@ html, body {
 }
 
 #viewDiv {
-  height: 80%;
+  height: 90%;
   width: 100%;
   position: absolute;
   z-index: 0;
@@ -25,7 +23,7 @@ html, body {
 
 #cadrediv {
   position: relative;
-  height: 85%;
+  height: 96%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,7 +40,10 @@ html, body {
 }
 
 #boutonCadre {
-  width: 200px;
+  width: auto;
+  font-size: 40px;
+  background-color: white;
+  border: black solid 2px;
 }
 
 #vert {
@@ -51,6 +52,7 @@ html, body {
   justify-content: space-between;
   height: 100%;
   width: 100%;
+  text-align: center;
 }
 
 h2 {
@@ -99,7 +101,7 @@ hr {
       border-style: solid;
       border-width: 3px;
       border-color: black;
-
+      z-index: 1;
 		}
 
 	#volet a.ouvrir,
@@ -125,8 +127,8 @@ hr {
 
 	#volet a.fermer {
 		position: absolute;
-		right: -106px;
-		top: 59px;
+		right: -104px;
+		top: 60px;
 		-webkit-transform: rotate(270deg);
 		-moz-transform: rotate(270deg);
 		-o-transform: rotate(270deg);
@@ -157,7 +159,29 @@ hr {
 	}
 
 
+.check label {
+  font-size: 40px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
 
+input[type=checkbox]
+{
+-webkit-transform: scale(2);
+}
+
+#choixOutils {
+  position: absolute;
+  background-color: white;
+  font-size: 40px;
+  bottom: 150px;
+  right: 20px;
+  padding: 20px;
+  border: black solid 2px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
 
 
 	#nom_gares {
