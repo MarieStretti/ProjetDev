@@ -12,22 +12,6 @@
 
   <body>
 
-     <!-- <div id="choixOutils" class="choooose">
-       <div>
-         <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
-         <label for="cadre">Cadre</label>
-       </div>
-       <div>
-         <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
-         <label for="commande">Commande</label>
-       </div>
-       <div>
-         <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)">
-         <label for="surbrillance">Surbrillance</label>
-       </div>
-     </div> -->
-
-
      <div id="choixOutils" class="choooose">
       <fieldset>
         <!-- <legend>Veuillez sélectionner vos outils :</legend> -->
@@ -36,11 +20,11 @@
           <label for="cadre">Cadre</label>
         </div>
         <div>
-          <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+          <input type="checkbox" id="commande" name="choix" value="2" >
           <label for="commande">Commande</label>
         </div>
         <div>
-          <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)">
+          <input type="checkbox" id="surbrillance" name="choix" value="3">
           <label for="surbrillance">Surbrillance</label>
         </div>
       </fieldset>
@@ -60,9 +44,7 @@
   </div>
   <div id='cadreSud' style="display:none">Sud</div>
 </div>
-<div id="boouuuton">
-  <button id="boutonCadre" style="display:none">Rafraichir le cadre</button>
-</div>
+
 
 
    <div id="volet_clos" style="display:none">
@@ -132,9 +114,6 @@
     </div>
   </div>
 
-  <div id="audio">
-    <input id="btn" type="button" name="button" value="click">
-  </div>
 
 <!--Script necessaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
@@ -145,9 +124,10 @@
 
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
     <script src="https://js.arcgis.com/4.11/"></script>
-    <script src="index.js"></script>
     <script src="surbrillance.js"></script>
     <script src="cadre.js"></script>
+    <script src="index.js"></script>
+
 
   </body>
 </html>

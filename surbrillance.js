@@ -1,16 +1,3 @@
-var voletclos = document.getElementById("volet_clos");
-
-function alertsurbrillance(checkboxElem) {
- if (checkboxElem.checked) {
-   volet_clos.style.display = "block";
-
-
-
- } else {
-    volet_clos.style.display = "none";
- }
-};
-
 function executeSurbrillance(view, map, gare1, gareRenderer_defaut){
 
 require([
@@ -27,10 +14,11 @@ require([
     "esri/renderers/UniqueValueRenderer",
     "esri/Color",
     "esri/symbols/WebStyleSymbol",
+    "esri/geometry/Point",
     "dojo/domReady!"
 
   ], function (Map, MapView, WebMap, FeatureLayer, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
-        UniqueValueRenderer, Color, WebStyleSymbol) {
+        UniqueValueRenderer, Color, WebStyleSymbol, Point) {
 
 
 
@@ -41,15 +29,24 @@ var lambert93 = proj4.Proj("EPSG:2154");
 
 
 var gareRenderer_s1 = {
-  "type": "unique-value",
-  "field": "id_ref_zdl",
-  "uniqueValueInfos": []
+  "type": "simple",
+  "field": "",
+  "uniqueValueInfos": [],
+  "symbol" :{
+     type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+     size: 30,
+     color: "yellow"
+   }
 };
 
 var gareRenderer_s2 = {
-  "type": "unique-value",
-  "field": "id_ref_zdl",
-  "uniqueValueInfos": []
+  "type": "simple",
+  "field": "",
+  "symbol" :{
+     type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+     size: 30,
+     color: "blue"
+   }
 };
 
 renderer1 = gareRenderer_s1;
@@ -62,18 +59,8 @@ var gareRenderer = {
   "uniqueValueInfos": [],
 };
 
-
 var boutonGares = document.getElementById("boutonGares");
 var nom_gares = document.getElementById("nom_gares");
-
-
-
-var gare = new FeatureLayer({
-  portalItem: {
-    id: "7898dc0c69f848f08c0ccb720b96bd95",
-  },
-  renderer: gareRenderer
-});
 
 
 
@@ -82,13 +69,13 @@ var gare = new FeatureLayer({
   window.addEventListener("load", requeteSQL_toutID, false);
 
   function requeteSQL_toutID(event){
-      var query = gare.createQuery();
+      var query = gare1.createQuery();
       query.outFields = ["id_ref_zdl"];
-      gare.queryFeatures(query).features;
+      gare1.queryFeatures(query).features;
 
       var liste = [];
       var liste_RER = [];
-      gare.queryFeatures(query).then(function(response){
+      gare1.queryFeatures(query).then(function(response){
         response.features.forEach(function(item){
             liste.push(item.attributes.id_ref_zdl);
           });
@@ -113,9 +100,14 @@ var gare = new FeatureLayer({
 
   }
 
+id = 0;
+
   function requeteSQLRER(event){
-    var L = [];
-    var query = gare.createQuery();
+
+    map.remove(gare);
+    clearInterval(setInterVar);
+
+    var query = gare1.createQuery();
     if (event.target.value == "M1"){
       query.where = "res_com LIKE '%" + event.target.value +" /%' OR res_com LIKE '%" + event.target.value +"' ";
     }
@@ -123,47 +115,51 @@ var gare = new FeatureLayer({
       query.where = "res_com LIKE '%" + event.target.value +"%'";
     }
 
-    query.outFields = ["id_ref_zdl"];
-    gare.queryFeatures(query).features;
+    query.outFields = ["x","y"];
+    gare1.queryFeatures(query).features;
 
-    gareRenderer_s1.uniqueValueInfos = [];
-    var liste = [];
-
-    gare.queryFeatures(query).then(function(response){
+    var liste = []
+    gare1.queryFeatures(query).then(function(response){
       response.features.forEach(function(item){
-          liste.push(item.attributes.id_ref_zdl);
+
+        var new_coord  = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y])
+        var latitude = new_coord[1];
+        var longitude = new_coord[0];
+
+        var point = {
+          type: "point",
+          latitude: latitude,
+          longitude: longitude
+        };
+
+        var pointGraphic = new Graphic({
+          geometry: point,
         });
 
-          for (var i = 0; i < liste.length; i++) {
-            gareRenderer_s1.uniqueValueInfos.push({
-              "value":liste[i],
-              "symbol": {
-                "color": [0, 0, 255, 255],
-                "size": 30,
-                "type": "simple-marker",
-              }}
-            )
+        liste.push(pointGraphic);
 
-          }
+        });
 
-          gareRenderer_s2.uniqueValueInfos = JSON.parse(JSON.stringify(gareRenderer_s1.uniqueValueInfos));
+        gare = new FeatureLayer({
+          source: liste, // autocast from an array of esri/Graphic
+          renderer:renderer1,
+          objectIdField: "FID",
+        });
 
-          for (var i = 0; i < liste.length; i++) {
+        id = gare.id;
+        console.log(gare.id);
 
-            gareRenderer_s2.uniqueValueInfos[i].symbol.color = [255,255,0,255];
+        gare_surbrillance = gare;
 
-          }
-
-            map.add(gare);
-            renderer1 = gareRenderer_s1;
-            renderer2 = gareRenderer_s2;
-            renderer_encours = 1;
-            clearInterval(setInterVar);
-            setInterVar = setInterval(clignoter,1000);
+        map.add(gare);
+        renderer_encours = 1;
+        clignoter(gare);
 
       });
 
   }
+
+
 
 nom_gares.addEventListener("input", nomDeGare, false);
 nom_gares.addEventListener("click", voletRecherche, false);
@@ -193,12 +189,12 @@ var p = [p1,p2,p3];
 function nomDeGare(event){
   nom_gares.value = nom_gares.value.toUpperCase();
   liste = [];
-  var query = gare.createQuery();
+  var query = gare1.createQuery();
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
   query.outFields = ["nom_long"];
-  gare.queryFeatures(query).features;
+  gare1.queryFeatures(query).features;
 
-  gare.queryFeatures(query).then(function(response){
+  gare1.queryFeatures(query).then(function(response){
     response.features.forEach(function(item){
         liste.push(item.attributes.nom_long);
 
@@ -227,54 +223,67 @@ boutonGares.addEventListener("click", trouverGare, false);
 
 function trouverGare(event){
 
+  map.remove(gare);
+  clearInterval(setInterVar);
   liste = [];
-  var query = gare.createQuery();
+  var query = gare1.createQuery();
   console.log(nom_gares.value);
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
   console.log(query.where);
-  query.outFields = ["id_ref_zdl","x","y"];
-  gare.queryFeatures(query).features;
+  query.outFields = ["x","y"];
+  gare1.queryFeatures(query).features;
 
   gareRenderer_s1.uniqueValueInfos = [];
-  var new_coord1 =[];
-  gare.queryFeatures(query).then(function(response){
+  var new_coord;
+
+  gare1.queryFeatures(query).then(function(response){
+
     response.features.forEach(function(item){
-        liste.push(item.attributes.id_ref_zdl);
-        new_coord1 = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y]);
+
+
+        new_coord  = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y])
+        var latitude = new_coord[1];
+        var longitude = new_coord[0];
+
+        var point = {
+          type: "point",
+          latitude: latitude,
+          longitude: longitude
+        };
+
+        var pointGraphic = new Graphic({
+          geometry: point,
+        });
+
+        liste.push(pointGraphic);
 
 
       });
 
       console.log(liste);
-      gareRenderer_s1.uniqueValueInfos.push({
-        "value":liste[0],
-        "symbol": {
-          "color": [0, 255, 0, 255],
-          "size": 30,
-          "type": "simple-marker",
-        }}
-      )
+      gare = new FeatureLayer({
+        source: liste, // autocast from an array of esri/Graphic
+        renderer:renderer1,
+        objectIdField: "FID",
+      });
 
-        gareRenderer_s2.uniqueValueInfos = JSON.parse(JSON.stringify(gareRenderer_s1.uniqueValueInfos));
-        gareRenderer_s2.uniqueValueInfos[0].symbol.color = [255,255,0,255];
+      gare_surbrillance = gare;
 
-        map.add(gare);
-        renderer1 = gareRenderer_s1;
-        renderer2 = gareRenderer_s2;
-        renderer_encours = 1;
-        clearInterval(setInterVar);
-        setInterVar = setInterval(clignoter,1000);
+      map.add(gare);
+      renderer_encours = 1;
+      clignoter(gare);
 
 
-        view.center.latitude = new_coord1[1];
-        view.center.longitude = new_coord1[0];
+      view.center.latitude = new_coord[1];
+      view.center.longitude = new_coord[0];
 
-        view.goTo({
-          target: view.center
-        });
+      view.goTo({
+        target: view.center
+      });
 
 
     });
+
     volet.style.width = "400px";
     nom_gares.value ="";
     p1.innerHTML ="";
@@ -284,30 +293,39 @@ function trouverGare(event){
 
 }
 
-setInterVar = 0;
+var setInterVar;
 renderer_encours = 0;
 
-//gareRenderer_s1.onclick(console.log(uniqueValueInfos.)
 
-function clignoter(){
-  //console.log("renderer en cours " + renderer_encours);
+function clignoter(featurelayer){
 
-  if (renderer_encours == 1){
-    map.findLayerById(gare.id).renderer = renderer2;
-    renderer_encours = 2;
-  }
+clearInterval(setInterVar);
+setInterVar = setInterval( function c(){
 
-  else {
-    map.findLayerById(gare.id).renderer = renderer1;
-    renderer_encours = 1;
-  }
+    if (renderer_encours == 1){
+      featurelayer.renderer = renderer2;
+      renderer_encours = 2;
+    }
+
+    else {
+      featurelayer.renderer = renderer1;
+      renderer_encours = 1;
+
+
+}},1000);
 
 }
+
+
+
+ //////////////////////// CONCERNE L'AFFICHAGE ///////////////////////////////
+
 
 var metros = document.getElementById("metros");
 var rer = document.getElementById("RER");
 var metro = document.getElementById("METRO");
 var rech = document.getElementById("RECHERCHE");
+
 
 var boutonRER = document.getElementById("boutonRER");
 var boutonMetro= document.getElementById("boutonMetro");
@@ -316,6 +334,7 @@ var boutonRecherche= document.getElementById("boutonRecherche");
 var volet = document.getElementById("volet");
 
 
+// Réaction de la div RER en fonction du click sur le boutonRER
 
 
 document.getElementById("boutonRER").addEventListener("click", function(){
@@ -335,6 +354,8 @@ document.getElementById("boutonRER").addEventListener("click", function(){
   }
 });
 
+
+// Réaction de la div metro en fonction du click sur le boutonMetro
 
 document.getElementById("boutonMetro").addEventListener("click", function(){
 
@@ -356,6 +377,7 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 });
 
 
+// Réaction de la div recherche en fonction du click sur le boutonRecherche
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
   if (rech.style.display == "flex") {
@@ -374,44 +396,28 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
 });
 
 
+//////////////////////////// REINITIALISATION /////////////////////////////////
 
-document.getElementById('loupe').addEventListener('click', function(){
-  console.log(view.magnifier);
-  if (view.magnifier.visible == true) {
-      view.magnifier.visible = false;
-  }
-  else {
-    view.magnifier.visible = true;
-  }
-})
+// En fonction de la checkbox de l'outil on effectue des réinitialisations
 
 
 
- //*** Add div element to show coordates ***//
-   var coordsWidget = document.createElement("div");
-   coordsWidget.id = "coordsWidget";
-   coordsWidget.className = "esri-widget esri-component";
-   coordsWidget.style.padding = "7px 15px 5px";
-   view.ui.add(coordsWidget, "bottom-right");
+surbrillance.addEventListener("change", function parametres_Defaut(event){
 
-   //*** Update lat, lon, zoom and scale ***//
-   function showCoordinates(pt) {
-     var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
-         " | Scale 1:" + Math.round(view.scale * 1) / 1 +
-        " | Zoom " + view.zoom;
-    coordsWidget.innerHTML = coords;
-   }
 
-  //*** Add event and show center coordinates after the view is finished moving e.g. zoom, pan ***//
-   view.watch(["stationary"], function() {
-    showCoordinates(view.center);
-  });
+if(surbrillance.checked){
+      gare = new FeatureLayer();
+    }
 
-   //*** Add event to show mouse coordinates on click and move ***//
-   view.on(["pointer-down","pointer-move"], function(evt) {
-     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
+    else {
+      map.remove(gare);
+      clearInterval(setInterVar);
+      gare_surbrillance = 0;
+      renderer_encours = 0;
+      gare = 0;
+    }
 
-});
+}, false);
 
 
 })};

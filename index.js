@@ -71,7 +71,23 @@ map.add(gare);
 
   view.popup = null;
 
-  executeSurbrillance(view, map, gare, gareRenderer_defaut);
+  surbrillance.addEventListener("change",executeSurbrillanceEvent,false);
+executeSurbrillance(view, map, gare, gareRenderer_defaut);
+var voletclos = document.getElementById("volet_clos");
+
+
+function executeSurbrillanceEvent(event){
+  if (surbrillance.checked) {
+    volet_clos.style.display = "flex";
+  }
+  else {
+    volet_clos.style.display = "none";
+
+  }
+
+};
+
+
 
   executeCadre(view, map, gare, gareRenderer_defaut)
 
