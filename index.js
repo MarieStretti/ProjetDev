@@ -64,9 +64,12 @@ map.add(gare);
     zoom: zoomlevel
   });
 
+  view.ui.move([ "zoom", map ], "top-right");
+
   view.zoom=zoomlevel;
   zoomlevel = view.zoom;
 
+  view.popup = null;
 
   executeSurbrillance(view, map, gare, gareRenderer_defaut);
 
