@@ -4,116 +4,113 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>ArcGIS</title>
-
-    <style>
-      html, body, #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href=style.css >
-
-
   </head>
+
   <body>
-    <div class="choooose">
+
+     <!-- <div id="choixOutils" class="choooose">
+       <div>
+         <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
+         <label for="cadre">Cadre</label>
+       </div>
+       <div>
+         <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+         <label for="commande">Commande</label>
+       </div>
+       <div>
+         <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)">
+         <label for="surbrillance">Surbrillance</label>
+       </div>
+     </div> -->
 
 
-    <fieldset>
-      <legend>Veuillez sélectionner vos outils :</legend>
-      <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)"> cadre
-      <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)"> commande vocale
-      <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)" > surbrillance
-    </fieldset>
-   </div>
-
-   <div id="audio">
-     <input id="btn" type="button" name="button" value="click">
-   </div>
-
-
-
-    <div id="viewDiv">
-      <div id="widgetLoupe">
-        <button id="loupe" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
-      </div>
-
+     <div id="choixOutils" class="choooose">
+      <fieldset>
+        <!-- <legend>Veuillez sélectionner vos outils :</legend> -->
+        <div>
+          <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
+          <label for="cadre">Cadre</label>
+        </div>
+        <div>
+          <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+          <label for="commande">Commande</label>
+        </div>
+        <div>
+          <input type="checkbox" id="surbrillance" name="choix" value="3" onchange="alertsurbrillance(this)">
+          <label for="surbrillance">Surbrillance</label>
+        </div>
+      </fieldset>
     </div>
 
-<div id="cadrediv" style="display:none">
-  <div id="cadresAll">
-    <div id='cadreEst'>Est</div>
-    <div id="vert">
-      <div id='cadreNord'>Nord</div>
-      <div id='cadreSud'>Sud</div>
-    </div>
-    <div id='cadreOuest'>West</div>
-  </div>
-    <button id="boutonCadre">Rafraichir le cadre</button>
-</div>
+       <div id="viewDiv">
+         <div id="widgetLoupe">
+           <button id="loupe" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
+         </div>
+       </div>
+
+
+       <div id="cadrediv" style="display:none">
+         <div id="cadresAll">
+           <div id='cadreEst'>Est</div>
+           <div id="vert">
+             <div id='cadreNord'>Nord</div>
+             <div id='cadreSud'>Sud</div>
+           </div>
+           <div id='cadreOuest'>West</div>
+         </div>
+         <button id="boutonCadre">Rafraichir le cadre</button>
+       </div>
 
 
 
+   <div id="volet_clos" style="display:none">
+     <div id="volet">
+       <div id="button">
 
-
-
-     <div id="volet_clos" style="display:none">
-       <div id="volet">
-         <div id="button">
-
-           <button id="boutonRER" class="btn"><img src="pictures/RER.png" alt="404" height="150" width="150" ></button>
-           <div id="RER" style="display:none">
-
-              <div id=RER1>
-               <input type=image src="pictures/RERA.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER A">
-               <input type=image src="pictures/RERC.png" alt="404" height="100" width="100"  class="classRER btn" value="RER C">
-               <input type=image src="pictures/RERE.png" alt="404" height="100" width="100"  class="classRER btn" value="RER E">
-
-             </div>
-
-             <div id=RER2>
-               <input type=image src="pictures/RERB.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER B">
-               <input type=image src="pictures/RERD.png" alt="404" height="100" width="100"  class="classRER btn" value="RER D">
-              </div>
-
+         <button id="boutonRER" class="btn"><img src="pictures/RER.png" alt="404" height="150" width="150" ></button>
+         <div id="RER" style="display:none">
+            <div id=RER1>
+             <input type=image src="pictures/RERA.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER A">
+             <input type=image src="pictures/RERC.png" alt="404" height="100" width="100"  class="classRER btn" value="RER C">
+             <input type=image src="pictures/RERE.png" alt="404" height="100" width="100"  class="classRER btn" value="RER E">
            </div>
 
-           <div id="metros">
-             <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
-             <div id="METRO" style="display:none">
+           <div id=RER2>
+             <input type=image src="pictures/RERB.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER B">
+             <input type=image src="pictures/RERD.png" alt="404" height="100" width="100"  class="classRER btn" value="RER D">
+           </div>
+         </div>
+         <div id="metros">
+           <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
+           <div id="METRO" style="display:none">
+             <div id=METRO1>
+               <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
+               <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
+               <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
+               <input type=image src="pictures/metro7.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M7">
+               <input type=image src="pictures/metro9.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M9">
+               <input type=image src="pictures/metro11.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M11">
+               <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
+             </div>
 
-       <div id=METRO1>
-         <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
-         <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
-         <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
-         <input type=image src="pictures/metro7.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M7">
-         <input type=image src="pictures/metro9.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M9">
-         <input type=image src="pictures/metro11.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M11">
-         <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
-       </div>
+             <div id=METRO2>
+               <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
+               <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
+               <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
+               <input type=image src="pictures/metro8.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M8">
+               <input type=image src="pictures/metro10.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M10">
+               <input type=image src="pictures/metro12.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M12">
+               <input type=image src="pictures/metro14.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M14">
+             </div>
+           </div>
+         </div>
 
-       <div id=METRO2>
-         <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
-         <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
-         <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
-         <input type=image src="pictures/metro8.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M8">
-         <input type=image src="pictures/metro10.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M10">
-         <input type=image src="pictures/metro12.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M12">
-         <input type=image src="pictures/metro14.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M14">
-       </div>
-     </div>
-   </div>
-            <button id="boutonRecherche" class="btn"><img src="pictures/gare.png" alt="404" height="150" width="150" ></button>
-
-
-            <div id="RECHERCHE" style="display:none">
+         <button id="boutonRecherche" class="btn"><img src="pictures/gare.png" alt="404" height="150" width="150" ></button>
+        <div id="RECHERCHE" style="display:none">
 
 
                 <input id="nom_gares" />
@@ -130,31 +127,29 @@
             </div>
 
 
-         </div>
          <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
          <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
 
-        </div>
-
       </div>
+    </div>
+  </div>
+
+  <div id="audio">
+    <input id="btn" type="button" name="button" value="click">
+  </div>
+
+<!--Script necessaires -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="annyang.js"></script>
+    <script type="text/javascript" src="mespeak.js"></script>
+    <script type="text/javascript" src="texttospeech.js"></script>
 
 
-
-
-
-
-<!--Script nécéssaires -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
-<script src="annyang.js"></script>
-<script type="text/javascript" src="mespeak.js"></script>
-<script type="text/javascript" src="texttospeech.js"></script>
-
-
-<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
-<script src="https://js.arcgis.com/4.11/"></script>
-<script src="index.js"></script>
-<script src="surbrillance.js"></script>
-<script src="cadre.js"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.11/"></script>
+    <script src="index.js"></script>
+    <script src="surbrillance.js"></script>
+    <script src="cadre.js"></script>
 
   </body>
 </html>
