@@ -180,7 +180,7 @@ function changerNomGare(event){
 
 function voletRecherche(event){
 
-    volet.style.width = "1300px";
+    volet.style.width = "75%";
 }
 
 
@@ -381,15 +381,16 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
   if (rech.style.display == "flex") {
-    volet.style.width = "400px";
+    volet.style.width = "40%";
     rech.style.display = "none";
     boutonRER.style.display ="block";
     boutonMetro.style.display ="block";
   }
 
   else {
-  volet.style.width = "1300px"
+  volet.style.width = "75%"
   rech.style.display = "flex";
+  rech.style.width = "100%";
   boutonRER.style.display ="none";
   boutonMetro.style.display ="none";
   }
