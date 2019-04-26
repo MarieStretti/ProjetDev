@@ -87,6 +87,15 @@ function executeSurbrillanceEvent(event){
 
 };
 
+document.getElementById('loupe').addEventListener('click', function(){
+  console.log(view.magnifier);
+  if (view.magnifier.visible == true) {
+      view.magnifier.visible = false;
+  }
+  else {
+    view.magnifier.visible = true;
+  }
+})
 
 
   executeCadre(view, map, gare, gareRenderer_defaut)

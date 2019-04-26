@@ -131,6 +131,8 @@ hr {
       border-width: 3px;
       border-color: black;
       z-index: 1;
+      /* display: flex;
+      justify-content: center; */
 		}
 
 	#volet a.ouvrir,
@@ -203,7 +205,7 @@ input[type=checkbox]
   position: absolute;
   background-color: white;
   font-size: 40px;
-  bottom: 160px;
+  bottom: 120px;
   right: 40px;
   padding: 20px;
   border: black solid 2px;
@@ -220,6 +222,8 @@ input[type=checkbox]
 		color: white;
 		font-weight: bold;
 		background-color: #060D9D;
+    border: none;
+    border-bottom: white solid 3px;
 	}
 
 
@@ -289,12 +293,14 @@ input[type=checkbox]
 #RECHERCHE {
   display: flex;
   flex-direction: column;
+  width: 70%;
 }
 
 #boutonGares {
-  background-color: green;
+  background-color: #060D9D;
   font-weight: bold;
   font-size: 70px;
+  color: white;
 }
 
 
