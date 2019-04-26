@@ -284,7 +284,7 @@ function trouverGare(event){
 
     });
 
-    volet.style.width = "400px";
+    volet.style.width = "40%";
     nom_gares.value ="";
     p1.innerHTML ="";
     p2.innerHTML ="";
