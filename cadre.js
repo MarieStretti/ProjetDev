@@ -1,13 +1,23 @@
-var cadrediv = document.getElementById("cadrediv");
+var cadreNord = document.getElementById("cadreNord");
+var cadreOuest = document.getElementById("cadreOuest");
+var cadreEst = document.getElementById("cadreEst");
+var cadreSud = document.getElementById("cadreSud");
+var boutonCadre = document.getElementById("boutonCadre");
 
 function alertcadre(checkboxElem) {
  if (checkboxElem.checked) {
-   cadrediv.style.display = "flex";
-
-
+   cadreNord.style.display = "flex";
+   cadreOuest.style.display = "flex";
+   cadreEst.style.display = "flex";
+   cadreSud.style.display = "flex";
+   boutonCadre.style.display = "flex";
 
  } else {
-    cadrediv.style.display = "none";
+    cadreOuest.style.display = "none";
+    cadreNord.style.display = "none";
+    cadreEst.style.display = "none";
+    cadreSud.style.display = "none";
+    boutonCadre.style.display = "none";
  }
 };
 
