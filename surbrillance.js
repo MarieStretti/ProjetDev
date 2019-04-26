@@ -129,11 +129,13 @@ id = 0;
         var point = {
           type: "point",
           latitude: latitude,
-          longitude: longitude
+          longitude: longitude,
+
         };
 
         var pointGraphic = new Graphic({
           geometry: point,
+          attributes: {x: item.attributes.x , y: item.attributes.y }
         });
 
         liste.push(pointGraphic);
@@ -180,7 +182,7 @@ function changerNomGare(event){
 
 function voletRecherche(event){
 
-    volet.style.width = "75%";
+    volet.style.width = "1300px";
 }
 
 
@@ -253,6 +255,7 @@ function trouverGare(event){
 
         var pointGraphic = new Graphic({
           geometry: point,
+          attributes: {x: item.attributes.x , y: item.attributes.y }
         });
 
         liste.push(pointGraphic);
@@ -284,7 +287,7 @@ function trouverGare(event){
 
     });
 
-    volet.style.width = "40%";
+    volet.style.width = "400px";
     nom_gares.value ="";
     p1.innerHTML ="";
     p2.innerHTML ="";
@@ -381,16 +384,15 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
   if (rech.style.display == "flex") {
-    volet.style.width = "40%";
+    volet.style.width = "400px";
     rech.style.display = "none";
     boutonRER.style.display ="block";
     boutonMetro.style.display ="block";
   }
 
   else {
-  volet.style.width = "75%"
+  volet.style.width = "1300px"
   rech.style.display = "flex";
-  rech.style.width = "100%";
   boutonRER.style.display ="none";
   boutonMetro.style.display ="none";
   }
@@ -410,7 +412,7 @@ if(surbrillance.checked){
       gare = new FeatureLayer();
     }
 
-    else {
+else {
       map.remove(gare);
       clearInterval(setInterVar);
       gare_surbrillance = 0;

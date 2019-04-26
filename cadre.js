@@ -2,7 +2,6 @@ var cadreNord = document.getElementById("cadreNord");
 var cadreOuest = document.getElementById("cadreOuest");
 var cadreEst = document.getElementById("cadreEst");
 var cadreSud = document.getElementById("cadreSud");
-//var boutonCadre = document.getElementById("boutonCadre");
 
 function alertcadre(checkboxElem) {
  if (checkboxElem.checked) {
@@ -10,18 +9,16 @@ function alertcadre(checkboxElem) {
    cadreOuest.style.display = "flex";
    cadreEst.style.display = "flex";
    cadreSud.style.display = "flex";
-  // boutonCadre.style.display = "flex";
 
  } else {
     cadreOuest.style.display = "none";
     cadreNord.style.display = "none";
     cadreEst.style.display = "none";
     cadreSud.style.display = "none";
-  //  boutonCadre.style.display = "none";
  }
 };
 
-function executeCadre(view, map, gare, gareRenderer_defaut){
+function executeCadre(view, map, gareLayer, gareRenderer_defaut){
 
 require([
     "esri/Map",
@@ -50,25 +47,109 @@ require([
           var cadreSud   = document.getElementById('cadreSud');
 
 
+          liste_points = [];
+
           /// préparation des projections de coordonnées avec proj4
           var wgs84 = proj4.Proj('EPSG:4326');
-
           proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-
           var lambert93 = proj4.Proj("EPSG:2154");
 
-          /// stockage des coordonnées de TOUS LES POINTS de la couche sur laquelle on compte les éléments
-          var query = gare.createQuery();
-          query.outFields = ["x","y"];
-          gare.queryFeatures(query).features;
-          var liste_points = [];
-          gare.queryFeatures(query).then(function(response){
-            response.features.forEach(function(item){
-                liste_points.push([item.attributes.x,item.attributes.y]); // on rajoute les couples [x,y] aux coordonnées
-            });
-          });
+          // On regarde la valeur de gare_surbrillance toutes les x secondes
 
-          ///////// au clic : activation du cadre ///////////////////////:
+          var indice = 1;
+          var layer_display = 0;
+
+          cadre.addEventListener("change",etatcadre,false);
+
+          // permet de savoir si le cadre est coché
+
+          function etatcadre(event){
+
+            if (cadre.checked){
+              indice = 1;
+              if(layer_display != gareLayer) {
+                  liste_points = [];
+                  layer_display = gareLayer;
+                  definitonLayer(gareLayer);
+                  RefreshCadre();
+              }
+
+            }
+
+            else{
+              indice = 0;
+            }
+        }
+
+          function test(){
+
+                  liste_points =[];
+
+                  if(gare_surbrillance != 0){
+                    console.log(gare_surbrillance);
+                    layer_display = gare_surbrillance;
+                    definitonLayer(gare_surbrillance);
+                    RefreshCadre();
+
+                  }
+
+                  else{
+                    definitonLayer(gareLayer);
+                    RefreshCadre();
+                  }
+
+
+          }
+
+
+
+                    // mise à jour du cadre lorsque surbrillance est coché
+
+                    var set;
+                    surbrillance.addEventListener("change", function () {
+
+                      if (surbrillance.checked){
+                        set = setInterval(test,500);
+                        RefreshCadre();
+                      }
+                      else{
+
+                          liste_points =[];
+
+                          clearInterval(set);
+                          definitonLayer(gareLayer);
+                          RefreshCadre();
+
+                      }
+
+                  }, false);
+
+
+
+                      // permet lorsque le cadre est activé de rafraichir la carte lors des mouvement sur cette dernière
+
+                      view.on(["drag","double-click","click","mouse-wheel"], function() {
+                          if (indice == 1){
+                            RefreshCadre();
+                          }
+                    }, false);
+
+
+
+          /// stockage des coordonnées de TOUS LES POINTS de la couche sur laquelle on compte les éléments
+
+          function definitonLayer(featurelayer){
+
+            for (var i = 0; i < featurelayer.source.items.length; i++) {
+              liste_points.push([featurelayer.source.items[i].attributes.x,featurelayer.source.items[i].attributes.y]);
+          }
+
+       }
+
+
+
+          // Permet de rafraichir le cadre
+
           function RefreshCadre() {
             console.log("refresh");
           ////  coordonnées d'emprise actuelle de la carte /////
@@ -175,7 +256,6 @@ require([
 
             // nombre de points détectés dans l'emprise actuelle
             var nb_total_points = points_NSEO[0]+ points_NSEO[1]+points_NSEO[2]+ points_NSEO[3];
-            console.log();
 
            //////// modification de la couleur des cadres   //////////////////:
 
@@ -200,9 +280,5 @@ require([
 
           };
 
-          // mises à jour du cadre
-          view.on(["drag","double-click","click","mouse-wheel"], function() {
-            RefreshCadre();
-          }, false);
 
 })};
