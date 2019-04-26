@@ -31,6 +31,7 @@ require([
   });
 console.log(view);
   view.ui.move([ "zoom", webmap ], "top-right");
+  view.popup = null;
 
   // Create the layer and set the renderer
   var area = new FeatureLayer({
