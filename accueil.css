@@ -3,6 +3,7 @@ body,html {
   height: 100%;
   margin: 0px;
   display: flex;
+  font-family: berlin;
   justify-content: center;
 }
 
@@ -19,6 +20,15 @@ h1 {
   margin: 0px;
 }
 
+#version {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  height: 64%;
+  margin-left: 20px;
+  color: white;
+}
+
 #haut {
   background-color: #8B110D;
   height: 60%;
@@ -26,12 +36,20 @@ h1 {
   position: absolute;
 }
 
+.logos {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+}
+
 #titre {
   height: 50%;
-  width: 100%;
+  width: 80%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-left: 185px;
 }
 
 #content {
@@ -40,7 +58,7 @@ h1 {
   background-color: white;
   display: flex;
   justify-content: space-between;
-  top: 200px;
+  top: 230px;
   /* left: 40px; */
   position: relative;
   z-index: 1;
@@ -88,6 +106,29 @@ h1 {
   width: 100%;
 }
 
+#projet {
+  border: none;
+  background-color: white;
+  color: #470907;
+  font-family: berlin;
+  font-size: 40px;
+  cursor: pointer;
+  text-decoration:none;
+  text-align: center;
+}
+
+
+#resume {
+  z-index: 1;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 30px;
+  height: 1000px;
+}
 
 /***************** Flipping card ************************************/
 
