@@ -218,7 +218,7 @@ input[type=checkbox]
 	#nom_gares {
 		height: 100%;
 		weight: 100%;
-		font-size: 70px;
+		font-size: 5vw;;
 		color: white;
 		font-weight: bold;
 		background-color: #060D9D;
@@ -274,7 +274,7 @@ input[type=checkbox]
 #propositionGare{
   display: flex;
   flex-direction: column;
-  font-size: 70px;
+  font-size: 5vw;
   font-weight: bold;
 }
 
@@ -299,7 +299,7 @@ input[type=checkbox]
 #boutonGares {
   background-color: #060D9D;
   font-weight: bold;
-  font-size: 70px;
+  font-size: 5vw;
   color: white;
 }
 

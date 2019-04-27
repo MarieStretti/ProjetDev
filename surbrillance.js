@@ -182,7 +182,7 @@ function changerNomGare(event){
 
 function voletRecherche(event){
 
-    volet.style.width = "1300px";
+    volet.style.width = "600px";
 }
 
 
@@ -391,8 +391,9 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
   }
 
   else {
-  volet.style.width = "1300px"
+  volet.style.width = "600px"
   rech.style.display = "flex";
+  rech.style.width = '100%'
   boutonRER.style.display ="none";
   boutonMetro.style.display ="none";
   }
