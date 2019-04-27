@@ -93,4 +93,16 @@ function executeSurbrillanceEvent(event){
   commande_voc(view,map);
   console.log('index executed');
 
+
+
+  document.getElementById('loupe').addEventListener('click', function(){
+    console.log(view.magnifier);
+    if (view.magnifier.visible == true) {
+        view.magnifier.visible = false;
+    }
+    else {
+      view.magnifier.visible = true;
+    }
+  })
+
 });
