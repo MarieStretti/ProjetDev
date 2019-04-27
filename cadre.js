@@ -259,22 +259,27 @@ require([
 
            //////// modification de la couleur des cadres   //////////////////:
 
-            var couleurs_croissantes = ["lightgoldenrodyellow","gold","orange","red","purple","black"];
-            var nb_paliers = 4; /////////// nb de paliers de couleur ( à changer à la main)
+            var couleurs_croissantes = ["#ffff80","gold","orange","orangered","red","#b30000"];
+            var nb_paliers = 6; /////////// nb de paliers de couleur ( à changer à la main)
             var taille_palier = nb_total_points/nb_paliers;
-            var paliers = [taille_palier,2*taille_palier,3*taille_palier];
+            var paliers = [taille_palier,2*taille_palier,3*taille_palier,4*taille_palier,5*taille_palier];
 
             // attribution des couleurs (4 paliers)
             for (var i = 0; i<4 ; i++){
               cadres_NSEO[i].innerHTML = points_NSEO[i];
-              if (points_NSEO[i] >= paliers[2]){ // rouge
+              cadres_NSEO[i].style.fontFamily = 'Open Sans Condensed';
+              if (points_NSEO[i] >= paliers[4]){ // darkred
+                cadres_NSEO[i].style.background = couleurs_croissantes[5];
+              }else if (points_NSEO[i] >= paliers[3]){ // red
+                cadres_NSEO[i].style.background = couleurs_croissantes[4];
+              }else if (points_NSEO[i] >= paliers[2]){ // orangered
                 cadres_NSEO[i].style.background = couleurs_croissantes[3];
               }else if (points_NSEO[i] >= paliers[1]){ // orange
                 cadres_NSEO[i].style.background = couleurs_croissantes[2];
-              }else if (points_NSEO[i] >= paliers[0]){ // jaune
+              }else if (points_NSEO[i] >= paliers[0]){ // gold
                 cadres_NSEO[i].style.background = couleurs_croissantes[1];
               }else{
-                cadres_NSEO[i].style.background = couleurs_croissantes[0]; // gris pâle
+                cadres_NSEO[i].style.background = couleurs_croissantes[0]; // lightyellow
               };
             };
 
