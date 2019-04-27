@@ -396,6 +396,7 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
   rech.style.width = '100%'
   boutonRER.style.display ="none";
   boutonMetro.style.display ="none";
+
   }
 });
 
@@ -419,6 +420,14 @@ else {
       gare_surbrillance = 0;
       renderer_encours = 0;
       gare = 0;
+      rer.style.display = "none";
+      metro.style.display = "none";
+      rech.style.display = "none";
+      metros.style.overflowY = "hidden";
+
+      boutonRecherche.style.display = "block";
+      boutonRER.style.display ="block";
+      boutonMetro.style.display ="block";
     }
 
 }, false);
