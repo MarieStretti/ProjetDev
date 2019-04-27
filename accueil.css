@@ -39,9 +39,9 @@ h1 {
 .logos {
   display: flex;
   justify-content: space-between;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 30px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
 }
 
 #titre {
@@ -58,8 +58,7 @@ h1 {
   background-color: white;
   display: flex;
   justify-content: space-between;
-  top: 230px;
-  /* left: 40px; */
+  top: 210px;
   position: relative;
   z-index: 1;
 }
@@ -120,14 +119,18 @@ h1 {
 
 #resume {
   z-index: 1;
+  width: 700px;
+  text-align: justify;
+  font-size: 40px;
 }
+
 
 #page {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-size: 30px;
-  height: 1000px;
+  height: 1500px;
 }
 
 /***************** Flipping card ************************************/
