@@ -1,4 +1,5 @@
  function commande_voc (view,map){
+   console.log('annyang commande going');
 
    annyang.setLanguage('fr-FR');
 
@@ -133,9 +134,9 @@
  function alertannyang(checkboxElem) {
   if (checkboxElem.checked) {
     annyang.start();
-    console.log('started');
+    console.log('commande started');
   } else {
     annyang.pause();
-    console.log('stoped');
+    console.log('commande stoped');
   }
 }

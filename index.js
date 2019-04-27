@@ -88,7 +88,9 @@ function executeSurbrillanceEvent(event){
 
 };
 
-  executeCadre(view, map, gare, gareRenderer_defaut)
+  executeCadre(view, map, gare, gareRenderer_defaut);
 
   commande_voc(view,map);
+  console.log('index executed');
+
 });
