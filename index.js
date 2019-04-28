@@ -70,13 +70,14 @@ map.add(gare);
   view.zoom=zoomlevel;
   zoomlevel = view.zoom;
 
+  // permet de ne pas pouvoir afficher les attributs qui parasitent la vue
   view.popup = null;
 
 surbrillance.addEventListener("change",executeSurbrillanceEvent,false);
 executeSurbrillance(view, map, gare, gareRenderer_defaut);
 var voletclos = document.getElementById("volet_clos");
 
-
+// on peut passer cette fonction dans surbrillance.js à la manière du cadre et de la commande vocal avec un alertsurbrillance
 function executeSurbrillanceEvent(event){
   if (surbrillance.checked) {
     volet_clos.style.display = "flex";
@@ -91,9 +92,6 @@ function executeSurbrillanceEvent(event){
   executeCadre(view, map, gare, gareRenderer_defaut);
 
   commande_voc(view,map);
-  console.log('index executed');
-
-
 
   document.getElementById('loupe').addEventListener('click', function(){
     if (view.magnifier.visible == true) {
@@ -102,10 +100,6 @@ function executeSurbrillanceEvent(event){
     else {
       view.magnifier.visible = true;
     }
-  })
-
-  document.getElementById('lecture').addEventListener('click', function(){
-    texttospeech();
   })
 
 });

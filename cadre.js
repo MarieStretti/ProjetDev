@@ -109,8 +109,8 @@ require([
                     surbrillance.addEventListener("change", function () {
 
                       if (surbrillance.checked){
-                        set = setInterval(test,500);
-                        RefreshCadre();
+                          set = setInterval(test,500);
+                          RefreshCadre();
                       }
                       else{
 
