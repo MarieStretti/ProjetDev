@@ -332,22 +332,28 @@ input[type=checkbox]
   text-align: center;
 } */
 
+#lecture {
+  margin-left: 15px;
+  background-color: white;
+}
+
 .check {
   right: 150px;
   top: 30px;
   position: absolute;
   z-index: 1;
   background-color: black;
+  display: flex;
+  align-items: center;
 }
 
-.check input {
-  display: none;
-  background-color: black;
-}
+/* .check input {
+  background-color: white;
+} */
 
 .check label {
   display: inline-block;
-  width: 100px;
+  width: 120px;
   height: auto;
   text-align: center;
   border: 1px solid black;
@@ -357,6 +363,7 @@ input[type=checkbox]
   font-size: 25px;
   font-weight: bold;
 }
+
 
 .widg:hover {
   background-color: white;

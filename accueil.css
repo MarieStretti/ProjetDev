@@ -134,6 +134,21 @@ h1 {
   height: 2000px;
 }
 
+#sources {
+  font-size: 30px;
+}
+
+#sourceLogos {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.img {
+  width: auto;
+  height: 70px;
+}
+
 /***************** Flipping card ************************************/
 
 .flip-card {
