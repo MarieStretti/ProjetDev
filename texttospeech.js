@@ -1,4 +1,6 @@
 
+function texttospeech(){
+
 meSpeak.loadConfig("mespeak_config.json");
 meSpeak.loadVoice('voices/fr.json');
 
@@ -30,3 +32,5 @@ boutonGares.addEventListener('click',function(){
   meSpeak.speak(string,{ variant: 'f2',speed:150,wordgap:5});
 
 },false);
+
+}

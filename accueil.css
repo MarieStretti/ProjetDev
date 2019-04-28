@@ -18,6 +18,7 @@ h1 {
   color: white;
   font-size: 80px;
   margin: 0px;
+  margin-left: 70px;
 }
 
 #version {
@@ -25,7 +26,7 @@ h1 {
   display: flex;
   align-items: center;
   height: 64%;
-  margin-left: 20px;
+  margin-left: 50px;
   color: white;
 }
 
@@ -53,8 +54,8 @@ h1 {
 }
 
 #content {
-  width: 700px;
-  height: 450px;
+  width: 800px;
+  height: 500px;
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -87,7 +88,7 @@ h1 {
   background-color: #470907;
   color: white;
   font-family: berlin;
-  font-size: 40px;
+  font-size: 48px;
   cursor: pointer;
 }
 
@@ -119,7 +120,7 @@ h1 {
 
 #resume {
   z-index: 1;
-  width: 700px;
+  width: 800px;
   text-align: justify;
   font-size: 40px;
 }

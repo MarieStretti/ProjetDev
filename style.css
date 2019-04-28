@@ -303,22 +303,36 @@ input[type=checkbox]
   color: white;
 }
 
+#widgets {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
 
-#loupe {
+.widg {
   position:absolute;
   top:45px;
-  right:100px;
   background-color: black;
   color: white;
   border: none;
   height: 40px;
-  width: 40px;
   cursor: pointer;
   z-index: 1;
-  /* transition-duration: 0.2s; */
 }
 
-#loupe:hover {
+#loupe {
+  right:100px;
+  width: 40px;
+}
+
+#lecture {
+  right: 150px;
+  width: 130px;
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 30px;
+}
+
+.widg:hover {
   background-color: white;
   color: black;
   border: 2px solid black;
