@@ -16,7 +16,6 @@
 
      <div id="choixOutils" class="choooose">
       <fieldset>
-        <!-- <legend>Veuillez sélectionner vos outils :</legend> -->
         <div>
           <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
           <label for="cadre">Cadre</label>
@@ -39,10 +38,10 @@
     <div id='cadreOuest' style="display:none">West</div>
     <div id="viewDiv">
       <div id="widgets">
-
-        <input type="checkbox" name="choix" id="lecture" type="button">
-        <label for="lecture"> Lecture audio </label>
-
+        <div class="check">
+          <input type="checkbox" name="choix" id="lecture" type="button">
+          <label for="lecture">Lecture audio</label>
+        </div>
         <button id="loupe" class="widg" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
       </div>
     </div>

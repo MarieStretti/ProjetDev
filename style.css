@@ -307,11 +307,12 @@ input[type=checkbox]
   display: flex;
   width: 100%;
   height: auto;
+  right: 200px;
 }
 
 .widg {
   position:absolute;
-  top:45px;
+  top: 30px;
   background-color: black;
   color: white;
   border: none;
@@ -325,15 +326,46 @@ input[type=checkbox]
   width: 40px;
 }
 
-#lecture {
-  right: 150px;
-  width: 130px;
+/* #lecture {
   font-family: 'Julius Sans One', sans-serif;
   font-size: 30px;
+  text-align: center;
+} */
+
+.check {
+  right: 150px;
+  top: 30px;
+  position: absolute;
+  z-index: 1;
+  background-color: black;
+}
+
+.check input {
+  display: none;
+  background-color: black;
+}
+
+.check label {
+  display: inline-block;
+  width: 100px;
+  height: auto;
+  text-align: center;
+  border: 1px solid black;
+  /* line-height: 35px; */
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .widg:hover {
   background-color: white;
   color: black;
   border: 2px solid black;
+}
+
+.widg:focus {
+  background-color: white;
+  color: black;
+  border: 5px solid red;
 }
