@@ -1,0 +1,184 @@
+body,html {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  display: flex;
+  font-family: berlin;
+  justify-content: center;
+}
+
+@font-face {
+  font-family: berlin;
+  src: url(berlin-sans-fb-demi-cufonfonts/BRLNSDB.TTF);
+}
+
+
+h1 {
+  font-family: berlin;
+  color: white;
+  font-size: 80px;
+  margin: 0px;
+  margin-left: 70px;
+}
+
+#version {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  height: 64%;
+  margin-left: 50px;
+  color: white;
+}
+
+#haut {
+  background-color: #8B110D;
+  height: 60%;
+  width: 100%;
+  position: absolute;
+}
+
+.logos {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 25px;
+}
+
+#titre {
+  height: 50%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin-left: 185px;
+}
+
+#content {
+  width: 800px;
+  height: 500px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  top: 210px;
+  position: relative;
+  z-index: 1;
+}
+
+.carre {
+  display: flex;
+  flex-direction: column;
+  /* border: 2px solid black; */
+  width: 33.3%;
+  height: 100%;
+}
+
+.square {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 2px solid black; */
+}
+
+.btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #470907;
+  color: white;
+  font-family: berlin;
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #470907;
+}
+
+#logo {
+  height: auto;
+  width: 90%;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+}
+
+#projet {
+  border: none;
+  background-color: white;
+  color: #470907;
+  font-family: berlin;
+  font-size: 40px;
+  cursor: pointer;
+  text-decoration:none;
+  text-align: center;
+}
+
+
+#resume {
+  z-index: 1;
+  width: 800px;
+  text-align: justify;
+  font-size: 40px;
+}
+
+
+#page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 30px;
+  height: 2000px;
+}
+
+/***************** Flipping card ************************************/
+
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border: 1px solid #470907;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back, .flip-card-back2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card-back, .flip-card-back2 {
+  background-color: #470907;
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card-back2 {
+  background-color: white;
+}

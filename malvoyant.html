@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Camayeux - Malvoyants</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href=style.css >
+  </head>
+
+  <body>
+
+    <div id="audio"></div>
+
+     <div id="choixOutils" class="choooose">
+      <fieldset>
+        <div>
+          <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
+          <label for="cadre">Cadre</label>
+        </div>
+        <div>
+          <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+          <label for="commande">Commande vocale</label>
+        </div>
+        <div>
+          <input type="checkbox" id="surbrillance" name="choix" value="3">
+          <label for="surbrillance">Surbrillance</label>
+        </div>
+      </fieldset>
+    </div>
+
+
+<div id="vertic">
+  <div id='cadreNord' style="display:none">Nord</div>
+  <div id="horiz">
+    <div id='cadreOuest' style="display:none">West</div>
+    <div id="viewDiv">
+      <div id="widgets">
+        <div class="check">
+          <input type="checkbox" name="choix" id="lecture" type="button">
+          <label for="lecture">Lecture audio</label>
+        </div>
+        <button id="loupe" class="widg" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
+      </div>
+    </div>
+    <div id='cadreEst' style="display:none">Est</div>
+  </div>
+  <div id='cadreSud' style="display:none">Sud</div>
+</div>
+
+
+
+   <div id="volet_clos" style="display:none">
+     <div id="volet">
+       <div id="button">
+
+         <button id="boutonRER" class="btn"><img src="pictures/RER.png" alt="404" height="150" width="150" ></button>
+         <div id="RER" style="display:none">
+            <div id=RER1>
+             <input type=image src="pictures/RERA.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER A">
+             <input type=image src="pictures/RERC.png" alt="404" height="100" width="100"  class="classRER btn" value="RER C">
+             <input type=image src="pictures/RERE.png" alt="404" height="100" width="100"  class="classRER btn" value="RER E">
+           </div>
+
+           <div id=RER2>
+             <input type=image src="pictures/RERB.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER B">
+             <input type=image src="pictures/RERD.png" alt="404" height="100" width="100"  class="classRER btn" value="RER D">
+           </div>
+         </div>
+         <div id="metros">
+           <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
+           <div id="METRO" style="display:none">
+             <div id=METRO1>
+               <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
+               <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
+               <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
+               <input type=image src="pictures/metro7.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M7">
+               <input type=image src="pictures/metro9.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M9">
+               <input type=image src="pictures/metro11.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M11">
+               <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
+             </div>
+
+             <div id=METRO2>
+               <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
+               <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
+               <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
+               <input type=image src="pictures/metro8.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M8">
+               <input type=image src="pictures/metro10.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M10">
+               <input type=image src="pictures/metro12.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M12">
+               <input type=image src="pictures/metro14.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M14">
+             </div>
+           </div>
+         </div>
+
+         <button id="boutonRecherche" class="btn"><img src="pictures/pen.png" alt="404" height="150" width="150" ></button>
+        <div id="RECHERCHE" style="display:none;overflow-y: scroll;">
+
+
+                <input id="nom_gares" />
+
+                <div id=propositionGare>
+                  <div id=p1></div>
+                  <div id=p2></div>
+                  <div id=p3></div>
+                </div>
+
+                <input id="boutonGares" class="btn" type="submit" value="Rechercher !"/>
+
+
+            </div>
+
+
+         <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
+         <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
+
+      </div>
+    </div>
+  </div>
+
+
+<!--Script necessaires -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="annyang.js"></script>
+    <script type="text/javascript" src="mespeak.js"></script>
+    <script type="text/javascript" src="texttospeech.js"></script>
+
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.11/"></script>
+    <script src="surbrillance.js"></script>
+    <script src="cadre.js"></script>
+    <script src="index.js"></script>
+
+
+
+  </body>
+</html>

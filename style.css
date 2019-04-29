@@ -1,0 +1,371 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  /* font-family: 'Open Sans Condensed', sans-serif; */
+  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
+	overflow: hidden; /* empecher le scroll sur la page */
+}
+
+.esri-widget--button {
+  color: white;
+  background-color: black;
+}
+
+#viewDiv {
+  height: 100%;
+  width: 100%;
+  /* position: absolute; */
+  z-index: 0;
+}
+
+
+#vertic {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#horiz {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+
+#cadreNord{
+    height : 35px;
+    width : 100%;
+    background : lightgoldenrodyellow;
+    align-items: center;
+    justify-content: center;
+}
+
+#cadreOuest{
+  width: 35px;
+  background : lightgoldenrodyellow;
+  /* writing-mode: vertical-rl; */
+  text-orientation: upright;
+  align-items: center;
+  justify-content: center;
+}
+
+#cadreEst{
+  width: 35px;
+    background : lightgoldenrodyellow;
+    /* writing-mode: vertical-rl; */
+    text-orientation: upright;
+    align-items: center;
+    justify-content: center;
+}
+
+#cadreSud{
+    width : 100%;
+    height : 35px;
+    background : lightgoldenrodyellow;
+    align-items: center;
+    justify-content: center;
+}
+
+#boouuuton {
+  display: flex;
+  justify-content: center;
+}
+
+#boutonCadre {
+  width: auto;
+  font-size: 40px;
+  background-color: white;
+  border: black solid 2px;
+}
+
+
+h2 {
+  padding-left: 10px;
+}
+
+#button {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.btn {
+  color: black;
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: 'Open Sans Condensed', sans-serif;
+  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  /* font-family: 'Julius Sans One', sans-serif; */
+}
+
+.btn:hover {background: #eee;}
+
+hr {
+  width: 250px;
+  /* border-top: 100px; */
+  background-color: black;
+  border-color: black;
+  size: 10;
+}
+
+
+
+/*################################### CSS VOLET ##########################################*/
+
+	#volet {
+			width: 400px;
+      height: 99%;
+			background: white;
+      color: black;
+      border-style: solid;
+      border-width: 3px;
+      border-color: black;
+      z-index: 1;
+      /* display: flex;
+      justify-content: center; */
+		}
+
+	#volet a.ouvrir,
+
+	#volet a.fermer {
+		padding: 10px 25px; /*padding du bouton ouvrir et fermer*/
+		background: black;
+		color: white;
+	  font-weight: bold;
+	  font-size: 20px;
+		text-decoration: none;
+	}
+
+	#volet {
+		position: absolute;
+		left: -408px; top: 0px;
+		-webkit-transition: all .5s ease-in;
+		-moz-transition: all .5s ease-in;
+		transition: all .5s ease-in;
+	}
+
+	#volet a.ouvrir,
+
+	#volet a.fermer {
+		position: absolute;
+		right: -104px;
+		top: 60px;
+		-webkit-transform: rotate(270deg);
+		-moz-transform: rotate(270deg);
+		-o-transform: rotate(270deg);
+		-ms-transform: rotate(270deg);
+		-moz-radius: 0 0 8px 8px;
+		border-radius: 0 0 8px 8px;
+	}
+
+	#volet a.fermer {
+		display: none;
+	}
+
+	#volet:target {
+		left: 0px;
+	}
+
+	/* code pour la fermeture */
+
+	#volet:target a.fermer {
+		display: block;
+	}
+	#volet:target a.ouvrir {
+		display: none;
+	}
+
+	#volet_clos:target #volet {
+		left: -408px;
+	}
+
+
+.check label {
+  font-size: 40px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+input[type=checkbox]
+{
+-webkit-transform: scale(2);
+}
+
+#choixOutils {
+  position: absolute;
+  background-color: white;
+  font-size: 40px;
+  bottom: 120px;
+  right: 40px;
+  padding: 20px;
+  border: black solid 2px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+	#nom_gares {
+		height: 100%;
+		weight: 100%;
+		font-size: 5vw;;
+		color: white;
+		font-weight: bold;
+		background-color: #060D9D;
+    border: none;
+    border-bottom: white solid 3px;
+	}
+
+
+
+  #metros {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+#METRO1  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: centerss
+	}
+
+#METRO2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  	}
+
+#METRO {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+#RER1  {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	}
+
+#RER2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  	}
+
+#RER {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+#propositionGare{
+  display: flex;
+  flex-direction: column;
+  font-size: 5vw;
+  font-weight: bold;
+}
+
+#p1:hover {
+  background-color: gold;
+}
+
+#p2:hover {
+  background-color: gold;
+}
+
+#p3:hover {
+  background-color: gold;
+}
+
+#RECHERCHE {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+#boutonGares {
+  background-color: #060D9D;
+  font-weight: bold;
+  font-size: 5vw;
+  color: white;
+}
+
+#widgets {
+  display: flex;
+  width: 100%;
+  height: auto;
+  right: 200px;
+}
+
+.widg {
+  position:absolute;
+  top: 30px;
+  background-color: black;
+  color: white;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+#loupe {
+  right:100px;
+  width: 40px;
+}
+
+/* #lecture {
+  font-family: 'Julius Sans One', sans-serif;
+  font-size: 30px;
+  text-align: center;
+} */
+
+.check {
+  right: 150px;
+  top: 30px;
+  position: absolute;
+  z-index: 1;
+  background-color: black;
+}
+
+.check input {
+  display: none;
+  background-color: black;
+}
+
+.check label {
+  display: inline-block;
+  width: 100px;
+  height: auto;
+  text-align: center;
+  border: 1px solid black;
+  /* line-height: 35px; */
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.widg:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.widg:focus {
+  background-color: white;
+  color: black;
+  border: 5px solid red;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>CamaYeux - Daltoniens </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Open+Sans+Condensed:300|Saira+Extra+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="dalto.css">
+    <script src="https://js.arcgis.com/4.11/"></script>
+    <script src="dalto.js"></script>
+
+  </head>
+  <body>
+
+    <div id="widgetLoupe">
+      <button id="loupe" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
+    </div>
+
+    <div id="viewDiv">
+
+      <div id="volet_clos">
+        <div id="volet">
+          <div id="button">
+            <button id="btnD" class="btn">Deutéranopie</button>
+            <hr>
+            <button id="btnP" class="btn">Protanopie</button>
+            <hr>
+            <button id="btnT" class="btn">Tritanopie</button>
+            <hr>
+            <button id="btnPP" class="btn">Paramètres personnalisables</button>
+            <div id="PP" style="display:none">
+              <p id="txt">Projets en cours</p>
+              <div id='ProjCours'>
+                <input type='color' id='cours' class='btnparam'>
+              </div>
+              <p>Projets programmés</p>
+              <div id='ProjProg'>
+                <input type='color' id='prog' class='btnparam'>
+              </div>
+              <p>Projets à l'étude</p>
+              <div id='ProjEtude'>
+                <input type='color' id='etude' class='btnparam'>
+              </div>
+            </div>
+          </div>
+
+          <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
+          <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
+        </div>
+      </div>
+    </div>
+
+
+<!--
+<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="TestARCGIS" src="//ensggeomatique.maps.arcgis.com/apps/Embed/index.html?webmap=e2017899f2444494aea4fe0d9e98fe58&extent=0.8995,48.0922,4.135,49.1739&zoom=true&previewImage=false&scale=true&legendlayers=true&disable_scroll=false&theme=light"></iframe></div>    <div id="viewDiv"></div>
+-->
+  </body>
+</html>
