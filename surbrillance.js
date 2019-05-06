@@ -129,6 +129,7 @@ for (var i = 0; i < classMETRO.length; i++) {
           objectIdField: "FID",
         });
 
+        // la couche potentiellement interogee par le cadre change
         gare_surbrillance = gare;
 
         map.add(gare);
@@ -138,7 +139,6 @@ for (var i = 0; i < classMETRO.length; i++) {
       });
 
   }
-
 
 
 nom_gares.addEventListener("input", nomDeGare, false);
@@ -154,22 +154,27 @@ p3.addEventListener("click", changerNomGare, false);
 
 var p = [p1,p2,p3];
 
-
+// permet de choisir la gare proposee comme celle que l'on desire rechercher
 function changerNomGare(event){
   nom_gares.value = event.target.innerHTML;
 }
 
+// on agrandit le volet lors de la recherche de gares
 function voletRecherche(event){
     volet.style.width = "600px";
 }
 
 
 
+
 // permet de proposer a l'utilisateur les 3 gares les plus proches (semantiquement) de celle qui 'l'est en train de chercher
 
 function nomDeGare(event){
+
+  // permet de mettre en majuscules
   nom_gares.value = nom_gares.value.toUpperCase();
-  liste = [];
+
+  var liste = [];
   var query = layerGare.createQuery();
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
   query.outFields = ["nom_long"];
@@ -192,8 +197,6 @@ function nomDeGare(event){
 
       }
 
-
-
     });
 
 }
@@ -208,15 +211,12 @@ function trouverGare(event){
 
   map.remove(gare);
   clearInterval(setInterVar);
-  liste = [];
+  var liste = [];
   var query = layerGare.createQuery();
-  console.log(nom_gares.value);
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
-  console.log(query.where);
   query.outFields = ["x","y"];
   layerGare.queryFeatures(query).features;
 
-  gareRenderer_s1.uniqueValueInfos = [];
   var new_coord;
 
   layerGare.queryFeatures(query).then(function(response){
@@ -241,7 +241,6 @@ function trouverGare(event){
 
         liste.push(pointGraphic);
 
-
       });
 
       // on cree une nouvelle FeatureLayer a partir des Graphic crees precedemment
@@ -251,7 +250,9 @@ function trouverGare(event){
         objectIdField: "FID",
       });
 
+      // la couche potentiellement interogee par le cadre change
       gare_surbrillance = gare;
+
 
       map.add(gare);
       clignoter(gare);
