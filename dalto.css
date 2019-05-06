@@ -12,6 +12,14 @@ html, body {
   background-color: black;
 }
 
+h3.esri-widget__heading {
+  font-size: 22px;
+}
+
+.esri-legend__layer-cell--info {
+  font-size: 20px;
+}
+
 #home {
   background-color: #8B110D;
   height: 50px;
