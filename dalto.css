@@ -10,6 +10,13 @@ html, body {
 .esri-widget--button {
   color: white;
   background-color: black;
+  height: 100%;
+  width: 100%;
+}
+
+.esri-ui-corner .esri-component {
+  width: 60px;
+  height: 90px;
 }
 
 h3.esri-widget__heading {
@@ -19,6 +26,11 @@ h3.esri-widget__heading {
 .esri-legend__layer-cell--info {
   font-size: 20px;
 }
+
+.esri-ui-corner .esri-component.esri-widget--panel {
+    width: 300px;
+}
+
 
 #home {
   background-color: #8B110D;
