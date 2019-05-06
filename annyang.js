@@ -133,10 +133,10 @@
 
  function alertannyang(checkboxElem) {
   if (checkboxElem.checked) {
-    annyang.start();
+    annyang.start({autoRestart : true});
     console.log('commande started');
   } else {
-    annyang.pause();
+    annyang.abort();
     console.log('commande stoped');
   }
 }
