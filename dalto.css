@@ -3,34 +3,50 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
-  /* font-family: 'Open Sans Condensed', sans-serif; */
-  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  overflow: hidden;
   font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
 }
 
 .esri-widget--button {
   color: white;
   background-color: black;
+  height: 100%;
+  width: 100%;
 }
 
-#loupe {
-  position:absolute;
-  top:14px;
-  right:70px;
-  background-color: black;
-  color: white;
-  border: none;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
+.esri-ui-corner .esri-component {
+  width: 60px;
+  height: 90px;
+}
+
+h3.esri-widget__heading {
+  font-size: 22px;
+}
+
+.esri-legend__layer-cell--info {
+  font-size: 20px;
+}
+
+.esri-ui-corner .esri-component.esri-widget--panel {
+    width: 300px;
+}
+
+
+#home {
+  background-color: #8B110D;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
   z-index: 1;
-  /* transition-duration: 0.2s; */
+  position: absolute;
 }
 
-#loupe:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
+.bandeau {
+  background-color: #8B110D;
+  color: white;
+  height: 100%;
+  border: none;
+  cursor: pointer;
 }
 
 #viewDiv {
@@ -98,7 +114,7 @@ hr {
 
 #volet {
 			width: 300px;
-      height: 99%;
+      height: 90%;
 			background: white;
       color: black;
       border-style: solid;
@@ -107,17 +123,17 @@ hr {
 		}
 		#volet a.ouvrir,
 		#volet a.fermer {
-			padding: 10px 25px; /*padding du bouton ouvrir et fermer*/
+			padding: 20px 25px; /*padding du bouton ouvrir et fermer*/
 			background: black;
 			color: white;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 30px;
 			text-decoration: none;
 		}
 
 		#volet {
 			position: absolute;
-			left: -308px; top: 0px;
+			left: -308px; top: 52px;
 			-webkit-transition: all .5s ease-in;
 			-moz-transition: all .5s ease-in;
 			transition: all .5s ease-in;
@@ -125,8 +141,8 @@ hr {
 		#volet a.ouvrir,
 		#volet a.fermer {
 			position: absolute;
-			right: -106px;
-			top: 58px;
+			right: -150px;
+			top: 73px;
 			-webkit-transform: rotate(270deg);
 			-moz-transform: rotate(270deg);
 			-o-transform: rotate(270deg);

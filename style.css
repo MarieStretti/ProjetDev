@@ -3,15 +3,47 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
-  /* font-family: 'Open Sans Condensed', sans-serif; */
-  /* font-family: 'Saira Extra Condensed', sans-serif; */
   font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
 	overflow: hidden; /* empecher le scroll sur la page */
 }
 
-.esri-widget--button {
+.esri-zoom .esri-widget--button {
+    box-shadow: none;
+    color: white;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+}
+
+.esri-icon {
+    font-size: 25px;
+    display: inline-block;
+}
+
+.esri-ui-corner .esri-component {
+    box-shadow: none;
+}
+
+.esri-ui-corner .esri-component {
+  width: 60px;
+  height: 90px;
+}
+
+#home {
+  background-color: #8B110D;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  z-index: 1;
+  position: absolute;
+}
+
+.bandeau {
+  background-color: #8B110D;
   color: white;
-  background-color: black;
+  height: 100%;
+  border: none;
+  cursor: pointer;
 }
 
 #viewDiv {
@@ -25,9 +57,10 @@ html, body {
 #vertic {
   display: flex;
   flex-direction: column;
-  height: 90%;
+  height: 93%;
   justify-content: space-between;
   text-align: center;
+  margin-top: 50px;
 }
 
 #horiz {
@@ -124,42 +157,39 @@ hr {
 
 	#volet {
 			width: 400px;
-      height: 99%;
+      height: 91.3%;
 			background: white;
       color: black;
       border-style: solid;
       border-width: 3px;
       border-color: black;
       z-index: 1;
-      /* display: flex;
-      justify-content: center; */
 		}
 
 	#volet a.ouvrir,
 
 	#volet a.fermer {
-		padding: 10px 25px; /*padding du bouton ouvrir et fermer*/
+		padding: 20px 25px; /*padding du bouton ouvrir et fermer*/
 		background: black;
 		color: white;
 	  font-weight: bold;
-	  font-size: 20px;
+	  font-size: 30px;
 		text-decoration: none;
 	}
 
 	#volet {
 		position: absolute;
-		left: -408px; top: 0px;
+		left: -408px; top: 50px;
 		-webkit-transition: all .5s ease-in;
 		-moz-transition: all .5s ease-in;
 		transition: all .5s ease-in;
 	}
 
 	#volet a.ouvrir,
-
 	#volet a.fermer {
 		position: absolute;
-		right: -104px;
-		top: 60px;
+		right: -145px;
+		top: 68px;
 		-webkit-transform: rotate(270deg);
 		-moz-transform: rotate(270deg);
 		-o-transform: rotate(270deg);
@@ -196,27 +226,27 @@ hr {
   margin-bottom: 5px;
 }
 
-input[type=checkbox]
+input[type="checkbox"]
 {
--webkit-transform: scale(2);
+-webkit-transform: scale(2.5);
+margin: 0px;
 }
 
 #choixOutils {
-  position: absolute;
-  background-color: white;
+  background-color: #8B110D;
+  color: white;
   font-size: 40px;
   bottom: 120px;
-  right: 40px;
-  padding: 20px;
-  border: black solid 2px;
+  margin-left: 15px;
   z-index: 1;
+  width: 90%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+
 }
 
-
 	#nom_gares {
-		height: 100%;
+		height: auto;
 		weight: 100%;
 		font-size: 5vw;;
 		color: white;
@@ -274,7 +304,8 @@ input[type=checkbox]
 #propositionGare{
   display: flex;
   flex-direction: column;
-  font-size: 5vw;
+  font-size: 60px;
+  height: 100%;
   font-weight: bold;
 }
 
@@ -303,48 +334,44 @@ input[type=checkbox]
   color: white;
 }
 
-#widgets {
-  display: flex;
+/* #widgets {
   width: 100%;
   height: auto;
   right: 200px;
-}
+  top: 52px;
+} */
 
 .widg {
   position:absolute;
-  top: 30px;
   background-color: black;
   color: white;
   border: none;
   height: 40px;
   cursor: pointer;
   z-index: 1;
+  top: 95px;
 }
 
 #loupe {
-  right:100px;
-  width: 40px;
+  right:120px;
+  width: 50px;
+  height: 50px;
 }
 
-/* #lecture {
-  font-family: 'Julius Sans One', sans-serif;
-  font-size: 30px;
-  text-align: center;
-} */
 
 #lecture {
-  margin-left: 15px;
+  margin-left: 18px;
   background-color: white;
 }
 
 .check {
-  right: 150px;
-  top: 30px;
+  right: 180px;
   position: absolute;
   z-index: 1;
   background-color: black;
   display: flex;
   align-items: center;
+  top: 95px;
 }
 
 /* .check input {

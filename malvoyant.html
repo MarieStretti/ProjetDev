@@ -12,24 +12,27 @@
 
   <body>
 
-    <div id="audio"></div>
-
-     <div id="choixOutils" class="choooose">
-      <fieldset>
-        <div>
-          <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
-          <label for="cadre">Cadre</label>
-        </div>
-        <div>
-          <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
-          <label for="commande">Commande vocale</label>
-        </div>
-        <div>
-          <input type="checkbox" id="surbrillance" name="choix" value="3">
-          <label for="surbrillance">Surbrillance</label>
-        </div>
-      </fieldset>
+    <div id="home">
+      <form method="get" action="index.html">
+        <button class="bandeau" title="Retour à la page d'accueil" type="submit"><i class="fas fa-home fa-3x"></i></button>
+      </form>
+      <div id="choixOutils" class="choooose">
+          <div>
+            <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
+            <label for="cadre">Cadre</label>
+          </div>
+          <div>
+            <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+            <label for="commande">Commande vocale</label>
+          </div>
+          <div>
+            <input type="checkbox" id="surbrillance" name="choix" value="3">
+            <label for="surbrillance">Surbrillance</label>
+          </div>
+      </div>
     </div>
+
+    <div id="audio"></div>
 
 
 <div id="vertic">
@@ -42,7 +45,7 @@
           <input type="checkbox" name="choix" id="lecture">
           <label for="lecture">Lecture audio</label>
         </div>
-        <button id="loupe" class="widg" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
+        <button id="loupe" class="widg" type="button"><i class="fas fa-search fa-3x"></i></button>
       </div>
     </div>
     <div id='cadreEst' style="display:none">Est</div>
@@ -95,12 +98,12 @@
          </div>
 
          <button id="boutonRecherche" class="btn"><img src="pictures/pen.png" alt="404" height="150" width="150" ></button>
-        <div id="RECHERCHE" style="display:none;overflow-y: scroll;">
+        <div id="RECHERCHE" style="display:none;">
 
 
                 <input id="nom_gares" />
 
-                <div id=propositionGare>
+                <div id="propositionGare" style="overflow-y: scroll;">
                   <div id=p1></div>
                   <div id=p2></div>
                   <div id=p3></div>
