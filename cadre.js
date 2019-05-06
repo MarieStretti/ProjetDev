@@ -268,7 +268,9 @@ require([
             for (var i = 0; i<4 ; i++){
               cadres_NSEO[i].innerHTML = points_NSEO[i];
               cadres_NSEO[i].style.fontFamily = 'Open Sans Condensed';
-              if (points_NSEO[i] >= paliers[4]){ // darkred
+              if (points_NSEO[i] == 0){ // cadre vide : lightyellow
+                cadres_NSEO[i].style.background = couleurs_croissantes[0];
+              }else if (points_NSEO[i] >= paliers[4]){ // darkred
                 cadres_NSEO[i].style.background = couleurs_croissantes[5];
               }else if (points_NSEO[i] >= paliers[3]){ // red
                 cadres_NSEO[i].style.background = couleurs_croissantes[4];
