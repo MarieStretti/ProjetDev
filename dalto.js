@@ -3,11 +3,12 @@ require([
   "esri/Map",
   "esri/WebMap",
   "esri/views/MapView",
+  "esri/widgets/Legend",
   "esri/layers/FeatureLayer",
   "esri/core/promiseUtils",
   "dojo/domReady!",
   "esri/widgets/BasemapToggle"
-], function(Map,WebMap,MapView,FeatureLayer,BasemapToggle) {
+], function(Map,WebMap,MapView,Legend,FeatureLayer,BasemapToggle) {
 
 
   var webmap = new WebMap({
@@ -15,8 +16,7 @@ require([
       id: "9c41116150794b6d899503bb1dc2af2f"
     }
   });
-  console.log(webmap);
-
+  console.log("webmap",webmap);
 
   // creation map
   var view = new MapView({
@@ -29,7 +29,23 @@ require([
       minZoom: 9,
     }
   });
-console.log(view);
+
+  view.when(function() {
+    var featureLayer = webmap.layers.getItemAt(0);
+
+    var legend = new Legend({
+      view: view,
+      layerInfos: [
+        {
+          layer: featureLayer,
+          title: "Projets d'aménagement"
+        }
+      ]
+    });
+    view.ui.add(legend, "bottom-right");
+  });
+
+console.log("view",view);
   view.ui.move([ "zoom", webmap ], "top-right");
   view.popup = null;
 
@@ -47,17 +63,17 @@ console.log(view);
 
   // Couche deuteranopie
   document.getElementById("btnD").addEventListener("click", function(){
-    webmap.findLayerById(area.id).renderer = maj([152,210,23,255],[255,255,255,255],[132,12,236,255]);
+    webmap.findLayerById(area.id).renderer = maj([38,97,156,255],[141,97,14,255],[242,166,22,255]);
   });
 
   // Couche protanopie
   document.getElementById("btnP").addEventListener("click", function(){
-    webmap.findLayerById(area.id).renderer = maj([152,210,23,255],[255,255,255,255],[132,12,236,255]);
+    webmap.findLayerById(area.id).renderer = maj([38,97,156,255],[184,119,18,255],[242,227,83,255]);
   });
 
   // Couche tritanopie
   document.getElementById("btnT").addEventListener("click", function(){
-    webmap.findLayerById(area.id).renderer = maj([12,140,236,255],[255,255,255,255],[236,12,12,255]);
+    webmap.findLayerById(area.id).renderer = maj([12,140,236,255],[253,225,235,255],[236,12,12,255]);
   });
 
   //################################### COULEURS CHANGEES DIRECTEMENT ###############################################
@@ -98,16 +114,6 @@ console.log(view);
       webmap.findLayerById(area.id).renderer = param;
     });
   };
-
-  document.getElementById('loupe').addEventListener('click', function(){
-    console.log(view.magnifier);
-    if (view.magnifier.visible == true) {
-        view.magnifier.visible = false;
-    }
-    else {
-      view.magnifier.visible = true;
-    }
-  })
 
 
   /*
@@ -170,28 +176,3 @@ console.log(view);
     }
   }
 });
-
-
-// //*** Add div element to show coordates ***//
-//   var coordsWidget = document.createElement("div");
-//   coordsWidget.id = "coordsWidget";
-//   coordsWidget.className = "esri-widget esri-component";
-//   coordsWidget.style.padding = "7px 15px 5px";
-//   view.ui.add(coordsWidget, "bottom-right");
-//
-//   //*** Update lat, lon, zoom and scale ***//
-//   function showCoordinates(pt) {
-//     var coords = "Lat/Lon " + pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) +
-//         " | Scale 1:" + Math.round(view.scale * 1) / 1 +
-//         " | Zoom " + view.zoom;
-//     coordsWidget.innerHTML = coords;
-//   }
-//
-//   //*** Add event and show center coordinates after the view is finished moving e.g. zoom, pan ***//
-//   view.watch(["stationary"], function() {
-//     showCoordinates(view.center);
-//   });
-//
-//   //*** Add event to show mouse coordinates on click and move ***//
-//   view.on(["pointer-down","pointer-move"], function(evt) {
-//     showCoordinates(view.toMap({ x: evt.x, y: evt.y }));
