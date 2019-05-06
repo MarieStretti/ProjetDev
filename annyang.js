@@ -1,4 +1,5 @@
  function commande_voc (view,map){
+
    console.log('annyang commande going');
 
    annyang.setLanguage('fr-FR');
@@ -9,9 +10,6 @@
 
    if (annyang) {
      // Ajout des commandes vocales
-     annyang.addCommands({
-       'bonjour': function() { alert('Hello world!'); }
-     });
 
      //Zoom d'un niveau
      annyang.addCommands({
@@ -126,6 +124,67 @@
     annyang.addCommands(commandebas4);
     annyang.addCommands(commandebas5);
     annyang.addCommands(commandebas6);
+
+
+   //DE-activation Surbrillance
+    var commandesurb1 = {'Surbrillance': SurbFunction};
+    var commandesurb2 = {'activer Surbrillance': SurbFunction};
+    var commandesurb3 = {'voir Surbrillance': SurbFunction};
+    var commandesurb4 = {'cocher Surbrillance': SurbFunction};
+    function SurbFunction(){
+          console.log("Surbrillance changed");
+          document.getElementById('surbrillance').click();
+    };
+    annyang.addCommands(commandesurb1);
+    annyang.addCommands(commandesurb2);
+    annyang.addCommands(commandesurb3);
+    annyang.addCommands(commandesurb4);
+
+
+    //DE-activation Cadre
+     var commandecadre1 = {'Cadre': CadreFunction};
+     var commandecadre2 = {'activer Cadre': CadreFunction};
+     var commandecadre3 = {'voir Cadre': CadreFunction};
+     var commandecadre4 = {'cocher Cadre': CadreFunction};
+     function CadreFunction(){
+           console.log("Cadre changed");
+           document.getElementById('cadre').click();
+     };
+     annyang.addCommands(commandecadre1);
+     annyang.addCommands(commandecadre2);
+     annyang.addCommands(commandecadre3);
+     annyang.addCommands(commandecadre4);
+
+
+     //DE-activation Commande vocale
+      var commandevoc1 = {'Commande vocale': CmdVocFunction};
+      var commandevoc2 = {'activer commande vocale': CmdVocFunction};
+      var commandevoc3 = {'voir commande vocale': CmdVocFunction};
+      var commandevoc4 = {'cocher commande vocale': CmdVocFunction};
+      function CmdVocFunction(){
+            console.log("Commande vocale changed");
+            document.getElementById('commande').click();
+      };
+      annyang.addCommands(commandevoc1);
+      annyang.addCommands(commandevoc2);
+      annyang.addCommands(commandevoc3);
+      annyang.addCommands(commandevoc4);
+
+
+      //DE-activation Lecture Audio
+       var commandelect1 = {'Lecture Audio': CmdLectureAudio};
+       var commandelect2 = {'activer Lecture Audio': CmdLectureAudio};
+       var commandelect3 = {'voir Lecture Audio': CmdLectureAudio};
+       var commandelect4 = {'cocher Lecture Audio': CmdLectureAudio};
+       function CmdLectureAudio(){
+             console.log("Lecture Audio changed");
+             document.getElementById('lecture').click();
+       };
+       annyang.addCommands(commandelect1);
+       annyang.addCommands(commandelect2);
+       annyang.addCommands(commandelect3);
+       annyang.addCommands(commandelect4);
+
 
    }
 
