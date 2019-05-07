@@ -18,6 +18,7 @@ require([
   });
   console.log("webmap",webmap);
 
+  console.log(webmap.resourceInfo);
   // creation map
   var view = new MapView({
     container: "viewDiv",
@@ -29,6 +30,8 @@ require([
       minZoom: 9,
     }
   });
+
+  console.log("view", view);
 
   view.when(function() {
     var featureLayer = webmap.layers.getItemAt(0);
@@ -43,6 +46,7 @@ require([
       ]
     });
     view.ui.add(legend, "bottom-right");
+    console.log(legend);
   });
 
 console.log("view",view);
@@ -60,6 +64,12 @@ console.log("view",view);
   area.popupEnabled = "false";
   webmap.add(area,0);
 
+  console.log(document.getElementsByClassName("esri-legend__layer-caption").value);
+
+  // Carte initiale
+  document.getElementById("carte").addEventListener("click", function(){
+    webmap.findLayerById(area.id).renderer = maj([237,81,81,255],[20,158,206,255],[167,198,54,255]);
+  });
 
   // Couche deuteranopie
   document.getElementById("btnD").addEventListener("click", function(){
