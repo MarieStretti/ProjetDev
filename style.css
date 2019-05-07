@@ -141,9 +141,9 @@ h2 {
 
 hr {
   width: 250px;
+  height: 2px;
   background-color: black;
   border-color: black;
-  size: 10;
 }
 
 #choixOutils {
@@ -212,6 +212,7 @@ hr {
   font-size: 60px;
   height: 100%;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .prop:hover {

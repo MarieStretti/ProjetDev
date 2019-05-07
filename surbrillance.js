@@ -38,7 +38,7 @@ var gareRenderer_s1 = {
   "symbol" :{
      type: "simple-marker",
      size: 30,
-     color: "yellow"
+     color: "#FCD946"
    }
 };
 
@@ -51,7 +51,7 @@ var gareRenderer_s2 = {
   "symbol" :{
      type: "simple-marker",
      size: 30,
-     color: "blue"
+     color: "#060D9D"
    }
 };
 
