@@ -246,8 +246,7 @@ hr {
   cursor: pointer;
   z-index: 1;
   top: 95px;
-  border-radius: 7px;
-  padding: 1px;
+  padding: 2px;
 }
 
 #loupe {
@@ -267,32 +266,6 @@ hr {
   background-color: white;
 }
 
-.check {
-  right: 180px;
-  position: absolute;
-  z-index: 1;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  top: 95px;
-  border-radius: 10px;
-  padding: 2px;
-}
-
-input[type="checkbox"] {
-  -webkit-transform: scale(2.5);
-  margin: 0px;
-}
-
-.check label {
-  width: 120px;
-  text-align: center;
-  cursor: pointer;
-  color: white;
-  font-size: 27px;
-  margin-left: 5px;
-}
-
 .widg:hover {
   background-color: white;
   color: black;
@@ -300,14 +273,13 @@ input[type="checkbox"] {
 }
 
 
-
 .container {
-  display: block;
+  display: flex;
+  align-items: center;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 34px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -328,13 +300,41 @@ input[type="checkbox"] {
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  margin-top: 8px;
+  margin-right: 10px;
 }
 
 .container input:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: black;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 10.5px;
+  top: 6px;
+  width: 7px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 
