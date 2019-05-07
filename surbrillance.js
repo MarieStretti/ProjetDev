@@ -209,11 +209,23 @@ boutonGares.addEventListener("click", trouverGare, false);
 
 function trouverGare(event){
 
+  if(nom_gares.value != ""){
+
+  var str = "" + nom_gares.value;
+  var n = str.indexOf("'");
+  var regex = /'/gi;
+
+  gare_recherchee = str.replace(regex, "''");
+
   map.remove(gare);
   clearInterval(setInterVar);
   var liste = [];
   var query = layerGare.createQuery();
-  query.where = "nom_long LIKE '" + nom_gares.value +"%'";
+
+  query.where = "nom_long LIKE '" + gare_recherchee +"'";
+
+  console.log(query.where);
+
   query.outFields = ["x","y"];
   layerGare.queryFeatures(query).features;
 
@@ -222,7 +234,6 @@ function trouverGare(event){
   layerGare.queryFeatures(query).then(function(response){
 
     response.features.forEach(function(item){
-
 
         new_coord  = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y])
         var latitude = new_coord[1];
@@ -274,6 +285,7 @@ function trouverGare(event){
     p2.innerHTML ="";
     p3.innerHTML ="";
 
+}
 
 }
 
@@ -329,9 +341,13 @@ var volet = document.getElementById("volet");
 document.getElementById("boutonRER").addEventListener("click", function(){
 
   if (rer.style.display == "flex") {
+    map.remove(gare);
+    gare_surbrillance = 0;
+    gare = 0;
     rer.style.display = "none";
     boutonMetro.style.display ="block";
     boutonRecherche.style.display ="block";
+
   }
 
   else {
@@ -348,6 +364,9 @@ document.getElementById("boutonRER").addEventListener("click", function(){
 document.getElementById("boutonMetro").addEventListener("click", function(){
 
   if (metro.style.display == "flex") {
+    map.remove(gare);
+    gare_surbrillance = 0;
+    gare = 0;
     metro.style.display = "none";
     boutonRER.style.display ="block";
     boutonRecherche.style.display ="block";
@@ -370,6 +389,9 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
   if (rech.style.display == "flex") {
+    map.remove(gare);
+    gare_surbrillance = 0;
+    gare = 0;
     volet.style.width = "400px";
     rech.style.display = "none";
     boutonRER.style.display ="block";

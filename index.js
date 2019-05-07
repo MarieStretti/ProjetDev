@@ -1,5 +1,5 @@
 // import modules d'esri et fcts
-var zoomlevel = 11;
+var zoomlevel = 10;
 var lng_c = 2.4;
 var lat_c = 48.8;
 require([
@@ -16,10 +16,26 @@ require([
     "esri/renderers/UniqueValueRenderer",
     "esri/Color",
     "esri/symbols/WebStyleSymbol",
+    "esri/geometry/Extent",
+    "esri/core/watchUtils",
     "dojo/domReady!"
 
   ], function(Map, MapView, WebMap, FeatureLayer, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
-        UniqueValueRenderer, Color, WebStyleSymbol) {
+        UniqueValueRenderer, Color, WebStyleSymbol,Extent, watchUtils) {
+
+
+   var extentMap = new Extent({
+     xmax:1000000, //768211,
+     xmin:-10000, //530887,
+     ymin:6000000,//6750430,
+     ymax:6500000,//6942667,
+
+   });
+
+   var webStyleSymbol = new WebStyleSymbol({
+     name: "Train",
+     styleName: "EsriIconsStyle"
+   });
 
   var map = new WebMap({
     portalItem: {
@@ -28,7 +44,7 @@ require([
   });
 
 
-// Définition du style d'affichage des gares
+// Definition du style d'affichage des gares
 var gareRenderer_defaut = {
   "type": "simple",
   "field": "",
@@ -41,7 +57,7 @@ var gareRenderer_defaut = {
 };
 
 
-// Crée la couche des gares et y applique le style d'affichage
+// Cree la couche des gares et y applique le style d'affichage
 var gare = new FeatureLayer({
   portalItem: {
     id: "7898dc0c69f848f08c0ccb720b96bd95",
@@ -51,19 +67,62 @@ var gare = new FeatureLayer({
 });
 
 
+
 gare_surbrillance = 0;
-// On ajoute la couche à la carte
+// On ajoute la couche a la carte
 map.add(gare);
 
 
-// On défini la vue initiale de la carte et on la place dans la div
+// On defini la vue initiale de la carte et on la place dans la div
 // creation map
   var view = new MapView({
     container: "viewDiv",
     map: map,
     center: [lng_c,lat_c], //longlats
-    zoom: zoomlevel
+    zoom: zoomlevel,
   });
+
+    console.log(view);
+
+  var maxExtent = extentMap;
+
+  // Permet de limiter la carte observable à l'IDF
+
+  view.on( "pointer-move", function(){
+console.log("cgange!!");
+     if((view.extent.xmin < maxExtent.xmin) ||
+       (view.extent.ymin < maxExtent.ymin)  ||
+       (view.extent.xmax > maxExtent.xmax) ||
+       (view.extent.ymax > maxExtent.ymax)
+     ){
+
+     view.center.latitude = lat_c;
+     view.center.longitude = lng_c;
+     view.goTo({
+       animate : false,
+       target: view.center,
+     });
+
+     }
+
+ });
+
+// empeche a l'utilisateur de trop dezoomer
+
+   watchUtils.pausable(view, "zoom", function(){
+      if(Math.ceil(view.zoom)< 9){
+
+      view.goTo({
+        animate : false,
+        zoom:9
+      });
+
+      }
+  });
+
+
+  console.log(view.extent);
+
 
   view.ui.move([ "zoom", map ], "top-right");
 
@@ -77,7 +136,7 @@ surbrillance.addEventListener("change",executeSurbrillanceEvent,false);
 executeSurbrillance(view, map, gare, gareRenderer_defaut);
 var voletclos = document.getElementById("volet_clos");
 
-// on peut passer cette fonction dans surbrillance.js à la manière du cadre et de la commande vocal avec un alertsurbrillance
+// on peut passer cette fonction dans surbrillance.js a la maniere du cadre et de la commande vocal avec un alertsurbrillance
 function executeSurbrillanceEvent(event){
   if (surbrillance.checked) {
     volet_clos.style.display = "flex";
@@ -101,5 +160,6 @@ function executeSurbrillanceEvent(event){
       view.magnifier.visible = true;
     }
   })
+
 
 });

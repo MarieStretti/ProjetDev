@@ -56,7 +56,7 @@ require([
 
           // On regarde la valeur de gare_surbrillance toutes les x secondes
 
-          var indice = 1;
+          var indice = 0;
           var layer_display = 0;
 
           cadre.addEventListener("change",etatcadre,false);
