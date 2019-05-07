@@ -149,11 +149,10 @@ hr {
 #choixOutils {
   background-color: #8B110D;
   color: white;
-  font-size: 40px;
   bottom: 120px;
   margin-left: 15px;
   z-index: 1;
-  width: 90%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
 }
@@ -279,7 +278,7 @@ hr {
   position: relative;
   padding-left: 35px;
   cursor: pointer;
-  font-size: 34px;
+  font-size: 2em;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -309,6 +308,7 @@ hr {
 
 .container input:checked ~ .checkmark {
   background-color: black;
+  border: 2px solid white;
 }
 
 .checkmark:after {
