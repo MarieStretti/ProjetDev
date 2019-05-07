@@ -178,7 +178,7 @@ hr {
 #nom_gares {
 	height: auto;
 	weight: 100%;
-	font-size: 5vw;;
+	font-size: 3.5em;;
 	color: white;
 	font-weight: bold;
 	background-color: #060D9D;
@@ -232,7 +232,7 @@ hr {
 #boutonGares {
   background-color: #060D9D;
   font-weight: bold;
-  font-size: 5vw;
+  font-size: 4em;
   color: white;
 }
 
