@@ -18,16 +18,27 @@
       </form>
       <div id="choixOutils" class="choooose">
           <div>
-            <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
-            <label for="cadre">Cadre</label>
+            <label class="container">Cadre
+              <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
+              <span class="checkmark"></span>
+            <!-- <label for="cadre" class="container">Cadre</label> -->
+          </label>
           </div>
           <div>
-            <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
-            <label for="commande">Commande vocale</label>
+            <label class="container">Commande vocale
+              <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+              <span class="checkmark"></span>
+            <!-- <label for="commande" class="container">Commande vocale</label> -->
+          </label>
           </div>
           <div>
+            <label class="container">Surbrillance
+
             <input type="checkbox" id="surbrillance" name="choix" value="3">
-            <label for="surbrillance">Surbrillance</label>
+            <span class="checkmark"></span>
+            <!-- <label for="surbrillance" class="container">Surbrillance</label> -->
+          </label>
+
           </div>
       </div>
     </div>
@@ -36,9 +47,9 @@
 
 
 <div id="vertic">
-  <div id='cadreNord' style="display:none">Nord</div>
+  <div id='cadreNord' class="cadres" style="display:none">Nord</div>
   <div id="horiz">
-    <div id='cadreOuest' style="display:none">West</div>
+    <div id='cadreOuest' class="cadres" style="display:none">West</div>
     <div id="viewDiv">
       <div id="widgets">
         <div class="check">
@@ -48,9 +59,9 @@
         <button id="loupe" class="widg" type="button"><i class="fas fa-search fa-3x"></i></button>
       </div>
     </div>
-    <div id='cadreEst' style="display:none">Est</div>
+    <div id='cadreEst' class="cadres" style="display:none">Est</div>
   </div>
-  <div id='cadreSud' style="display:none">Sud</div>
+  <div id='cadreSud' class="cadres" style="display:none">Sud</div>
 </div>
 
 
@@ -60,22 +71,22 @@
        <div id="button">
 
          <button id="boutonRER" class="btn"><img src="pictures/RER.png" alt="404" height="150" width="150" ></button>
-         <div id="RER" style="display:none">
-            <div id=RER1>
+         <div id="RER" class="TRANSP" style="display:none">
+            <div id=RER1 class="transport">
              <input type=image src="pictures/RERA.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER A">
              <input type=image src="pictures/RERC.png" alt="404" height="100" width="100"  class="classRER btn" value="RER C">
              <input type=image src="pictures/RERE.png" alt="404" height="100" width="100"  class="classRER btn" value="RER E">
            </div>
 
-           <div id=RER2>
+           <div id=RER2 class="transport">
              <input type=image src="pictures/RERB.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER B">
              <input type=image src="pictures/RERD.png" alt="404" height="100" width="100"  class="classRER btn" value="RER D">
            </div>
          </div>
          <div id="metros">
            <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
-           <div id="METRO" style="display:none">
-             <div id=METRO1>
+           <div id="METRO" class="TRANSP" style="display:none">
+             <div id=METRO1 class="transport">
                <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
                <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
                <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
@@ -85,7 +96,7 @@
                <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
              </div>
 
-             <div id=METRO2>
+             <div id=METRO2 class="transport">
                <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
                <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
                <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
@@ -101,12 +112,14 @@
         <div id="RECHERCHE" style="display:none;">
 
 
-                <input id="nom_gares" />
+                <input type="text" id="nom_gares" placeholder="Entrez une gare"/>
 
                 <div id="propositionGare" style="overflow-y: scroll;">
-                  <div id=p1></div>
-                  <div id=p2></div>
-                  <div id=p3></div>
+                  <div id=p1 class="prop"></div>
+                  <hr>
+                  <div id=p2 class="prop"></div>
+                  <hr>
+                  <div id=p3 class="prop"></div>
                 </div>
 
                 <input id="boutonGares" class="btn" type="submit" value="Rechercher !"/>
@@ -115,8 +128,8 @@
             </div>
 
 
-         <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
-         <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
+         <a href="#volet" class="ouvrir" aria-hidden="true">Rechercher</a>
+         <a href="#volet_clos" class="fermer" aria-hidden="true">Rechercher</a>
 
       </div>
     </div>

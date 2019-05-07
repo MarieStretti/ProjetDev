@@ -4,7 +4,14 @@ html, body {
   height: 100%;
   width: 100%;
   font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
+  /* font-family: 'Open Sans Condensed', sans-serif; */
+
 	overflow: hidden; /* empecher le scroll sur la page */
+}
+
+span.esri-icon esri-icon-plus {
+    font-size: 30px;
+    display: inline-block;
 }
 
 .esri-zoom .esri-widget--button {
@@ -31,7 +38,7 @@ html, body {
 
 #home {
   background-color: #8B110D;
-  height: 50px;
+  height: 48px;
   width: 100%;
   display: flex;
   z-index: 1;
@@ -53,7 +60,6 @@ html, body {
   z-index: 0;
 }
 
-
 #vertic {
   display: flex;
   flex-direction: column;
@@ -61,6 +67,8 @@ html, body {
   justify-content: space-between;
   text-align: center;
   margin-top: 50px;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 #horiz {
@@ -69,39 +77,29 @@ html, body {
   height: 100%;
 }
 
-
-#cadreNord{
-    height : 35px;
-    width : 100%;
-    background : lightgoldenrodyellow;
-    align-items: center;
-    justify-content: center;
-}
-
-#cadreOuest{
+.cadres {
   width: 35px;
   background : lightgoldenrodyellow;
-  /* writing-mode: vertical-rl; */
-  text-orientation: upright;
   align-items: center;
   justify-content: center;
 }
 
+#cadreNord{
+    width : 100%;
+}
+
+#cadreOuest{
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
 #cadreEst{
-  width: 35px;
-    background : lightgoldenrodyellow;
-    /* writing-mode: vertical-rl; */
-    text-orientation: upright;
-    align-items: center;
-    justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
 #cadreSud{
     width : 100%;
-    height : 35px;
-    background : lightgoldenrodyellow;
-    align-items: center;
-    justify-content: center;
 }
 
 #boouuuton {
@@ -115,7 +113,6 @@ html, body {
   background-color: white;
   border: black solid 2px;
 }
-
 
 h2 {
   padding-left: 10px;
@@ -136,21 +133,209 @@ h2 {
   padding: 14px 28px;
   font-size: 20px;
   cursor: pointer;
-  font-family: 'Open Sans Condensed', sans-serif;
-  /* font-family: 'Saira Extra Condensed', sans-serif; */
-  /* font-family: 'Julius Sans One', sans-serif; */
+  /* font-family: 'Open Sans Condensed', sans-serif; */
+  font-family: 'Julius Sans One', sans-serif;
 }
 
 .btn:hover {background: #eee;}
 
 hr {
   width: 250px;
-  /* border-top: 100px; */
   background-color: black;
   border-color: black;
   size: 10;
 }
 
+#choixOutils {
+  background-color: #8B110D;
+  color: white;
+  font-size: 40px;
+  bottom: 120px;
+  margin-left: 15px;
+  z-index: 1;
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: red;
+}
+
+::placeholder {
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+}
+
+#nom_gares {
+	height: auto;
+	weight: 100%;
+	font-size: 5vw;;
+	color: white;
+	font-weight: bold;
+	background-color: #060D9D;
+  border: none;
+  border-bottom: white solid 3px;
+}
+
+.transport {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#metros {
+  display: flex;
+  flex-direction: column;
+}
+
+#METRO1  {
+    align-items: center;
+}
+
+.TRANSP {
+  display: flex;
+  justify-content: space-around;
+}
+
+#propositionGare{
+  display: flex;
+  flex-direction: column;
+  font-size: 60px;
+  height: 100%;
+  font-weight: bold;
+}
+
+.prop:hover {
+  background-color: gold;
+}
+
+/* .prop {
+  border-bottom: 3px solid red;
+  padding: 5px 0px;
+} */
+
+#RECHERCHE {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+#boutonGares {
+  background-color: #060D9D;
+  font-weight: bold;
+  font-size: 5vw;
+  color: white;
+}
+
+.widg {
+  position:absolute;
+  background-color: black;
+  color: white;
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1;
+  top: 95px;
+  border-radius: 7px;
+  padding: 1px;
+}
+
+#loupe {
+  right:120px;
+  width: 50px;
+  height: 50px;
+}
+
+#loupe:active {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+#lecture {
+  margin-left: 18px;
+  background-color: white;
+}
+
+.check {
+  right: 180px;
+  position: absolute;
+  z-index: 1;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  top: 95px;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+input[type="checkbox"] {
+  -webkit-transform: scale(2.5);
+  margin: 0px;
+}
+
+.check label {
+  width: 120px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  font-size: 27px;
+  margin-left: 5px;
+}
+
+.widg:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
 
 
 /*################################### CSS VOLET ##########################################*/
@@ -206,8 +391,6 @@ hr {
 		left: 0px;
 	}
 
-	/* code pour la fermeture */
-
 	#volet:target a.fermer {
 		display: block;
 	}
@@ -218,188 +401,3 @@ hr {
 	#volet_clos:target #volet {
 		left: -408px;
 	}
-
-
-.check label {
-  font-size: 40px;
-  margin-left: 5px;
-  margin-bottom: 5px;
-}
-
-input[type="checkbox"]
-{
--webkit-transform: scale(2.5);
-margin: 0px;
-}
-
-#choixOutils {
-  background-color: #8B110D;
-  color: white;
-  font-size: 40px;
-  bottom: 120px;
-  margin-left: 15px;
-  z-index: 1;
-  width: 90%;
-  display: flex;
-  justify-content: space-around;
-
-}
-
-	#nom_gares {
-		height: auto;
-		weight: 100%;
-		font-size: 5vw;;
-		color: white;
-		font-weight: bold;
-		background-color: #060D9D;
-    border: none;
-    border-bottom: white solid 3px;
-	}
-
-
-
-  #metros {
-    display: flex;
-    flex-direction: column;
-  }
-
-
-#METRO1  {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: centerss
-	}
-
-#METRO2 {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-  	}
-
-#METRO {
-  display: flex;
-  justify-content: space-around;
-}
-
-
-#RER1  {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-	}
-
-#RER2 {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-  	}
-
-#RER {
-  display: flex;
-  justify-content: space-around;
-}
-
-
-#propositionGare{
-  display: flex;
-  flex-direction: column;
-  font-size: 60px;
-  height: 100%;
-  font-weight: bold;
-}
-
-#p1:hover {
-  background-color: gold;
-}
-
-#p2:hover {
-  background-color: gold;
-}
-
-#p3:hover {
-  background-color: gold;
-}
-
-#RECHERCHE {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-}
-
-#boutonGares {
-  background-color: #060D9D;
-  font-weight: bold;
-  font-size: 5vw;
-  color: white;
-}
-
-/* #widgets {
-  width: 100%;
-  height: auto;
-  right: 200px;
-  top: 52px;
-} */
-
-.widg {
-  position:absolute;
-  background-color: black;
-  color: white;
-  border: none;
-  height: 40px;
-  cursor: pointer;
-  z-index: 1;
-  top: 95px;
-}
-
-#loupe {
-  right:120px;
-  width: 50px;
-  height: 50px;
-}
-
-
-#lecture {
-  margin-left: 18px;
-  background-color: white;
-}
-
-.check {
-  right: 180px;
-  position: absolute;
-  z-index: 1;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  top: 95px;
-}
-
-/* .check input {
-  background-color: white;
-} */
-
-.check label {
-  display: inline-block;
-  width: 120px;
-  height: auto;
-  text-align: center;
-  border: 1px solid black;
-  /* line-height: 35px; */
-  cursor: pointer;
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-
-.widg:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-}
-
-.widg:focus {
-  background-color: white;
-  color: black;
-  border: 5px solid red;
-}

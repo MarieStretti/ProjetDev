@@ -29,6 +29,7 @@ h3.esri-widget__heading {
 
 .esri-ui-corner .esri-component.esri-widget--panel {
     width: 300px;
+    height: 200px;
 }
 
 
@@ -83,7 +84,7 @@ h2 {
   border: none;
   background-color: inherit;
   padding: 14px 28px;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
   font-family: 'Open Sans Condensed', sans-serif;
   /* font-family: 'Saira Extra Condensed', sans-serif; */
@@ -94,10 +95,9 @@ h2 {
 
 hr {
   width: 250px;
-  /* border-top: 100px; */
+  height: 2px;
   background-color: black;
   border-color: black;
-  size: 10;
 }
 
 #PP {
