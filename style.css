@@ -166,7 +166,7 @@ hr {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: red;
+  background: #060D9D;
 }
 
 ::placeholder {
