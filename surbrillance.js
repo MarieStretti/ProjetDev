@@ -224,8 +224,6 @@ function trouverGare(event){
 
   query.where = "nom_long LIKE '" + gare_recherchee +"'";
 
-  console.log(query.where);
-
   query.outFields = ["x","y"];
   layerGare.queryFeatures(query).features;
 

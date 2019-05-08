@@ -86,7 +86,6 @@ require([
                   liste_points =[];
 
                   if(gare_surbrillance != 0){
-                    console.log(gare_surbrillance);
                     layer_display = gare_surbrillance;
                     definitonLayer(gare_surbrillance);
                     RefreshCadre();
@@ -151,7 +150,6 @@ require([
           // Permet de rafraichir le cadre
 
           function RefreshCadre() {
-            console.log("refresh");
           ////  coordonnees d'emprise actuelle de la carte /////
 
             var size   =  view.size; // emprise en pixels de la carte

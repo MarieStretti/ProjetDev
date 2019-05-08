@@ -249,6 +249,74 @@ hr {
   padding: 2px;
 }
 
+#topog {
+  right:180px;
+  width: 200px;
+  height: auto;
+  position:absolute;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  top: 95px;
+  padding: 3px 5px 5px 40px;
+}
+
+#topog input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+/* Create a custom checkbox */
+.checkmark2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  margin: 21px 10px auto 6px;
+}
+
+#topog input:checked ~ .checkmark2 {
+  background-color: white;
+  /* border: 2px solid black; */
+}
+
+.checkmark2:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+#topog input:checked ~ .checkmark2:after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the checkmark/indicator */
+#topog .checkmark2:after {
+  left: 10.5px;
+  top: 6px;
+  width: 7px;
+  height: 12px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
 #loupe {
   right:120px;
   width: 50px;

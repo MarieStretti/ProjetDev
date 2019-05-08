@@ -82,14 +82,11 @@ map.add(gare);
     zoom: zoomlevel,
   });
 
-    console.log(view);
-
   var maxExtent = extentMap;
 
   // Permet de limiter la carte observable à l'IDF
 
   view.on( "pointer-move", function(){
-console.log("cgange!!");
      if((view.extent.xmin < maxExtent.xmin) ||
        (view.extent.ymin < maxExtent.ymin)  ||
        (view.extent.xmax > maxExtent.xmax) ||
@@ -119,10 +116,6 @@ console.log("cgange!!");
 
       }
   });
-
-
-  console.log(view.extent);
-
 
   view.ui.move([ "zoom", map ], "top-right");
 
@@ -159,7 +152,17 @@ function executeSurbrillanceEvent(event){
     else {
       view.magnifier.visible = true;
     }
-  })
+  });
 
+  //Carte topographique
+  var topo = document.getElementById("carte_topo");
+  topo.addEventListener("click", function(){
+    if (topo.checked == true) {
+      map.basemap.baseLayers.items[0].opacity = 1;
+    }
+    else {
+      map.basemap.baseLayers.items[0].opacity = 0;
+    }
+  });
 
 });

@@ -16,9 +16,7 @@ require([
       id: "9c41116150794b6d899503bb1dc2af2f"
     }
   });
-  console.log("webmap",webmap);
 
-  console.log(webmap.resourceInfo);
   // creation map
   var view = new MapView({
     container: "viewDiv",
@@ -30,8 +28,6 @@ require([
       minZoom: 9,
     }
   });
-
-  console.log("view", view);
 
   view.when(function() {
     var featureLayer = webmap.layers.getItemAt(0);
@@ -46,10 +42,8 @@ require([
       ]
     });
     view.ui.add(legend, "bottom-right");
-    console.log(legend);
   });
 
-console.log("view",view);
   view.ui.move([ "zoom", webmap ], "top-right");
   view.popup = null;
 
@@ -60,11 +54,19 @@ console.log("view",view);
     },
     renderer: maj([237,81,81,255],[20,158,206,255],[167,198,54,255])
   });
-  console.log("area",area);
   area.popupEnabled = "false";
   webmap.add(area,0);
 
-  console.log(document.getElementsByClassName("esri-legend__layer-caption").value);
+  //Carte topographique
+  var topo = document.getElementById("carte_topo");
+  topo.addEventListener("click", function(){
+    if (topo.checked == true) {
+      webmap.basemap.baseLayers.items[0].opacity = 1;
+    }
+    else {
+      webmap.basemap.baseLayers.items[0].opacity = 0;
+    }
+  });
 
   // Carte initiale
   document.getElementById("carte").addEventListener("click", function(){

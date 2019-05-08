@@ -8,6 +8,26 @@
   </head>
   <body>
 
+    <div id="popup">
+      <p id="close">X</p>
+    <div id="resume">
+      <p id="text">Ce projet de cartographie pour les personnes daltoniennes et malvoyantes est commandité par l'Institut d'Aménagement et d'Urbanisme de la région Ile-de-France (IAU).
+        Chaque année, l’IAU travaille sur un « sujet d’atelier ». Cette année, le thème porte sur le « Changement de regard – Changement de perspective ».
+        Le projet mené s’inscrit dans ce thème et porte sur l’accessibilité de la cartographie.
+      </p>
+      <p id="sources">Réalisé par : Marie Stretti, Anouk Schleich, Ridley Campbell, Hugo Boulze, étudiants du cycle Ingénieur à l'Ecole Nationale des Sciences Géographiques dans le cadre d'un projet développement, 2019</p>
+      <p id="sources">Sources des données :</p>
+      <div id="sourceLogos">
+        <img src="pictures/logoIAU.png" class="img" alt="IAU">
+        <img src="pictures/EsriAG_logo.png" class="img" alt="esri">
+        <img src="pictures/logoDataGouv.png" class="img" alt="DataGouv">
+        <img src="pictures/Logo_IDF.jpg" class="img" alt="IDF">
+      </div>
+    </div>
+
+    </div>
+
+
     <div id="haut">
       <div class="logos">
         <img src="pictures/logoIAU.png" alt="IAU" style="height:80px; width:auto">
@@ -17,9 +37,6 @@
         <h1>camayeux</h1>
       </div>
     </div>
-
-    <div id="page" style="width=100%">
-
 
       <div id="content">
 
@@ -85,24 +102,16 @@
       </div>
     </div>
 
-        <div id="resume">
-          <p>Ce projet de cartographie pour les personnes daltoniennes et malvoyantes est commandité par l'Institut d'Aménagement et d'Urbanisme de la région Ile-de-France (IAU).
-            Chaque année, l’IAU travaille sur un « sujet d’atelier ». Cette année, le thème porte sur le « Changement de regard – Changement de perspective ».
-            Le projet mené s’inscrit dans ce thème et porte sur l’accessibilité de la cartographie.
-          </p>
-          <p id="sources">Réalisé par : Marie Stretti, Anouk Schleich, Ridley Campbell, Hugo Boulze, étudiants du cycle Ingénieur à l'Ecole Nationale des Sciences Géographiques dans le cadre d'un projet développement, 2019</p>
-          <p id="sources">Sources des données :</p>
-          <div id="sourceLogos">
-            <img src="pictures/logoIAU.png" class="img" alt="IAU">
-            <img src="pictures/EsriAG_logo.png" class="img" alt="esri">
-            <img src="pictures/logoDataGouv.png" class="img" alt="DataGouv">
-            <img src="pictures/Logo_IDF.jpg" class="img" alt="IDF">
-          </div>
-        </div>
+    <script type="text/javascript">
 
+    document.getElementById('projet').addEventListener('click',function(){
+      document.getElementById('popup').style.display = "flex";
+    });
+    document.getElementById('close').addEventListener('click',function(){
+      document.getElementById('popup').style.display = "none";
+    });
 
-      </div>
-
+    </script>
 
   </body>
 </html>

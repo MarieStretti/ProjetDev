@@ -5,6 +5,7 @@ body,html {
   display: flex;
   font-family: berlin;
   justify-content: center;
+  overflow-y: hidden;
 }
 
 @font-face {
@@ -96,6 +97,24 @@ h1 {
   width: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #470907;
+}
+
+::placeholder {
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+}
+
 #projet {
   border: none;
   background-color: white;
@@ -105,27 +124,55 @@ h1 {
   cursor: pointer;
   text-decoration:none;
   text-align: center;
+  line-height: 230px;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#popup {
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  z-index: 10;
+  position: absolute;
+  top: 110px;
+  left: 7%;
+  right: 7%;
+  bottom: 1%;
+  background: white;
+  padding: 7px 30px 10px 30px;
+}
+
+#close {
+  text-align: right;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #470907;
 }
 
 
 #resume {
-  z-index: 1;
-  width: 850px;
+  flex: 1;
   text-align: justify;
   font-size: 36px;
+  overflow-y: scroll;
 }
 
-
-#page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: 30px;
-  height: 2000px;
+#text {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 20px;
 }
+
 
 #sources {
   font-size: 30px;
+  margin-right: 20px;
+  margin-top: 30px;
 }
 
 #sourceLogos {
