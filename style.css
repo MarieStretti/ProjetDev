@@ -14,12 +14,17 @@ span.esri-icon esri-icon-plus {
     display: inline-block;
 }
 
+.esri-ui-corner .esri-component {
+	box-shadow:none;
+}
+
 .esri-zoom .esri-widget--button {
     box-shadow: none;
     color: white;
     background-color: black;
     height: 100%;
     width: 100%;
+	border-radius: 10px;
 }
 
 .esri-icon {
@@ -43,7 +48,7 @@ span.esri-icon esri-icon-plus {
   display: flex;
   z-index: 1;
   position: absolute;
-  border-radius: 100px;
+  border-radius: 10px;
 }
 
 .bandeau {
@@ -268,7 +273,7 @@ hr {
   cursor: pointer;
   z-index: 1;
   top: 95px;
-  padding: 7px 7px 7px 40px;
+  padding: 7px 7px 4px 42px;
   border-radius: 10px;
 }
 
@@ -289,7 +294,8 @@ hr {
   height: 30px;
   width: 30px;
   background-color: white;
-  margin: 8.5px 2px auto 6px;
+  margin: 7px 2px auto 7px;
+  border-radius: 10px;
 }
 
 #topog input:checked ~ .checkmark2 {
@@ -301,6 +307,7 @@ hr {
   content: "";
   position: absolute;
   display: none;
+  
 }
 
 /* Show the checkmark when checked */
@@ -384,6 +391,7 @@ hr {
   background-color: white;
   margin-top: 8px;
   margin-left: 20px;
+  border-radius: 10px;
 }
 
 .container input:checked ~ .checkmark {
