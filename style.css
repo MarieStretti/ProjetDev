@@ -251,7 +251,6 @@ hr {
 
 #topog {
   right:180px;
-  width: 200px;
   height: auto;
   position:absolute;
   background-color: black;
@@ -280,7 +279,7 @@ hr {
   height: 30px;
   width: 30px;
   background-color: white;
-  margin: 21px 10px auto 6px;
+  margin: 5px 10px auto 6px;
 }
 
 #topog input:checked ~ .checkmark2 {
@@ -343,11 +342,13 @@ hr {
 
 .container {
   display: flex;
+  justify-content: center;
   align-items: center;
   position: relative;
-  padding-left: 35px;
+  padding-left: 60px;
   cursor: pointer;
   font-size: 2em;
+  border-left: 2px solid white;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -372,7 +373,7 @@ hr {
   width: 30px;
   background-color: white;
   margin-top: 8px;
-  margin-right: 10px;
+  margin-left: 20px;
 }
 
 .container input:checked ~ .checkmark {
