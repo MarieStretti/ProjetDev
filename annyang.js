@@ -127,18 +127,20 @@
 
 
    //DE-activation Surbrillance
-    var commandesurb1 = {'Surbrillance': SurbFunction};
-    var commandesurb2 = {'activer Surbrillance': SurbFunction};
-    var commandesurb3 = {'voir Surbrillance': SurbFunction};
-    var commandesurb4 = {'cocher Surbrillance': SurbFunction};
+    var commandesurb1 = {'Recherche': SurbFunction};
+    var commandesurb2 = {'activer Recherche': SurbFunction};
+    var commandesurb3 = {'voir Recherche': SurbFunction};
+    var commandesurb4 = {'cocher Recherche': SurbFunction};
+    var commandesurb5 = {'Rechercher': SurbFunction};
     function SurbFunction(){
-          console.log("Surbrillance changed");
+          console.log("Rechercher changed");
           document.getElementById('surbrillance').click();
     };
     annyang.addCommands(commandesurb1);
     annyang.addCommands(commandesurb2);
     annyang.addCommands(commandesurb3);
     annyang.addCommands(commandesurb4);
+    annyang.addCommands(commandesurb5);
 
 
     //DE-activation Cadre
