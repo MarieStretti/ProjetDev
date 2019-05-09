@@ -43,6 +43,7 @@ span.esri-icon esri-icon-plus {
   display: flex;
   z-index: 1;
   position: absolute;
+  border-radius: 100px;
 }
 
 .bandeau {
@@ -267,7 +268,8 @@ hr {
   cursor: pointer;
   z-index: 1;
   top: 95px;
-  padding: 3px 5px 5px 40px;
+  padding: 7px 7px 7px 40px;
+  border-radius: 10px;
 }
 
 #topog input {
@@ -287,7 +289,7 @@ hr {
   height: 30px;
   width: 30px;
   background-color: white;
-  margin: 5px 10px auto 6px;
+  margin: 8.5px 2px auto 6px;
 }
 
 #topog input:checked ~ .checkmark2 {
