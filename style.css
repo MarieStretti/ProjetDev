@@ -54,11 +54,12 @@ span.esri-icon esri-icon-plus {
 }
 
 #help {
-
   padding-left: 20px;
-
 }
 
+#help i {
+  margin-top: 7px;
+}
 
 #viewDiv {
   height: 100%;
