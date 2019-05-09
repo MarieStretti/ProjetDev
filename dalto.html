@@ -16,46 +16,50 @@
   <body>
 
     <div id="home">
-      <a href="index.html" class="bandeau"><i class="fas fa-home fa-2x"></i></a>
-      <button type="button" id="carte" class="bandeau">Couleurs initiales</button>
+      <form method="get" action="index.html">
+        <button class="bandeau" title="Retour à la page d'accueil" type="submit"><i class="fas fa-home fa-3x"></i></button>
+      </form>
+      <!-- <a href="index.html" class="bandeau"><i class="fas fa-home fa-3x"></i></a> -->
+      <button type="button" id="carte" class="bandeau">Carte initiale</button>
       <label class="container">Carte topographique
         <input type="checkbox" id="carte_topo">
         <span class="checkmark"></span>
       </label>
-        <label class="container">Paramètres
-          <input type="checkbox" id="prm">
-          <span class="checkmark"></span>
-        </label>
-      </div>
     </div>
 
+    <div id="viewDiv">
 
-    <div id="paraaam">
-      <button id="btnD" class="btn">Deutéranopie</button>
-      <hr>
-      <button id="btnP" class="btn">Protanopie</button>
-      <hr>
-      <button id="btnT" class="btn">Tritanopie</button>
-      <hr>
-      <button id="btnPP" class="btn">Paramètres personnalisables</button>
-      <div id="PP" style="display:none">
-        <p id="txt">Projets en cours</p>
-        <div id='ProjCours'>
-          <input type='color' id='cours' class='btnparam'>
-        </div>
-        <p>Projets programmés</p>
-        <div id='ProjProg'>
-          <input type='color' id='prog' class='btnparam'>
-        </div>
-        <p>Projets à l'étude</p>
-        <div id='ProjEtude'>
-          <input type='color' id='etude' class='btnparam'>
+      <div id="volet_clos">
+        <div id="volet">
+          <div id="button">
+            <button id="btnD" class="btn">Deutéranopie</button>
+            <hr>
+            <button id="btnP" class="btn">Protanopie</button>
+            <hr>
+            <button id="btnT" class="btn">Tritanopie</button>
+            <hr>
+            <button id="btnPP" class="btn">Paramètres personnalisables</button>
+            <div id="PP" style="display:none">
+              <p id="txt">Projets en cours</p>
+              <div id='ProjCours'>
+                <input type='color' id='cours' class='btnparam'>
+              </div>
+              <p>Projets programmés</p>
+              <div id='ProjProg'>
+                <input type='color' id='prog' class='btnparam'>
+              </div>
+              <p>Projets à l'étude</p>
+              <div id='ProjEtude'>
+                <input type='color' id='etude' class='btnparam'>
+              </div>
+            </div>
+          </div>
+
+          <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
+          <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
         </div>
       </div>
     </div>
-
-
-    <div id="viewDiv"></div>
 
 
 <!--

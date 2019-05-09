@@ -127,19 +127,6 @@ require([
     });
   };
 
-  document.getElementById("prm").addEventListener("click", function(){
-    var bout = document.getElementById("prm");
-    var par = document.getElementById('paraaam');
-    if (bout.checked) {
-      par.style.display = "flex";
-      console.log("BLA");
-    }
-    else {
-      par.style.display = "none";
-      console.log("BLOP");
-    }
-  });
-
 
   /*
   * Met a jour les couleurs des surfaces representant les amenagements (renderer)

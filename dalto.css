@@ -40,16 +40,10 @@ h3.esri-widget__heading {
 #home {
   background-color: #8B110D;
   height: 50px;
-  width: 100%;
   display: flex;
   justify-content: space-around;
   z-index: 1;
   position: absolute;
-}
-
-#home a {
-  display: flex;
-  align-items: center;
 }
 
 .bandeau {
@@ -58,41 +52,18 @@ h3.esri-widget__heading {
   height: 100%;
   border: none;
   cursor: pointer;
-  font-family: Arial;
-  font-size: 1.2em;
 }
-
-#paraaam {
-  display: none;
-  position: absolute;
-  background-color: white;
-  z-index: 1;
-  width: 300px;
-  height: 95%;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-top: 50px;
-  border-right: 3px solid black;
-}
-
-
 
 #carte {
   border-left: 2px solid white;
-  font-size: 1.7em;
-  padding: 5px 50px;
+  border-right: 2px solid white;
+  font-size: 20px;
 }
 
-#carte:hover {
-  background-color: white;
-  color: #8B110D;
-  border: 2px solid #8B110D;
-}
 
 #viewDiv {
-  height: 95%;
+  height: 100%;
   width: 100%;
-  margin-top: 50px;
 }
 
 h2 {
@@ -154,14 +125,12 @@ hr {
   display: flex;
   align-items: center;
   position: relative;
-  padding-left: 90px;
+  padding-left: 37px;
   padding-right: 5px;
   cursor: pointer;
-  font-size: 1.7em;
+  font-size: 1.2em;
   font-family: Arial;
   color: white;
-  border-left: 2px solid white;
-
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -186,7 +155,7 @@ hr {
   width: 25px;
   background-color: white;
   margin-top: 12px;
-  margin-left: 32px;
+  margin-left: 5px;
 }
 
 .container input:checked ~ .checkmark {
@@ -219,3 +188,64 @@ hr {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+
+
+/*################################### CSS VOLET ##########################################*/
+
+#volet {
+			width: 300px;
+      height: 90%;
+			background: white;
+      color: black;
+      border-style: solid;
+      border-width: 3px;
+      border-color: black;
+		}
+		#volet a.ouvrir,
+		#volet a.fermer {
+			padding: 20px 25px; /*padding du bouton ouvrir et fermer*/
+			background: black;
+			color: white;
+      font-weight: bold;
+      font-size: 30px;
+			text-decoration: none;
+		}
+
+		#volet {
+			position: absolute;
+			left: -308px; top: 52px;
+			-webkit-transition: all .5s ease-in;
+			-moz-transition: all .5s ease-in;
+			transition: all .5s ease-in;
+		}
+		#volet a.ouvrir,
+		#volet a.fermer {
+			position: absolute;
+			right: -150px;
+			top: 73px;
+			-webkit-transform: rotate(270deg);
+			-moz-transform: rotate(270deg);
+			-o-transform: rotate(270deg);
+			-ms-transform: rotate(270deg);
+			-moz-radius: 0 0 8px 8px;
+			border-radius: 0 0 8px 8px;
+		}
+		#volet a.fermer {
+			display: none;
+		}
+		#volet:target {
+			left: 0px;
+		}
+
+		/* code pour la fermeture */
+
+		#volet:target a.fermer {
+			display: block;
+		}
+		#volet:target a.ouvrir {
+			display: none;
+		}
+		#volet_clos:target #volet {
+			left: -308px;
+		}

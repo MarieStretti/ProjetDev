@@ -16,20 +16,22 @@
       <form method="get" action="index.html">
         <button class="bandeau" title="Retour à la page d'accueil" type="submit"><i class="fas fa-home fa-3x"></i></button>
       </form>
+	 
+	   <a id="help" class="bandeau" href='#resume'> <i class="fas fa-question-circle fa-2x"></i></a>
       <div id="choixOutils" class="choooose">
             <label class="container">Cadre
               <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
               <span class="checkmark" align="center"></span>
           </label>
-          <label class="container">Surbrillance
+          <label class="container">Rechercher
             <input type="checkbox" id="surbrillance" name="choix" value="3">
             <span class="checkmark"></span>
           </label>
-            <label class="container">Commande vocale
+            <label class="container">Commande Vocale
               <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
               <span class="checkmark"></span>
           </label>
-          <label class="container">Lecture audio
+          <label class="container">Lecture Audio
           <input type="checkbox" name="choix" id="lecture">
           <span class="checkmark"></span>
         </label>
@@ -44,7 +46,7 @@
   <div id="horiz">
     <div id='cadreOuest' class="cadres" style="display:none">West</div>
     <div id="viewDiv">
-      <label id="topog">Fond
+      <label id="topog">Carte topographique
         <input type="checkbox" id="carte_topo">
         <span class="checkmark2"></span>
       </label>
@@ -140,6 +142,37 @@
     <script src="cadre.js"></script>
     <script src="index.js"></script>
 
+	  <div id="popup">
+      <p id="close">X</p>
+    <div id="resume">
+      <p>AIDE </p>
+	  <p> <i class="fas fa-home fa-3x"></i>  RETOUR A LA PAGE D'ACCUEIL</p>
+	  <p> <i class="fas fa-question-circle fa-2x"></i> AIDE</p>
+	  <p> CADRE </p>
+	  <p> PERMET DE CONNAITRE LA DENSITE D'OBJETS PRESENTS SUR LA CARTE EN FONCTION DES DIRECTIONS (NORD,SUD,EST,OUEST) </p>
+	  <p> RECHERCHE </p>
+	  <p> PERMET DE CHERCHER DES LIGNES DE METRO/RER OU DES GARES EN IDF </p>
+	  <p> COMMANDE VOCALE </p>
+	  <p> PERMET DE DONNER DES ORDRES A L'ORDINATEUR. PAR EXEMPLE,   </p>
+	  <p> LECTURE AUDIO </p>
+	  <p> PERMET D'AVOIR UNE AIDE VOCALE DE L'ORDINATEUR </p>
+	  <p> <i class="fas fa-search fa-3x"></i> LOUPE </p>
+	  <p> PERMET D'AFFICHER UNE LOUPE</p>
+ 
+    </div>
+
+    </div>
+	
+    <script type="text/javascript">
+
+    document.getElementById('help').addEventListener('click',function(){
+      document.getElementById('popup').style.display = "flex";
+    });
+    document.getElementById('close').addEventListener('click',function(){
+      document.getElementById('popup').style.display = "none";
+    });
+
+    </script>
 
 
   </body>
