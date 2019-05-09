@@ -147,7 +147,7 @@ h1 {
   bottom: 1%;
   background: white;
   padding: 7px 30px 10px 30px;
-  border: 3px solid black;
+  border: 3px solid #470907;
 
 }
 
@@ -166,6 +166,7 @@ h1 {
   text-align: justify;
   font-size: 36px;
   overflow-y: scroll;
+  color: #470907;
 }
 
 #text {
@@ -176,10 +177,15 @@ h1 {
 }
 
 
-#sources {
+.sources {
   font-size: 30px;
   margin-right: 20px;
   margin-top: 30px;
+}
+
+.sources a {
+  color: #8B110D;
+  text-decoration: none;
 }
 
 #sourceLogos {
