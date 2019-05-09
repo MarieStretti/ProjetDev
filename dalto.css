@@ -12,11 +12,13 @@ html, body {
   background-color: black;
   height: 100%;
   width: 100%;
+  border-radius: 10px;
 }
 
 .esri-ui-corner .esri-component {
   width: 60px;
   height: 90px;
+  box-shadow: none;
 }
 
 h3.esri-widget__heading {
@@ -187,6 +189,7 @@ hr {
   background-color: white;
   margin-top: 12px;
   margin-left: 32px;
+  border-radius: 10px;
 }
 
 .container input:checked ~ .checkmark {
