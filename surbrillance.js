@@ -1,3 +1,13 @@
+
+
+
+/**
+ * 
+ * @param {*} view 
+ * @param {*} map 
+ * @param {*} layerGare 
+ * @param {*} gareRenderer_defaut 
+ */
 function executeSurbrillance(view, map, layerGare, gareRenderer_defaut){
 
 require([
@@ -22,7 +32,7 @@ require([
 
 
 
-//definition de la projection Lmabert93
+//definition de la projection Lambert93
 
 var wgs84 = proj4.Proj('EPSG:4326');
 proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
@@ -222,7 +232,7 @@ function trouverGare(event){
   var liste = [];
   var query = layerGare.createQuery();
 
-  query.where = "nom_long LIKE '" + gare_recherchee +"'";
+  query.where = "nom_long LIKE '" + gare_recherchee +"'"; // requete SQL du nom des gares
 
   query.outFields = ["x","y"];
   layerGare.queryFeatures(query).features;
@@ -334,8 +344,11 @@ var boutonRecherche= document.getElementById("boutonRecherche");
 var volet = document.getElementById("volet");
 
 
-// Reaction de la div RER en fonction du click sur le boutonRER
-
+// 
+/**
+ * 
+ * Reaction de la div RER en fonction du click sur le boutonRER
+ */
 document.getElementById("boutonRER").addEventListener("click", function(){
 
   if (rer.style.display == "flex") {

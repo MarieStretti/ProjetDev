@@ -2,6 +2,10 @@ lecture_audio = 0;
 var lecture = document.getElementById('lecture');
 var audio = document.getElementById('audio');
 
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'lecture audio activee' ou 'lecture audio desactive'
+ * 
+ */
 lecture.addEventListener('change', function(){
   if(lecture.checked){
     lecture_audio = 1;
@@ -29,58 +33,69 @@ p1.addEventListener('mouseover',function(){
 
 p2.addEventListener('mouseover',function(){
   if(lecture_audio ==1 ){
-  var string = ""+p2.innerHTML;
-  meSpeak.speak(string,{ variant: 'f2',speed:150,wordgap:5});
-}
-
+    var string = ""+p2.innerHTML;
+    meSpeak.speak(string,{ variant: 'f2',speed:150,wordgap:5});
+  }
 },false);
 
 
 p3.addEventListener('mouseover',function(){
   if(lecture_audio ==1 ){
-  var string = ""+p3.innerHTML;
-  meSpeak.speak(string,{ variant: 'f2',speed:150,wordgap:5});
-}
-
-},false);
-
-
-
-boutonGares.addEventListener('click',function(){
-  if(lecture_audio ==1 ){
-  audio.innerHTML ='<audio autoplay volume="60"> <source src="audio/vous_rechercher_la_gare.wav" </audio>';
-  var valeur = nom_gares.value;
-  setTimeout(speak , 2300);
-  function speak(){
-    meSpeak.speak(valeur,{ variant: 'f2',speed:150,wordgap:5});
+    var string = ""+p3.innerHTML;
+    meSpeak.speak(string,{ variant: 'f2',speed:150,wordgap:5});
   }
-
-}
-
 },false);
 
 
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'rechercher la gare'
+ * 
+ */
+boutonGares.addEventListener('click',function(){  
+  if(lecture_audio ==1 ){
+    audio.innerHTML ='<audio autoplay volume="60"> <source src="audio/vous_rechercher_la_gare.wav" </audio>';
+    var valeur = nom_gares.value;
+    setTimeout(speak , 2300);
+    function speak(){
+      meSpeak.speak(valeur,{ variant: 'f2',speed:150,wordgap:5});
+    }
+  }
+},false);
+
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'rer'
+ * 
+ */
 boutonRER.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
     audio.innerHTML ='<audio autoplay volume="60"> <source src="audio/rer.wav" </audio>';
-}
+  }
 }, false);
 
-
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'metro'
+ * 
+ */
 boutonMetro.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
     audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/metro.wav" </audio>';
-}
+  }
 }, false);
 
-
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'rechercher une gare'
+ * 
+ */
 boutonRecherche.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
     audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/rechercher_une_gare.wav" </audio>';
-}
+  }
 }, false);
 
-
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'surbrillance activee' ou 'surbrillance activee'
+ * 
+ */
 surbrillance.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(surbrillance.checked){
@@ -89,9 +104,13 @@ surbrillance.addEventListener('change', function() {
     else {
       audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/surbrillance_desactivee.wav" </audio>';
     }
-}
+  }
 }, false);
 
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'cadre active' ou 'cadre desactive'.
+ * 
+ */
 cadre.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(cadre.checked){
@@ -100,9 +119,13 @@ cadre.addEventListener('change', function() {
     else {
       audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/cadre_desactive.wav" </audio>';
     }
-}
+  }
 }, false);
 
+/**
+ * Au clic du bouton correspondant, active le fichier audio 'commande vocale activee' ou 'commande vocale desactivee'
+ * 
+ */
 commande.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(commande.checked){
@@ -111,5 +134,5 @@ commande.addEventListener('change', function() {
     else {
       audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/commande_vocale_desactivee.wav" </audio>';
     }
-}
+  }
 }, false);

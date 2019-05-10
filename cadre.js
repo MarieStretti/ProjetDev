@@ -3,6 +3,13 @@ var cadreOuest = document.getElementById("cadreOuest");
 var cadreEst = document.getElementById("cadreEst");
 var cadreSud = document.getElementById("cadreSud");
 
+/**
+ * Cadre de couleur affiché ou caché selon si la checkbox correspondante est cochée ou non
+ * 
+ * 
+ * @param checkboxElem CheckBox "cadre" sur la carte web, cochée ou non.
+ * @see 
+ * */
 function alertcadre(checkboxElem) {
  if (checkboxElem.checked) {
    cadreNord.style.display = "flex";
@@ -40,65 +47,67 @@ require([
         UniqueValueRenderer, Color, WebStyleSymbol) {
 
 
-          /// CADRE DE COULEUR
-          var cadreNord  = document.getElementById('cadreNord');
-          var cadreOuest = document.getElementById('cadreOuest');
-          var cadreEst   = document.getElementById('cadreEst');
-          var cadreSud   = document.getElementById('cadreSud');
+        /// CADRE DE COULEUR
+        var cadreNord  = document.getElementById('cadreNord');
+        var cadreOuest = document.getElementById('cadreOuest');
+        var cadreEst   = document.getElementById('cadreEst');
+        var cadreSud   = document.getElementById('cadreSud');
 
+        // mise à jour des points
+        liste_points = [];
 
-          liste_points = [];
+        /// preparation des projections de coordonnees avec proj4
+        var wgs84 = proj4.Proj('EPSG:4326');
+        proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+        var lambert93 = proj4.Proj("EPSG:2154");
 
-          /// preparation des projections de coordonnees avec proj4
-          var wgs84 = proj4.Proj('EPSG:4326');
-          proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-          var lambert93 = proj4.Proj("EPSG:2154");
+        // On regarde la valeur de gare_surbrillance toutes les x secondes
 
-          // On regarde la valeur de gare_surbrillance toutes les x secondes
+        var indice = 1;
+        var layer_display = 0;
 
-          var indice = 0;
-          var layer_display = 0;
+        cadre.addEventListener("change",etatcadre,false);
 
-          cadre.addEventListener("change",etatcadre,false);
+        // permet de savoir si le cadre est coche
 
-          // permet de savoir si le cadre est coche
+        function etatcadre(event){
 
-          function etatcadre(event){
-
-            if (cadre.checked){
-              indice = 1;
-              if(layer_display != gareLayer) {
-                  liste_points = [];
-                  layer_display = gareLayer;
-                  definitonLayer(gareLayer);
-                  RefreshCadre();
-              }
-
+          if (cadre.checked){
+            indice = 1;
+            if(layer_display != gareLayer) {
+                liste_points = [];
+                layer_display = gareLayer;
+                definitonLayer(gareLayer);
+                RefreshCadre();
             }
+          }
 
-            else{
-              indice = 0;
-            }
+          else{
+            indice = 0;
+          }
         }
 
-          function test(){
+        /**
+         * 
+         * 
+         */
+        function test(){
+          liste_points =[];
 
-                  liste_points =[];
-
-                  if(gare_surbrillance != 0){
-                    layer_display = gare_surbrillance;
-                    definitonLayer(gare_surbrillance);
-                    RefreshCadre();
-
-                  }
-
-                  else{
-                    definitonLayer(gareLayer);
-                    RefreshCadre();
-                  }
-
+          if(gare_surbrillance != 0){
+            console.log(gare_surbrillance);
+            layer_display = gare_surbrillance;
+            definitonLayer(gare_surbrillance);
+            RefreshCadre();
 
           }
+
+          else{
+            definitonLayer(gareLayer);
+            RefreshCadre();
+          }
+
+        }
 
 
 
@@ -136,7 +145,10 @@ require([
 
 
           /// stockage des coordonnees de TOUS LES POINTS de la couche sur laquelle on compte les elements
-
+          /**
+           * 
+           * @param {*} featurelayer 
+           */
           function definitonLayer(featurelayer){
 
             for (var i = 0; i < featurelayer.source.items.length; i++) {
@@ -150,6 +162,7 @@ require([
           // Permet de rafraichir le cadre
 
           function RefreshCadre() {
+            console.log("refresh");
           ////  coordonnees d'emprise actuelle de la carte /////
 
             var size   =  view.size; // emprise en pixels de la carte

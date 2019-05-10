@@ -84,8 +84,11 @@ map.add(gare);
 
   var maxExtent = extentMap;
 
-  // Permet de limiter la carte observable à l'IDF
-
+ 
+  /**
+   * Permet de limiter la carte observable a l'IDF
+   * 
+   */
   view.on( "pointer-move", function(){
      if((view.extent.xmin < maxExtent.xmin) ||
        (view.extent.ymin < maxExtent.ymin)  ||
@@ -104,8 +107,10 @@ map.add(gare);
 
  });
 
-// empeche a l'utilisateur de trop dezoomer
-
+ /**
+  * empeche l'utilisateur de trop dezoomer
+  * 
+  */
    watchUtils.pausable(view, "zoom", function(){
       if(Math.ceil(view.zoom)< 9){
 
@@ -129,7 +134,11 @@ surbrillance.addEventListener("change",executeSurbrillanceEvent,false);
 executeSurbrillance(view, map, gare, gareRenderer_defaut);
 var voletclos = document.getElementById("volet_clos");
 
-// on peut passer cette fonction dans surbrillance.js a la maniere du cadre et de la commande vocal avec un alertsurbrillance
+// 
+/**
+ * on peut passer cette fonction dans surbrillance.js a la maniere du cadre et de la commande vocale avec un alertsurbrillance
+ * @param {*} event : evenement 'change' du bouton Surbrillance
+ */
 function executeSurbrillanceEvent(event){
   if (surbrillance.checked) {
     volet_clos.style.display = "flex";

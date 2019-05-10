@@ -95,8 +95,9 @@ require([
   var colorEtude;
   var param;
 
+  // activation ou desactivation du mode 'couleurs personnalisables'
   var btnPP = document.getElementById("btnPP");
-  btnPP.addEventListener("click", function(){
+  btnPP.addEventListener("click", function(){ 
     var pp = document.getElementById("PP");
     if (pp.style.display == "flex") {
       pp.style.display = "none";
@@ -107,7 +108,7 @@ require([
     }
   });
 
-
+  // activation ou desactivation du mode 'couleurs personnalisables'
   var items = document.getElementsByClassName('btnparam');
   for (var i = 0; i < items.length; i++) {
     items[i].addEventListener("change",function() {
@@ -128,12 +129,14 @@ require([
   };
 
 
-  /*
-  * Met a jour les couleurs des surfaces representant les amenagements (renderer)
-  * param color0 = couleur des projets 'en cours'
-  * param color1 = couleur des projets 'programmes'
-  * param color2 = couleur des projets 'a l'etude'
-  * return le renderer modifie
+
+ /**
+  * Fonction qui met a jour les couleurs des surfaces representant les amenagements sur la carte
+  * 
+  * @param {*} color0 : couleur des projets 'en cours'
+  * @param {*} color1 : couleur des projets 'programmes'
+  * @param {*} color2 : couleur des projets 'a l'etude'
+  * @return le renderer modifie
   */
   function maj(color0,color1,color2){
     var param = {
@@ -169,11 +172,13 @@ require([
     return param;
   };
 
-  /*
-  * Convertir les couleurs en hexadecimales en rgb +- la transparence
-  * param hex = couleur en hexadecimales
-  * param alpha = transparence
-  * return la liste rgb +- la transparence
+
+ /**
+  * Fonction qui convertit les couleurs du hexadecimal en rgb (+- la transparence)
+  * 
+  * @param {*} hex : couleur en hexadecimales
+  * @param {*} alpha  : la transparence
+  * @returns la liste rgb +- la transparence
   */
   function hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),

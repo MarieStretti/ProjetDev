@@ -1,4 +1,10 @@
- function commande_voc (view,map){
+/**
+ * 
+ * 
+ * @param {*} view 
+ * @param {*} map 
+ */
+function commande_voc (view,map){
 
    console.log('annyang commande going');
 
@@ -38,17 +44,19 @@
      var commandegauche2 = {'vers l Ouest': gaucheFunction};
      var commandegauche3 = {'Ouest': gaucheFunction};
      var commandegauche4 = {'vers la gauche': gaucheFunction};
+
      function gaucheFunction(){
-         console.log("gauche");
-         var xmin = view.extent.xmin.toFixed(2);
-         var xmax = view.extent.xmax.toFixed(2);
-         var x_range = xmax - xmin;
-         var x_new = xmin - (x_range/6);
-         view.center.x = x_new;
-         view.goTo({
-           target: view.center,
-         });
-       };
+        console.log("gauche");
+        var xmin = view.extent.xmin.toFixed(2);
+        var xmax = view.extent.xmax.toFixed(2);
+        var x_range = xmax - xmin;
+        var x_new = xmin - (x_range/6);
+        view.center.x = x_new;
+        view.goTo({
+          target: view.center,
+        });
+    };
+    
      annyang.addCommands(commandegauche1);
      annyang.addCommands(commandegauche2);
      annyang.addCommands(commandegauche3);
@@ -190,6 +198,10 @@
 
  }
 
+ /**
+  * 
+  * @param {*} checkboxElem 
+  */
  function alertannyang(checkboxElem) {
   if (checkboxElem.checked) {
     annyang.start({autoRestart : true});
