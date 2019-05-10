@@ -124,7 +124,7 @@ map.add(gare);
 
   view.ui.move([ "zoom", map ], "top-right");
 
-  view.zoom=zoomlevel;
+  view.zoom = zoomlevel;
   zoomlevel = view.zoom;
 
   // permet de ne pas pouvoir afficher les attributs qui parasitent la vue
