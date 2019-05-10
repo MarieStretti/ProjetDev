@@ -80,6 +80,9 @@ map.add(gare);
     map: map,
     center: [lng_c,lat_c], //longlats
     zoom: zoomlevel,
+	constraints: {
+      minZoom: 9,
+    }
   });
 
   var maxExtent = extentMap;
@@ -107,20 +110,6 @@ map.add(gare);
 
  });
 
- /**
-  * empeche l'utilisateur de trop dezoomer
-  * 
-  */
-   watchUtils.pausable(view, "zoom", function(){
-      if(Math.ceil(view.zoom)< 9){
-
-      view.goTo({
-        animate : false,
-        zoom:9
-      });
-
-      }
-  });
 
   view.ui.move([ "zoom", map ], "top-right");
 
