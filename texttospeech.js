@@ -9,11 +9,11 @@ var audio = document.getElementById('audio');
 lecture.addEventListener('change', function(){
   if(lecture.checked){
     lecture_audio = 1;
-    audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/lecture_audio_activee.wav" </audio>';
+    audio.innerHTML = '<audio autoplay> <source src="audio/lecture_audio_activee.wav"/> </audio>';
   }
   else{
     lecture_audio = 0;
-    audio.innerHTML =  '<audio autoplay volume="60"> <source src="audio/lecture_audio_desactivee.wav" </audio>';
+    audio.innerHTML =  '<audio autoplay> <source src="audio/lecture_audio_desactivee.wav"/> </audio>';
   }
 
 });
@@ -53,7 +53,7 @@ p3.addEventListener('mouseover',function(){
  */
 boutonGares.addEventListener('click',function(){
   if(lecture_audio ==1 ){
-    audio.innerHTML ='<audio autoplay volume="60"> <source src="audio/vous_rechercher_la_gare.wav" </audio>';
+    audio.innerHTML ='<audio autoplay> <source src="audio/vous_rechercher_la_gare.wav"/> </audio>';
     var valeur = nom_gares.value;
     setTimeout(speak , 2300);
     function speak(){
@@ -68,7 +68,8 @@ boutonGares.addEventListener('click',function(){
  */
 boutonRER.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
-    audio.innerHTML ='<audio autoplay volume="60"> <source src="audio/rer.wav" </audio>';
+    audio.innerHTML ='<audio autoplay> <source src="audio/rer.wav" /> </audio>';
+    audio.firstElementChild.volume = 0.7;
   }
 }, false);
 
@@ -78,7 +79,8 @@ boutonRER.addEventListener('mouseover', function() {
  */
 boutonMetro.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
-    audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/metro.wav" </audio>';
+    audio.innerHTML = '<audio autoplay> <source src="audio/metro.wav"/> </audio>';
+    audio.firstElementChild.volume = 0.7;
   }
 }, false);
 
@@ -88,7 +90,7 @@ boutonMetro.addEventListener('mouseover', function() {
  */
 boutonRecherche.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
-    audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/rechercher_une_gare.wav" </audio>';
+    audio.innerHTML = '<audio autoplay> <source src="audio/rechercher_une_gare.wav"/> </audio>';
   }
 }, false);
 
@@ -99,10 +101,12 @@ boutonRecherche.addEventListener('mouseover', function() {
 surbrillance.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(surbrillance.checked){
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/recherche_activee.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/recherche_activee.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
     }
     else {
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/recherche_desactivee.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/recherche_desactivee.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
     }
   }
 }, false);
@@ -114,10 +118,10 @@ surbrillance.addEventListener('change', function() {
 cadre.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(cadre.checked){
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/cadre_active.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/cadre_active.wav" /> </audio>';
     }
     else {
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/cadre_desactive.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/cadre_desactive.wav"/> </audio>';
     }
   }
 }, false);
@@ -129,10 +133,10 @@ cadre.addEventListener('change', function() {
 commande.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(commande.checked){
-      audio.innerHTML =  '<audio autoplay volume="60"> <source src="audio/commande_vocale_activee.wav" </audio>';
+      audio.innerHTML =  '<audio autoplay> <source src="audio/commande_vocale_activee.wav"/> </audio>';
     }
     else {
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/commande_vocale_desactivee.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/commande_vocale_desactivee.wav"/> </audio>';
     }
   }
 }, false);
@@ -148,8 +152,8 @@ var home = document.getElementById("maison");
 home.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
 
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/retour_page_accueil.wav" </audio>';
-
+      audio.innerHTML = '<audio autoplay> <source src="audio/retour_page_accueil.wav" /></audio>';
+      audio.firstElementChild.volume = 0.4;
   }
 }, false);
 
@@ -164,8 +168,8 @@ var help = document.getElementById("help");
 help.addEventListener('mouseover', function() {
   if(lecture_audio == 1 ){
 
-      audio.innerHTML =  '<audio autoplay volume="60"> <source src="audio/aide.wav" </audio>';
-
+      audio.innerHTML =  '<audio autoplay> <source src="audio/aide.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
   }
 }, false);
 
@@ -180,10 +184,12 @@ var carte_topo = document.getElementById("carte_topo");
 carte_topo.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(carte_topo.checked){
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/fond_active.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/fond_active.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
     }
     else {
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/fond_desactive.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/fond_desactive.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
     }
   }
 }, false);
@@ -201,10 +207,12 @@ var loupe = document.getElementById("loupe");
 loupe.addEventListener('change', function() {
   if(lecture_audio == 1 ){
     if(view.magnifier.visible == true){
-      audio.innerHTML =  '<audio autoplay volume="60"> <source src="audio/loupe_activee.wav" </audio>';
+      audio.innerHTML =  '<audio autoplay> <source src="audio/loupe_activee.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
     }
     else {
-      audio.innerHTML = '<audio autoplay volume="60"> <source src="audio/loupe_desactivee.wav" </audio>';
+      audio.innerHTML = '<audio autoplay> <source src="audio/loupe_desactivee.wav"/> </audio>';
+      audio.firstElementChild.volume = 0.4;
     }
   }
 }, false);
