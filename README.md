@@ -28,8 +28,12 @@
  Le fonctionnement du code est détaillé dans la documentation développeur, référencée ci-dessous.
 
 ## Documentation : 
- - Documentation développeur : [**documentations\Docu_Developpeur.pdf**]
+ - Documentation développeur : [**documentations\Documentation_programmation.pdf**]
  
- - Documentation utilisateur : [**documentations\Guide_d_utilisation.pdf**]
+ - Documentation utilisateur : [**documentations\Guide_utilisateur.pdf
  
- - Documentation installateur : [**documentations\Guide_d_installation.pdf**]
+ - Documentation utilisateur pour malvoyants : [**documentations\Guide_utilisateur.pdf**]
+ 
+ - Documentation installateur : [**documentations\Documentation_installation.pdf**]
+ 
+ - Rapport de projet : [**Rapport.pdf**]
