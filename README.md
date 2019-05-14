@@ -5,7 +5,7 @@
 ## Objectif du projet : 
   Creation de 2 cartes web, respectivement pour personnes daltoniennes et malvoyantes.
   Les fonctionnalités mises en place sont: 
-    ####### Pour les daltoniens: 
+    ###### Pour les daltoniens: 
     - Une sélection de palette de la couleur des objets de la carte selon le type de daltonisme 
     - Une modification personnalisable de la couleur des objets de la carte
     
@@ -27,4 +27,4 @@
 ## Documentation : 
  - Documentation développeur : [**documentations\Docu_Developpeur.pdf**]
  
- - Documentation installateur : [**Documentation\Guide_d_utilisation.pdf**]
+ - Documentation installateur : [**documentations\Guide_d_utilisation.pdf**]
