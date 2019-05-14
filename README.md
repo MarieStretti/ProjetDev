@@ -6,9 +6,9 @@
 Créer deux cartes web adaptées respectivement aux personnes daltoniennes et malvoyantes.
  
 ## Guide d'utilisation : 
- Depuis la page d'accueil, cliquer sur les boutons 'daltoniens' ou 'malvoyants' pour accéder aux cartes. 
+ L
 
 
 ## Documentation : 
- - Documentation développeur : [lien vers la doc]
- - Documentation installateur : [lien vers la doc]
+ - Documentation développeur : [Documentation\Doc_Dev]
+ - Documentation installateur : [Documentation\Doc_Utilisateur]
