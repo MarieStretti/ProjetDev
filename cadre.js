@@ -3,6 +3,13 @@ var cadreOuest = document.getElementById("cadreOuest");
 var cadreEst = document.getElementById("cadreEst");
 var cadreSud = document.getElementById("cadreSud");
 
+/**
+ * Cadre de couleur affiché ou caché selon si la checkbox correspondante est cochée ou non
+ * 
+ * 
+ * @param checkboxElem CheckBox "cadre" sur la carte web, cochée ou non.
+ * @see 
+ * */
 function alertcadre(checkboxElem) {
  if (checkboxElem.checked) {
    cadreNord.style.display = "flex";
@@ -40,70 +47,71 @@ require([
         UniqueValueRenderer, Color, WebStyleSymbol) {
 
 
-          /// CADRE DE COULEUR
-          var cadreNord  = document.getElementById('cadreNord');
-          var cadreOuest = document.getElementById('cadreOuest');
-          var cadreEst   = document.getElementById('cadreEst');
-          var cadreSud   = document.getElementById('cadreSud');
+        /// CADRE DE COULEUR
+        var cadreNord  = document.getElementById('cadreNord');
+        var cadreOuest = document.getElementById('cadreOuest');
+        var cadreEst   = document.getElementById('cadreEst');
+        var cadreSud   = document.getElementById('cadreSud');
 
+        // mise à jour des points
+        liste_points = [];
 
-          liste_points = [];
+        /// preparation des projections de coordonnees avec proj4
+        var wgs84 = proj4.Proj('EPSG:4326');
+        proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
+        var lambert93 = proj4.Proj("EPSG:2154");
 
-          /// préparation des projections de coordonnées avec proj4
-          var wgs84 = proj4.Proj('EPSG:4326');
-          proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
-          var lambert93 = proj4.Proj("EPSG:2154");
+        // On regarde la valeur de gare_surbrillance toutes les x secondes
 
-          // On regarde la valeur de gare_surbrillance toutes les x secondes
+        var indice = 1;
+        var layer_display = 0;
 
-          var indice = 1;
-          var layer_display = 0;
+        cadre.addEventListener("change",etatcadre,false);
 
-          cadre.addEventListener("change",etatcadre,false);
+        // permet de savoir si le cadre est coche
 
-          // permet de savoir si le cadre est coché
+        function etatcadre(event){
 
-          function etatcadre(event){
-
-            if (cadre.checked){
-              indice = 1;
-              if(layer_display != gareLayer) {
-                  liste_points = [];
-                  layer_display = gareLayer;
-                  definitonLayer(gareLayer);
-                  RefreshCadre();
-              }
-
+          if (cadre.checked){
+            indice = 1;
+            if(layer_display != gareLayer) {
+                liste_points = [];
+                layer_display = gareLayer;
+                definitonLayer(gareLayer);
+                RefreshCadre();
             }
+          }
 
-            else{
-              indice = 0;
-            }
+          else{
+            indice = 0;
+          }
         }
 
-          function test(){
+        /**
+         * 
+         * 
+         */
+        function test(){
+          liste_points =[];
 
-                  liste_points =[];
-
-                  if(gare_surbrillance != 0){
-                    console.log(gare_surbrillance);
-                    layer_display = gare_surbrillance;
-                    definitonLayer(gare_surbrillance);
-                    RefreshCadre();
-
-                  }
-
-                  else{
-                    definitonLayer(gareLayer);
-                    RefreshCadre();
-                  }
-
+          if(gare_surbrillance != 0){
+            console.log(gare_surbrillance);
+            layer_display = gare_surbrillance;
+            definitonLayer(gare_surbrillance);
+            RefreshCadre();
 
           }
 
+          else{
+            definitonLayer(gareLayer);
+            RefreshCadre();
+          }
+
+        }
 
 
-                    // mise à jour du cadre lorsque surbrillance est coché
+
+                    // mise a jour du cadre lorsque surbrillance est coche
 
                     var set;
                     surbrillance.addEventListener("change", function () {
@@ -126,7 +134,7 @@ require([
 
 
 
-                      // permet lorsque le cadre est activé de rafraichir la carte lors des mouvement sur cette dernière
+                      // permet lorsque le cadre est active de rafraichir la carte lors des mouvement sur cette derniere
 
                       view.on(["drag","double-click","click","mouse-wheel"], function() {
                           if (indice == 1){
@@ -136,8 +144,11 @@ require([
 
 
 
-          /// stockage des coordonnées de TOUS LES POINTS de la couche sur laquelle on compte les éléments
-
+          /// stockage des coordonnees de TOUS LES POINTS de la couche sur laquelle on compte les elements
+          /**
+           * 
+           * @param {*} featurelayer 
+           */
           function definitonLayer(featurelayer){
 
             for (var i = 0; i < featurelayer.source.items.length; i++) {
@@ -152,7 +163,7 @@ require([
 
           function RefreshCadre() {
             console.log("refresh");
-          ////  coordonnées d'emprise actuelle de la carte /////
+          ////  coordonnees d'emprise actuelle de la carte /////
 
             var size   =  view.size; // emprise en pixels de la carte
             var width  = size[1]; // longueur de la carte
@@ -171,7 +182,7 @@ require([
             var pix_y_nord = pix_y_center - dy; /// pixels != lon/lat !!!!!
             var pix_y_sud = pix_y_center + dy;
 
-            // coordonnées des 'coins' de la carte en pixels > 80% de l'emprise environ
+            // coordonnees des 'coins' de la carte en pixels > 80% de l'emprise environ
             var lat_nord = view.toMap({x: pix_x_est, y:pix_y_nord}).latitude;
             var lat_sud = view.toMap({x: pix_x_est, y:pix_y_sud}).latitude;
             var lon_ouest = view.toMap({x: pix_x_ouest, y:pix_y_nord}).longitude;
@@ -197,8 +208,8 @@ require([
             var emprise_y = Math.abs(y_nord-y_sud);
 
 
-            /// les points à un certain rayon du centre de la carte ne sont pas pris en compte
-            // ici on pose le rayon à 3 fois l'emprise actuelle de la carte
+            /// les points a un certain rayon du centre de la carte ne sont pas pris en compte
+            // ici on pose le rayon a 3 fois l'emprise actuelle de la carte
             var rayon_max = Math.max(3*emprise_x, 3*emprise_y);
 
             // initialisation des conteneurs du nombre des points dans chaque direction
@@ -254,21 +265,22 @@ require([
             }
           }
 
-            // nombre de points détectés dans l'emprise actuelle
+            // nombre de points detectes dans l'emprise actuelle
             var nb_total_points = points_NSEO[0]+ points_NSEO[1]+points_NSEO[2]+ points_NSEO[3];
 
            //////// modification de la couleur des cadres   //////////////////:
 
             var couleurs_croissantes = ["#ffff80","gold","orange","orangered","red","#b30000"];
-            var nb_paliers = 6; /////////// nb de paliers de couleur ( à changer à la main)
+            var nb_paliers = 6; /////////// nb de paliers de couleur ( a changer a la main)
             var taille_palier = nb_total_points/nb_paliers;
             var paliers = [taille_palier,2*taille_palier,3*taille_palier,4*taille_palier,5*taille_palier];
 
             // attribution des couleurs (4 paliers)
             for (var i = 0; i<4 ; i++){
               cadres_NSEO[i].innerHTML = points_NSEO[i];
-              cadres_NSEO[i].style.fontFamily = 'Open Sans Condensed';
-              if (points_NSEO[i] >= paliers[4]){ // darkred
+              if (points_NSEO[i] == 0){ // cadre vide : lightyellow
+                cadres_NSEO[i].style.background = couleurs_croissantes[0];
+              }else if (points_NSEO[i] >= paliers[4]){ // darkred
                 cadres_NSEO[i].style.background = couleurs_croissantes[5];
               }else if (points_NSEO[i] >= paliers[3]){ // red
                 cadres_NSEO[i].style.background = couleurs_croissantes[4];

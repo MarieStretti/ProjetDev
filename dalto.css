@@ -3,39 +3,98 @@ html, body {
   margin: 0;
   height: 100%;
   width: 100%;
-  /* font-family: 'Open Sans Condensed', sans-serif; */
-  /* font-family: 'Saira Extra Condensed', sans-serif; */
+  overflow: hidden;
   font-family: 'Julius Sans One', sans-serif; /*POUR LE TITRE DU VOLET*/
 }
 
 .esri-widget--button {
   color: white;
   background-color: black;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
 }
 
-#loupe {
-  position:absolute;
-  top:14px;
-  right:70px;
-  background-color: black;
-  color: white;
-  border: none;
-  height: 40px;
-  width: 40px;
-  cursor: pointer;
+.esri-ui-corner .esri-component {
+  width: 60px;
+  height: 90px;
+  box-shadow: none;
+}
+
+h3.esri-widget__heading {
+  font-size: 22px;
+}
+
+.esri-legend__layer-cell--info {
+  font-size: 20px;
+}
+
+.esri-ui-corner .esri-component.esri-widget--panel {
+    width: 300px;
+    height: 180px;
+}
+
+.esri-legend__layer-caption {
+  display: none;
+}
+
+
+#home {
+  background-color: #8B110D;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
   z-index: 1;
-  /* transition-duration: 0.2s; */
+  position: absolute;
 }
 
-#loupe:hover {
+#home a {
+  display: flex;
+  align-items: center;
+}
+
+.bandeau {
+  background-color: #8B110D;
+  color: white;
+  height: 100%;
+  border: none;
+  cursor: pointer;
+  font-family: Arial;
+  font-size: 1.2em;
+}
+
+#paraaam {
+  display: none;
+  position: absolute;
   background-color: white;
-  color: black;
-  border: 2px solid black;
+  z-index: 1;
+  width: 300px;
+  height: 95%;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 50px;
+  border-right: 3px solid black;
+}
+
+
+
+#carte {
+  border-left: 2px solid white;
+  font-size: 1.7em;
+  padding: 5px 50px;
+}
+
+#carte:hover {
+  background-color: white;
+  color: #8B110D;
+  border: 2px solid #8B110D;
 }
 
 #viewDiv {
-  height: 100%;
+  height: 95%;
   width: 100%;
+  margin-top: 50px;
 }
 
 h2 {
@@ -67,7 +126,7 @@ h2 {
   border: none;
   background-color: inherit;
   padding: 14px 28px;
-  font-size: 25px;
+  font-size: 30px;
   cursor: pointer;
   font-family: 'Open Sans Condensed', sans-serif;
   /* font-family: 'Saira Extra Condensed', sans-serif; */
@@ -78,10 +137,9 @@ h2 {
 
 hr {
   width: 250px;
-  /* border-top: 100px; */
+  height: 2px;
   background-color: black;
   border-color: black;
-  size: 10;
 }
 
 #PP {
@@ -94,61 +152,73 @@ hr {
 
 
 
-/*################################### CSS VOLET ##########################################*/
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 90px;
+  padding-right: 5px;
+  cursor: pointer;
+  font-size: 1.7em;
+  font-family: Arial;
+  color: white;
+  border-left: 2px solid white;
 
-#volet {
-			width: 300px;
-      height: 99%;
-			background: white;
-      color: black;
-      border-style: solid;
-      border-width: 3px;
-      border-color: black;
-		}
-		#volet a.ouvrir,
-		#volet a.fermer {
-			padding: 10px 25px; /*padding du bouton ouvrir et fermer*/
-			background: black;
-			color: white;
-      font-weight: bold;
-      font-size: 20px;
-			text-decoration: none;
-		}
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-		#volet {
-			position: absolute;
-			left: -308px; top: 0px;
-			-webkit-transition: all .5s ease-in;
-			-moz-transition: all .5s ease-in;
-			transition: all .5s ease-in;
-		}
-		#volet a.ouvrir,
-		#volet a.fermer {
-			position: absolute;
-			right: -106px;
-			top: 58px;
-			-webkit-transform: rotate(270deg);
-			-moz-transform: rotate(270deg);
-			-o-transform: rotate(270deg);
-			-ms-transform: rotate(270deg);
-			-moz-radius: 0 0 8px 8px;
-			border-radius: 0 0 8px 8px;
-		}
-		#volet a.fermer {
-			display: none;
-		}
-		#volet:target {
-			left: 0px;
-		}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
 
-		/* code pour la fermeture */
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: white;
+  margin-top: 12px;
+  margin-left: 32px;
+  border-radius: 10px;
+}
 
-		#volet:target a.fermer {
-			display: block;
-		}
-		#volet:target a.ouvrir {
-			display: none;
-		}
-		#volet_clos:target #volet {
-			left: -308px;
-		}
+.container input:checked ~ .checkmark {
+  background-color: black;
+  border: 2px solid white;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 8px;
+  top: 2px;
+  width: 7px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

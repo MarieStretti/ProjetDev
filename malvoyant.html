@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Camayeux - Malvoyants</title>
+
+    <link rel="shortcut icon" href="pictures/logoCamayeux_v3.ico">
+    <title>CamaYeux - Malvoyants</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -12,42 +14,49 @@
 
   <body>
 
-    <div id="audio"></div>
+    <div id="home">
+      <form method="get" action="index.html">
+        <button class="bandeau" id="maison" title="Retour à la page d'accueil" type="submit"><i class="fas fa-home fa-3x"></i></button>
+      </form>
 
-     <div id="choixOutils" class="choooose">
-      <fieldset>
-        <div>
-          <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
-          <label for="cadre">Cadre</label>
-        </div>
-        <div>
-          <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
-          <label for="commande">Commande vocale</label>
-        </div>
-        <div>
-          <input type="checkbox" id="surbrillance" name="choix" value="3">
-          <label for="surbrillance">Surbrillance</label>
-        </div>
-      </fieldset>
+	   <a id="help" class="bandeau" href='#resume'> <i class="fas fa-question-circle fa-2x"></i></a>
+      <div id="choixOutils" class="choooose">
+            <label class="container">CADRE
+              <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
+              <span class="checkmark" align="center"></span>
+          </label>
+          <label class="container">RECHERCHER
+            <input type="checkbox" id="surbrillance" name="choix" value="3">
+            <span class="checkmark"></span>
+          </label>
+            <label class="container">COMMANDE VOCALE
+              <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
+              <span class="checkmark"></span>
+          </label>
+          <label class="container">LECTURE AUDIO
+          <input type="checkbox" name="choix" id="lecture">
+          <span class="checkmark"></span>
+        </label>
+      </div>
     </div>
+
+    <div id="audio"></div>
 
 
 <div id="vertic">
-  <div id='cadreNord' style="display:none">Nord</div>
+  <div id='cadreNord' class="cadres" style="display:none">Nord</div>
   <div id="horiz">
-    <div id='cadreOuest' style="display:none">West</div>
+    <div id='cadreOuest' class="cadres" style="display:none">West</div>
     <div id="viewDiv">
-      <div id="widgets">
-        <div class="check">
-          <input type="checkbox" name="choix" id="lecture" type="button">
-          <label for="lecture">Lecture audio</label>
-        </div>
-        <button id="loupe" class="widg" type="button"><i class="fas fa-search" style="font-size: 24px"></i></button>
-      </div>
+      <label id="topog">FOND
+        <input type="checkbox" id="carte_topo">
+        <span class="checkmark2"></span>
+      </label>
+      <button id="loupe" class="widg" type="button"><i class="fas fa-search fa-3x"></i></button>
     </div>
-    <div id='cadreEst' style="display:none">Est</div>
+    <div id='cadreEst' class="cadres" style="display:none">Est</div>
   </div>
-  <div id='cadreSud' style="display:none">Sud</div>
+  <div id='cadreSud' class="cadres" style="display:none">Sud</div>
 </div>
 
 
@@ -57,22 +66,22 @@
        <div id="button">
 
          <button id="boutonRER" class="btn"><img src="pictures/RER.png" alt="404" height="150" width="150" ></button>
-         <div id="RER" style="display:none">
-            <div id=RER1>
+         <div id="RER" class="TRANSP" style="display:none">
+            <div id=RER1 class="transport">
              <input type=image src="pictures/RERA.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER A">
              <input type=image src="pictures/RERC.png" alt="404" height="100" width="100"  class="classRER btn" value="RER C">
              <input type=image src="pictures/RERE.png" alt="404" height="100" width="100"  class="classRER btn" value="RER E">
            </div>
 
-           <div id=RER2>
+           <div id=RER2 class="transport">
              <input type=image src="pictures/RERB.svg" alt="404" height="100" width="100"  class="classRER btn" value="RER B">
              <input type=image src="pictures/RERD.png" alt="404" height="100" width="100"  class="classRER btn" value="RER D">
            </div>
          </div>
          <div id="metros">
            <button id="boutonMetro" class="btn"><img src="pictures/METRO.png" alt="404" height="150" width="150" ></button>
-           <div id="METRO" style="display:none">
-             <div id=METRO1>
+           <div id="METRO" class="TRANSP" style="display:none">
+             <div id=METRO1 class="transport">
                <input type=image src="pictures/metro1.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M1">
                <input type=image src="pictures/metro3.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M3">
                <input type=image src="pictures/metro5.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M5">
@@ -82,7 +91,7 @@
                <input type=image src="pictures/metro13.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M13">
              </div>
 
-             <div id=METRO2>
+             <div id=METRO2 class="transport">
                <input type=image src="pictures/metro2.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M2">
                <input type=image src="pictures/metro4.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M4">
                <input type=image src="pictures/metro6.svg" alt="404" height="100" width="100"  class="classMETRO btn" value="M6">
@@ -95,15 +104,17 @@
          </div>
 
          <button id="boutonRecherche" class="btn"><img src="pictures/pen.png" alt="404" height="150" width="150" ></button>
-        <div id="RECHERCHE" style="display:none;overflow-y: scroll;">
+        <div id="RECHERCHE" style="display:none;">
 
 
-                <input id="nom_gares" />
+                <input type="text" id="nom_gares" placeholder="Entrez une gare"/>
 
-                <div id=propositionGare>
-                  <div id=p1></div>
-                  <div id=p2></div>
-                  <div id=p3></div>
+                <div id="propositionGare" style="overflow-y: scroll;">
+                  <div id=p1 class="prop"></div>
+                  <hr>
+                  <div id=p2 class="prop"></div>
+                  <hr>
+                  <div id=p3 class="prop"></div>
                 </div>
 
                 <input id="boutonGares" class="btn" type="submit" value="Rechercher !"/>
@@ -112,8 +123,8 @@
             </div>
 
 
-         <a href="#volet" class="ouvrir" aria-hidden="true">Paramètres</a>
-         <a href="#volet_clos" class="fermer" aria-hidden="true">Paramètres</a>
+         <a href="#volet" class="ouvrir" aria-hidden="true">Rechercher</a>
+         <a href="#volet_clos" class="fermer" aria-hidden="true">Rechercher</a>
 
       </div>
     </div>
@@ -133,6 +144,36 @@
     <script src="cadre.js"></script>
     <script src="index.js"></script>
 
+	  <div id="popup">
+      <p id="close" style="font-size:70px;">X</p>
+    <div id="resume">
+    <p id="aide"> <i class="fas fa-question-circle fa-3x"></i> AIDE</p> <br>
+	  <p id="title"> <i class="fas fa-home fa-2x"></i>  RETOUR A LA PAGE D'ACCUEIL</p> <br>
+	  <p id="title"> CADRE </p> <br> <br>
+	  <p id="textes"> PERMET DE CONNAITRE LA DENSITE D'OBJETS PRESENTS SUR LA CARTE EN FONCTION DES DIRECTIONS (NORD,SUD,EST,OUEST) </p> <br>
+	  <p id="title"> RECHERCHER </p> <br> <br>
+	  <p id="textes"> PERMET DE RECHERCHER LES GARES DES LIGNES DE METRO/RER EN IDF </p> <br>
+	  <p id="title"> COMMANDE VOCALE </p> <br> <br>
+	  <p id="textes"> PERMET D'UTILISER LA VOIX POUR SE DEPLACER SUR LA CARTE ET POUR UTILISER LES FONCTIONNALITES</p> <br>
+	  <p id="title"> LECTURE AUDIO </p> <br> <br>
+	  <p id="textes"> PERMET D'AVOIR UNE AIDE VOCALE DE L'ORDINATEUR </p> <br>
+	  <p id="title"> <i class="fas fa-search fa-2x"></i> LOUPE </p> <br> <br>
+	  <p id="textes"> PERMET D'AFFICHER UNE LOUPE</p>
+
+    </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+    document.getElementById('help').addEventListener('click',function(){
+      document.getElementById('popup').style.display = "flex";
+    });
+    document.getElementById('close').addEventListener('click',function(){
+      document.getElementById('popup').style.display = "none";
+    });
+
+    </script>
 
 
   </body>

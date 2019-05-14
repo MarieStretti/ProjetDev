@@ -1,4 +1,11 @@
- function commande_voc (view,map){
+/**
+ *
+ *
+ * @param {*} view
+ * @param {*} map
+ */
+function commande_voc (view,map){
+
    console.log('annyang commande going');
 
    annyang.setLanguage('fr-FR');
@@ -9,9 +16,6 @@
 
    if (annyang) {
      // Ajout des commandes vocales
-     annyang.addCommands({
-       'bonjour': function() { alert('Hello world!'); }
-     });
 
      //Zoom d'un niveau
      annyang.addCommands({
@@ -37,31 +41,27 @@
 
      //Déplacement de la vue pour voir la partie plus à gauche
      var commandegauche1 = {'gauche': gaucheFunction};
-     var commandegauche2 = {'vers l Ouest': gaucheFunction};
-     var commandegauche3 = {'Ouest': gaucheFunction};
-     var commandegauche4 = {'vers la gauche': gaucheFunction};
+     var commandegauche2 = {'vers la gauche': gaucheFunction};
+
      function gaucheFunction(){
-         console.log("gauche");
-         var xmin = view.extent.xmin.toFixed(2);
-         var xmax = view.extent.xmax.toFixed(2);
-         var x_range = xmax - xmin;
-         var x_new = xmin - (x_range/6);
-         view.center.x = x_new;
-         view.goTo({
-           target: view.center,
-         });
-       };
+        console.log("gauche");
+        var xmin = view.extent.xmin.toFixed(2);
+        var xmax = view.extent.xmax.toFixed(2);
+        var x_range = xmax - xmin;
+        var x_new = xmin - (x_range/6);
+        view.center.x = x_new;
+        view.goTo({
+          target: view.center,
+        });
+    };
+
      annyang.addCommands(commandegauche1);
      annyang.addCommands(commandegauche2);
-     annyang.addCommands(commandegauche3);
-     annyang.addCommands(commandegauche4);
 
 
      //Déplacement de la vue pour voir la partie plus à droite
      var commandedroite1 = {'droite': droiteFunction};
-     var commandedroite2 = {'vers l Est': droiteFunction};
-     var commandedroite3 = {'Est': droiteFunction};
-     var commandedroite4 = {'vers la droite': droiteFunction};
+     var commandedroite2 = {'vers la droite': droiteFunction};
      function droiteFunction(){
         console.log("droite");
         var xmin = view.extent.xmin.toFixed(2);
@@ -75,8 +75,6 @@
       };
       annyang.addCommands(commandedroite1);
       annyang.addCommands(commandedroite2);
-      annyang.addCommands(commandedroite3);
-      annyang.addCommands(commandedroite4);
 
 
   //Déplacement de la vue pour voir la partie plus en haut
@@ -127,16 +125,83 @@
     annyang.addCommands(commandebas5);
     annyang.addCommands(commandebas6);
 
+
+   //DE-activation Surbrillance
+    var commandesurb1 = {'Recherche': SurbFunction};
+    var commandesurb2 = {'activer Recherche': SurbFunction};
+    var commandesurb3 = {'voir Recherche': SurbFunction};
+    var commandesurb4 = {'cocher Recherche': SurbFunction};
+    var commandesurb5 = {'Rechercher': SurbFunction};
+    function SurbFunction(){
+          console.log("Rechercher changed");
+          document.getElementById('surbrillance').click();
+    };
+    annyang.addCommands(commandesurb1);
+    annyang.addCommands(commandesurb2);
+    annyang.addCommands(commandesurb3);
+    annyang.addCommands(commandesurb4);
+    annyang.addCommands(commandesurb5);
+
+
+    //DE-activation Cadre
+     var commandecadre1 = {'Cadre': CadreFunction};
+     var commandecadre2 = {'activer Cadre': CadreFunction};
+     var commandecadre3 = {'voir Cadre': CadreFunction};
+     var commandecadre4 = {'cocher Cadre': CadreFunction};
+     function CadreFunction(){
+           console.log("Cadre changed");
+           document.getElementById('cadre').click();
+     };
+     annyang.addCommands(commandecadre1);
+     annyang.addCommands(commandecadre2);
+     annyang.addCommands(commandecadre3);
+     annyang.addCommands(commandecadre4);
+
+
+     //DE-activation Commande vocale
+      var commandevoc1 = {'Commande vocale': CmdVocFunction};
+      var commandevoc2 = {'activer commande vocale': CmdVocFunction};
+      var commandevoc3 = {'voir commande vocale': CmdVocFunction};
+      var commandevoc4 = {'cocher commande vocale': CmdVocFunction};
+      function CmdVocFunction(){
+            console.log("Commande vocale changed");
+            document.getElementById('commande').click();
+      };
+      annyang.addCommands(commandevoc1);
+      annyang.addCommands(commandevoc2);
+      annyang.addCommands(commandevoc3);
+      annyang.addCommands(commandevoc4);
+
+
+      //DE-activation Lecture Audio
+       var commandelect1 = {'Lecture Audio': CmdLectureAudio};
+       var commandelect2 = {'activer Lecture Audio': CmdLectureAudio};
+       var commandelect3 = {'voir Lecture Audio': CmdLectureAudio};
+       var commandelect4 = {'cocher Lecture Audio': CmdLectureAudio};
+       function CmdLectureAudio(){
+             console.log("Lecture Audio changed");
+             document.getElementById('lecture').click();
+       };
+       annyang.addCommands(commandelect1);
+       annyang.addCommands(commandelect2);
+       annyang.addCommands(commandelect3);
+       annyang.addCommands(commandelect4);
+
+
    }
 
  }
 
+ /**
+  *
+  * @param {*} checkboxElem
+  */
  function alertannyang(checkboxElem) {
   if (checkboxElem.checked) {
-    annyang.start();
+    annyang.start({autoRestart : true});
     console.log('commande started');
   } else {
-    annyang.pause();
+    annyang.abort();
     console.log('commande stoped');
   }
 }

@@ -5,6 +5,7 @@ body,html {
   display: flex;
   font-family: berlin;
   justify-content: center;
+  overflow-y: hidden;
 }
 
 @font-face {
@@ -17,17 +18,7 @@ h1 {
   font-family: berlin;
   color: white;
   font-size: 80px;
-  margin: 0px;
-  margin-left: 70px;
-}
-
-#version {
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  height: 64%;
-  margin-left: 50px;
-  color: white;
+  margin: 0px 0px 0px 50px;
 }
 
 #haut {
@@ -35,6 +26,15 @@ h1 {
   height: 60%;
   width: 100%;
   position: absolute;
+}
+
+#bas{
+  position: absolute;
+
+  width: 100%;
+  text-align: center;
+  padding-top: 715px;
+  z-index:0;
 }
 
 .logos {
@@ -50,18 +50,29 @@ h1 {
   width: 80%;
   display: flex;
   justify-content: center;
-  margin-left: 185px;
+  margin: auto;
+}
+
+#version {
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  height: 59%;
+  margin-left: 20px;
+  color: white;
 }
 
 #content {
   width: 800px;
   height: 500px;
   background-color: white;
+  border-radius:10px;
   display: flex;
   justify-content: space-between;
   top: 210px;
   position: relative;
   z-index: 1;
+
 }
 
 .carre {
@@ -79,6 +90,7 @@ h1 {
   align-items: center;
   justify-content: center;
   /* border: 2px solid black; */
+
 }
 
 .btn {
@@ -90,6 +102,12 @@ h1 {
   font-family: berlin;
   font-size: 48px;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
 }
 
 .btn:hover {
@@ -106,32 +124,103 @@ h1 {
   width: 100%;
 }
 
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #470907;
+}
+
+::placeholder {
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+}
+
 #projet {
   border: none;
-  background-color: white;
   color: #470907;
   font-family: berlin;
   font-size: 40px;
   cursor: pointer;
   text-decoration:none;
   text-align: center;
+  line-height: 230px;
+  display: block;
+  width: 100%;
+  height: 100%;
+
+}
+
+#popup {
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  z-index: 10;
+  position: absolute;
+  top: 110px;
+  left: 7%;
+  right: 7%;
+  bottom: 1%;
+  background: white;
+  padding: 7px 30px 10px 30px;
+  border: 3px solid #470907;
+  border-radius:10px;
+
+}
+
+#close {
+  text-align: right;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #470907;
 }
 
 
 #resume {
-  z-index: 1;
-  width: 800px;
+  flex: 1;
   text-align: justify;
-  font-size: 40px;
+  font-size: 36px;
+  overflow-y: scroll;
+  color: #470907;
+}
+
+#text {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 20px;
 }
 
 
-#page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.sources {
   font-size: 30px;
-  height: 2000px;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.sources a {
+  color: #8B110D;
+  text-decoration: none;
+}
+
+#sourceLogos {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+}
+
+.img {
+  width: auto;
+  height: 70px;
 }
 
 /***************** Flipping card ************************************/
@@ -149,7 +238,6 @@ h1 {
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  border: 1px solid #470907;
 }
 
 .flip-card:hover .flip-card-inner {

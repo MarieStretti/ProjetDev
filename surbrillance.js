@@ -1,4 +1,14 @@
-function executeSurbrillance(view, map, gare1, gareRenderer_defaut){
+
+
+
+/**
+ *
+ * @param {*} view
+ * @param {*} map
+ * @param {*} layerGare
+ * @param {*} gareRenderer_defaut
+ */
+function executeSurbrillance(view, map, layerGare, gareRenderer_defaut){
 
 require([
     "esri/Map",
@@ -22,92 +32,69 @@ require([
 
 
 
+//definition de la projection Lambert93
+
 var wgs84 = proj4.Proj('EPSG:4326');
 proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
 var lambert93 = proj4.Proj("EPSG:2154");
 
 
+//definition du style 1 de la couche gare
 
 var gareRenderer_s1 = {
   "type": "simple",
   "field": "",
   "uniqueValueInfos": [],
   "symbol" :{
-     type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+     type: "simple-marker",
      size: 30,
-     color: "yellow"
+     color: "#FCD946"
    }
 };
+
+
+//definition du style 2 de la couche gare
 
 var gareRenderer_s2 = {
   "type": "simple",
   "field": "",
   "symbol" :{
-     type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+     type: "simple-marker",
      size: 30,
-     color: "blue"
+     color: "#060D9D"
    }
 };
 
-renderer1 = gareRenderer_s1;
-renderer2 = gareRenderer_s2;
-
-
-var gareRenderer = {
-  "type": "simple",
-  "field": "",
-  "uniqueValueInfos": [],
-};
 
 var boutonGares = document.getElementById("boutonGares");
 var nom_gares = document.getElementById("nom_gares");
 
 
+// On cree un ecouteur sur chacun des icones (= lignes) de metro et de RER
 
-  // On récupère l'id de l'ensemble des élements de la carte
+var classRER = document.getElementsByClassName("classRER");
 
-  window.addEventListener("load", requeteSQL_toutID, false);
+for (var i = 0; i < classRER.length; i++) {
+    classRER[i].addEventListener("click", sql_RER_METRO, false);
 
-  function requeteSQL_toutID(event){
-      var query = gare1.createQuery();
-      query.outFields = ["id_ref_zdl"];
-      gare1.queryFeatures(query).features;
+}
 
-      var liste = [];
-      var liste_RER = [];
-      gare1.queryFeatures(query).then(function(response){
-        response.features.forEach(function(item){
-            liste.push(item.attributes.id_ref_zdl);
-          });
-        });
-    }
+var classMETRO = document.getElementsByClassName("classMETRO");
+
+for (var i = 0; i < classMETRO.length; i++) {
+    classMETRO[i].addEventListener("click", sql_RER_METRO, false);
+
+}
 
 
-  // On crée une requête SQL sur la couche gare
+// Cette fonction permet d'afficher la ligne de RER ou metro demande par l'utilisateur
 
-  var classRER = document.getElementsByClassName("classRER");
-
-  for (var i = 0; i < classRER.length; i++) {
-    classRER[i].addEventListener("click", requeteSQLRER, false);
-
-  }
-
-
-  var classMETRO = document.getElementsByClassName("classMETRO");
-
-  for (var i = 0; i < classMETRO.length; i++) {
-    classMETRO[i].addEventListener("click", requeteSQLRER, false);
-
-  }
-
-id = 0;
-
-  function requeteSQLRER(event){
+  function sql_RER_METRO(event){
 
     map.remove(gare);
     clearInterval(setInterVar);
 
-    var query = gare1.createQuery();
+    var query = layerGare.createQuery();
     if (event.target.value == "M1"){
       query.where = "res_com LIKE '%" + event.target.value +" /%' OR res_com LIKE '%" + event.target.value +"' ";
     }
@@ -116,12 +103,15 @@ id = 0;
     }
 
     query.outFields = ["x","y"];
-    gare1.queryFeatures(query).features;
+    layerGare.queryFeatures(query).features;
 
     var liste = []
-    gare1.queryFeatures(query).then(function(response){
+
+    // On parcourt l'ensemble des elements retournes par la requete
+    layerGare.queryFeatures(query).then(function(response){
       response.features.forEach(function(item){
 
+        // On construit un point avec des coordonnes WGS84
         var new_coord  = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y])
         var latitude = new_coord[1];
         var longitude = new_coord[0];
@@ -142,16 +132,22 @@ id = 0;
 
         });
 
+        // on cree une nouvelle FeatureLayer a partir des Graphic crees precedemment
         gare = new FeatureLayer({
-          source: liste, // autocast from an array of esri/Graphic
-          renderer:renderer1,
+          source: liste,
+          renderer:gareRenderer_s1,
           objectIdField: "FID",
         });
 
-        id = gare.id;
-        console.log(gare.id);
-
+        // la couche potentiellement interogee par le cadre change
         gare_surbrillance = gare;
+
+
+        // on enleve la couche des gares de bases
+        if(origine_layer_onmap ==1){
+          map.remove(layerGare);
+          origine_layer_onmap = 0;
+        }
 
         map.add(gare);
         renderer_encours = 1;
@@ -160,7 +156,6 @@ id = 0;
       });
 
   }
-
 
 
 nom_gares.addEventListener("input", nomDeGare, false);
@@ -174,29 +169,35 @@ p1.addEventListener("click", changerNomGare, false);
 p2.addEventListener("click", changerNomGare, false);
 p3.addEventListener("click", changerNomGare, false);
 
+var p = [p1,p2,p3];
 
+// permet de choisir la gare proposee comme celle que l'on desire rechercher
 function changerNomGare(event){
   nom_gares.value = event.target.innerHTML;
 }
 
-
+// on agrandit le volet lors de la recherche de gares
 function voletRecherche(event){
-
     volet.style.width = "600px";
 }
 
 
-var p = [p1,p2,p3];
+
+
+// permet de proposer a l'utilisateur les 3 gares les plus proches (semantiquement) de celle qui l'est en train de chercher
 
 function nomDeGare(event){
+
+  // permet de mettre en majuscules
   nom_gares.value = nom_gares.value.toUpperCase();
-  liste = [];
-  var query = gare1.createQuery();
+
+  var liste = [];
+  var query = layerGare.createQuery();
   query.where = "nom_long LIKE '" + nom_gares.value +"%'";
   query.outFields = ["nom_long"];
-  gare1.queryFeatures(query).features;
+  layerGare.queryFeatures(query).features;
 
-  gare1.queryFeatures(query).then(function(response){
+  layerGare.queryFeatures(query).then(function(response){
     response.features.forEach(function(item){
         liste.push(item.attributes.nom_long);
 
@@ -213,8 +214,6 @@ function nomDeGare(event){
 
       }
 
-
-
     });
 
 }
@@ -223,25 +222,33 @@ function nomDeGare(event){
 boutonGares.addEventListener("click", trouverGare, false);
 
 
+// permet a l'utilisateur de trouver la gare de son choix
+
 function trouverGare(event){
+
+  if(nom_gares.value != ""){
+
+  var str = "" + nom_gares.value;
+  var n = str.indexOf("'");
+  var regex = /'/gi;
+
+  gare_recherchee = str.replace(regex, "''");
 
   map.remove(gare);
   clearInterval(setInterVar);
-  liste = [];
-  var query = gare1.createQuery();
-  console.log(nom_gares.value);
-  query.where = "nom_long LIKE '" + nom_gares.value +"%'";
-  console.log(query.where);
-  query.outFields = ["x","y"];
-  gare1.queryFeatures(query).features;
+  var liste = [];
+  var query = layerGare.createQuery();
 
-  gareRenderer_s1.uniqueValueInfos = [];
+  query.where = "nom_long LIKE '" + gare_recherchee +"'"; // requete SQL du nom des gares
+
+  query.outFields = ["x","y"];
+  layerGare.queryFeatures(query).features;
+
   var new_coord;
 
-  gare1.queryFeatures(query).then(function(response){
+  layerGare.queryFeatures(query).then(function(response){
 
     response.features.forEach(function(item){
-
 
         new_coord  = proj4(lambert93,wgs84,[item.attributes.x,item.attributes.y])
         var latitude = new_coord[1];
@@ -260,45 +267,57 @@ function trouverGare(event){
 
         liste.push(pointGraphic);
 
-
       });
 
-      console.log(liste);
+      // on cree une nouvelle FeatureLayer a partir des Graphic crees precedemment
       gare = new FeatureLayer({
-        source: liste, // autocast from an array of esri/Graphic
-        renderer:renderer1,
+        source: liste,
+        renderer:gareRenderer_s1,
         objectIdField: "FID",
       });
 
+      // la couche potentiellement interogee par le cadre change
       gare_surbrillance = gare;
 
+      // on enleve la couche des gares de bases
+      if(origine_layer_onmap ==1){
+        map.remove(layerGare);
+        origine_layer_onmap = 0;
+      }
+
       map.add(gare);
-      renderer_encours = 1;
       clignoter(gare);
 
-
+      // On centre la carte la ou se trouve la gare
       view.center.latitude = new_coord[1];
       view.center.longitude = new_coord[0];
-
       view.goTo({
         target: view.center
       });
 
-
     });
 
+
+    // Une fois clique, on enleve les propositions de gares
     volet.style.width = "400px";
     nom_gares.value ="";
     p1.innerHTML ="";
     p2.innerHTML ="";
     p3.innerHTML ="";
 
+}
 
 }
 
-var setInterVar;
-renderer_encours = 0;
 
+
+
+
+// permet de faire clignoter les objets selectionnes en faisant alterner les
+// deux styles 1 et 2 de la couche gare
+
+var setInterVar;
+renderer_encours = 1;
 
 function clignoter(featurelayer){
 
@@ -306,22 +325,22 @@ clearInterval(setInterVar);
 setInterVar = setInterval( function c(){
 
     if (renderer_encours == 1){
-      featurelayer.renderer = renderer2;
+      featurelayer.renderer = gareRenderer_s2;
       renderer_encours = 2;
     }
 
     else {
-      featurelayer.renderer = renderer1;
+      featurelayer.renderer = gareRenderer_s1;
       renderer_encours = 1;
 
-
-}},1000);
+}},1000); // le clignotement a lieu toutes les 1s (1000ms)
 
 }
 
 
 
- //////////////////////// CONCERNE L'AFFICHAGE ///////////////////////////////
+
+// #################### Affichage de l'outil Surbrillance ################### //
 
 
 var metros = document.getElementById("metros");
@@ -337,18 +356,30 @@ var boutonRecherche= document.getElementById("boutonRecherche");
 var volet = document.getElementById("volet");
 
 
-// Réaction de la div RER en fonction du click sur le boutonRER
-
-
+/**
+ *
+ * Reaction de la div RER en fonction du click sur le boutonRER
+ */
 document.getElementById("boutonRER").addEventListener("click", function(){
-
+  // si on clique sur le bouton rer alors qu'il est affiche, il faut donc le fermer
   if (rer.style.display == "flex") {
+    // on eneleve la couche des gares selectionnees
+    map.remove(gare);
+    gare_surbrillance = 0;
+    gare = 0;
+
+    // on reaffiche la layer de base de l'ensemble des gares
+    if(origine_layer_onmap ==0){
+      map.add(layerGare);
+      origine_layer_onmap = 1;
+    }
+
     rer.style.display = "none";
     boutonMetro.style.display ="block";
     boutonRecherche.style.display ="block";
 
-
   }
+
   else {
     rer.style.display = "flex";
     boutonMetro.style.display ="none";
@@ -358,11 +389,21 @@ document.getElementById("boutonRER").addEventListener("click", function(){
 });
 
 
-// Réaction de la div metro en fonction du click sur le boutonMetro
+// Reaction de la div metro en fonction du clic sur le boutonMetro
 
 document.getElementById("boutonMetro").addEventListener("click", function(){
 
   if (metro.style.display == "flex") {
+    map.remove(gare);
+    gare_surbrillance = 0;
+    gare = 0;
+
+
+    if(origine_layer_onmap ==0){
+      map.add(layerGare);
+      origine_layer_onmap = 1;
+    }
+
     metro.style.display = "none";
     boutonRER.style.display ="block";
     boutonRecherche.style.display ="block";
@@ -380,10 +421,20 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
 });
 
 
-// Réaction de la div recherche en fonction du click sur le boutonRecherche
+
+// Reaction de la div recherche en fonction du click sur le boutonRecherche
 
 document.getElementById("boutonRecherche").addEventListener("click", function(){
   if (rech.style.display == "flex") {
+    map.remove(gare);
+    gare_surbrillance = 0;
+    gare = 0;
+
+    if(origine_layer_onmap ==0){
+      map.add(layerGare);
+      origine_layer_onmap = 1;
+    }
+
     volet.style.width = "400px";
     rech.style.display = "none";
     boutonRER.style.display ="block";
@@ -401,14 +452,15 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
 });
 
 
-//////////////////////////// REINITIALISATION /////////////////////////////////
+// lorsque l'outil surbrillance est active, la couche des gares d'origine est necessairement presente
+origine_layer_onmap = 1;
 
-// En fonction de la checkbox de l'outil on effectue des réinitialisations
 
+// ################ Reinitialisation de l'outil Surbrillance ################ //
 
+// En fonction de la checkbox de l'outil surbrillance on reinitialise les variables
 
 surbrillance.addEventListener("change", function parametres_Defaut(event){
-
 
 if(surbrillance.checked){
       gare = new FeatureLayer();
@@ -424,10 +476,14 @@ else {
       metro.style.display = "none";
       rech.style.display = "none";
       metros.style.overflowY = "hidden";
-
       boutonRecherche.style.display = "block";
       boutonRER.style.display ="block";
       boutonMetro.style.display ="block";
+
+      if(origine_layer_onmap ==0){
+        map.add(layerGare);
+        origine_layer_onmap = 1;
+      }
     }
 
 }, false);
