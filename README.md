@@ -30,10 +30,10 @@
 ## Documentation : 
  - Documentation développeur : [**documentations\Documentation_programmation.pdf**]
  
- - Documentation utilisateur : [**documentations\Guide_utilisateur.pdf
+ - Documentation utilisateur : [**documentations\Guide_utilisateur_malvoyants.pdf**]
  
  - Documentation utilisateur pour malvoyants : [**documentations\Guide_utilisateur.pdf**]
  
  - Documentation installateur : [**documentations\Documentation_installation.pdf**]
  
- - Rapport de projet : [**Rapport.pdf**]
+ - Rapport de projet : [**documentations\Rapport.pdf**]
