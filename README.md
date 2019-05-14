@@ -29,4 +29,6 @@
 ## Documentation : 
  - Documentation développeur : [**documentations\Docu_Developpeur.pdf**]
  
- - Documentation installateur : [**documentations\Guide_d_utilisation.pdf**]
+ - Documentation utilisateur : [**documentations\Guide_d_utilisation.pdf**]
+ 
+ - Documentation installateur : [**documentations\Guide_d_installation.pdf**]
