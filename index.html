@@ -2,6 +2,7 @@
 <html lang="fr" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="pictures/logoCamayeux_v3.ico">
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Open+Sans+Condensed:300|Saira+Extra+Condensed" rel="stylesheet">
     <link rel="stylesheet" href="accueil.css">
     <title>CamaYeux</title>
@@ -11,11 +12,12 @@
     <div id="popup">
       <p id="close">X</p>
     <div id="resume">
-      <p id="text">Ce projet de cartographie pour les personnes daltoniennes et malvoyantes est commandité par l'Institut d'Aménagement et d'Urbanisme de la région Ile-de-France (IAU).
-        Chaque année, l’IAU travaille sur un « sujet d’atelier ». Cette année, le thème porte sur le « Changement de regard – Changement de perspective ».
+      <p id="text">Ce projet de cartographie pour les personnes daltoniennes et malvoyantes est commandité par Mme Laurie Gobled de l'Institut d'Aménagement et d'Urbanisme de la région Ile-de-France (IAU).
+        Chaque année, l’IAU travaille sur un « sujet d’atelier ». Cette année, un des thèmes porte sur le <br> « Changement de regard – Changement de perspective ».
         Le projet mené s’inscrit dans ce thème et porte sur l’accessibilité de la cartographie.
       </p>
-      <p class="sources">Réalisé par : Marie Stretti, Anouk Schleich, Ridley Campbell, Hugo Boulze, étudiants du cycle Ingénieur à l'Ecole Nationale des Sciences Géographiques dans le cadre d'un projet développement, 2019</p>
+      <p class="sources">Réalisé dans le cadre d'un projet développement par : Marie Stretti, Anouk Schleich, Ridley Campbell, Hugo Boulze, élèves ingénieurs à l'Ecole Nationale des Sciences Géographiques, 2019.</p>
+
       <p class="sources">Sources des données :</p>
       <div id="sourceLogos">
         <img src="pictures/logoIAU.png" class="img" alt="IAU">
@@ -38,8 +40,8 @@
 
     <div id="haut">
       <div class="logos">
-        <img src="pictures/logoIAU.png" alt="IAU" style="height:80px; width:auto">
-        <img src="pictures/logoENSG.png" alt="ENSG" style="height:80px; width:auto">
+        <img src="pictures/logoIAU.png" alt="IAU" style="height:80px; width:auto; border-radius:10px">
+        <img src="pictures/logoENSG.png" alt="ENSG" style="height:80px; width:auto; border-radius:10px">
       </div>
       <div id="titre">
         <h1>camayeux  </h1>
@@ -49,18 +51,18 @@
       </div>
     </div>
 
-      <div id="content">
+      <div id="content" >
 
-        <div id="gauche" class="carre">
-          <div id="ghaut" class="square">
-            <img class="image" src="pictures/dalto.PNG" alt="dalto">
+        <div id="gauche" class="carre" >
+          <div id="ghaut" class="square" >
+             <img class="image" src="pictures/dalto_square.PNG" alt="dalto" style="overflow:hidden; border-radius: 10px 0% 0% 0%">
         </div>
           <div id="gbas" class="square">
 
             <div class="flip-card">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
-                  <input type="button" id="daltoniens" class="btn" value="Daltoniens">
+                  <input type="button" id="daltoniens" class="btn" value="Daltoniens" style="border-radius: 0% 0% 0% 10px">
                 </div>
               <div class="flip-card-back">
                 <a href="dalto.html" class="btn">Aller à la carte</a>
@@ -85,29 +87,37 @@
             </div>
           </div>
           <div id="mbas" class="square">
-            <img class="image" src="pictures/surbrillance.PNG" alt="surbrillance">
+             <img class="image" src="pictures/cadre.PNG" alt="404">
           </div>
 
         </div>
 
-        <div id="droite" class="carre">
-          <div id="dhaut" class="square">
-            <img class="image" src="pictures/cadre.PNG" alt="cadre">
+        <div id="droite" class="carre" >
+          <div id="dhaut" class="square" >
+             <img class="image" src="pictures/malvoyants_square.PNG" alt="cadre" style="overflow:hidden; border-radius: 0% 10px 0% 0%">
           </div>
           <div id="dbas" class="square">
-            <div class="flip-card">
+            <div class="flip-card" >
               <div class="flip-card-inner">
                 <div class="flip-card-front">
-                  <input type="button" id="malvoyants" class="btn" value="Malvoyants">
+                  <input type="button" id="malvoyants" class="btn" value="Malvoyants" style="border-radius: 0% 0% 10px 0%">
                 </div>
-                <div class="flip-card-back">
+                <div class="flip-card-back" >
                   <a href="malvoyant.html" class="btn">Aller à la carte</a>
                 </div>
               </div>
             </div>
         </div>
       </div>
+
+
     </div>
+
+
+    <div id="bas" >
+      <p>ENSG - IAU - 2019</p>
+    </div>
+
 
     <script type="text/javascript">
 

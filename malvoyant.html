@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Camayeux - Malvoyants</title>
+
+    <link rel="shortcut icon" href="pictures/logoCamayeux_v3.ico">
+    <title>CamaYeux - Malvoyants</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.5.0/proj4.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -19,19 +21,19 @@
 
 	   <a id="help" class="bandeau" href='#resume'> <i class="fas fa-question-circle fa-2x"></i></a>
       <div id="choixOutils" class="choooose">
-            <label class="container">Cadre
+            <label class="container">CADRE
               <input type="checkbox" id="cadre" name="choix" value="1" onchange="alertcadre(this)">
               <span class="checkmark" align="center"></span>
           </label>
-          <label class="container">Rechercher
+          <label class="container">RECHERCHER
             <input type="checkbox" id="surbrillance" name="choix" value="3">
             <span class="checkmark"></span>
           </label>
-            <label class="container">Commande Vocale
+            <label class="container">COMMANDE VOCALE
               <input type="checkbox" id="commande" name="choix" value="2" onchange="alertannyang(this)">
               <span class="checkmark"></span>
           </label>
-          <label class="container">Lecture Audio
+          <label class="container">LECTURE AUDIO
           <input type="checkbox" name="choix" id="lecture">
           <span class="checkmark"></span>
         </label>
@@ -46,7 +48,7 @@
   <div id="horiz">
     <div id='cadreOuest' class="cadres" style="display:none">West</div>
     <div id="viewDiv">
-      <label id="topog">Fond
+      <label id="topog">FOND
         <input type="checkbox" id="carte_topo">
         <span class="checkmark2"></span>
       </label>
@@ -143,19 +145,19 @@
     <script src="index.js"></script>
 
 	  <div id="popup">
-      <p id="close">X</p>
+      <p id="close" style="font-size:70px;">X</p>
     <div id="resume">
-      <p id="aide"> <i class="fas fa-question-circle fa-3x"></i> AIDE</p>
-	  <p id="title"> <i class="fas fa-home fa-2x"></i>  RETOUR A LA PAGE D'ACCUEIL</p>
-	  <p id="title"> CADRE </p>
-	  <p id="textes"> PERMET DE CONNAITRE LA DENSITE D'OBJETS PRESENTS SUR LA CARTE EN FONCTION DES DIRECTIONS (NORD,SUD,EST,OUEST) </p>
-	  <p id="title"> RECHERCHE </p>
-	  <p id="textes"> PERMET DE CHERCHER DES LIGNES DE METRO/RER OU DES GARES EN IDF </p>
-	  <p id="title"> COMMANDE VOCALE </p>
-	  <p id="textes"> PERMET DE NAVIGUER ORALEMENT SUR LA CARTE</p>
-	  <p id="title"> LECTURE AUDIO </p>
-	  <p id="textes"> PERMET D'AVOIR UNE AIDE VOCALE DE L'ORDINATEUR </p>
-	  <p id="title"> <i class="fas fa-search fa-2x"></i> LOUPE </p>
+    <p id="aide"> <i class="fas fa-question-circle fa-3x"></i> AIDE</p> <br>
+	  <p id="title"> <i class="fas fa-home fa-2x"></i>  RETOUR A LA PAGE D'ACCUEIL</p> <br>
+	  <p id="title"> CADRE </p> <br> <br>
+	  <p id="textes"> PERMET DE CONNAITRE LA DENSITE D'OBJETS PRESENTS SUR LA CARTE EN FONCTION DES DIRECTIONS (NORD,SUD,EST,OUEST) </p> <br>
+	  <p id="title"> RECHERCHER </p> <br> <br>
+	  <p id="textes"> PERMET DE RECHERCHER LES GARES DES LIGNES DE METRO/RER EN IDF </p> <br>
+	  <p id="title"> COMMANDE VOCALE </p> <br> <br>
+	  <p id="textes"> PERMET D'UTILISER LA VOIX POUR SE DEPLACER SUR LA CARTE ET POUR UTILISER LES FONCTIONNALITES</p> <br>
+	  <p id="title"> LECTURE AUDIO </p> <br> <br>
+	  <p id="textes"> PERMET D'AVOIR UNE AIDE VOCALE DE L'ORDINATEUR </p> <br>
+	  <p id="title"> <i class="fas fa-search fa-2x"></i> LOUPE </p> <br> <br>
 	  <p id="textes"> PERMET D'AFFICHER UNE LOUPE</p>
 
     </div>
