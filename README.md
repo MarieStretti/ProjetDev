@@ -15,8 +15,9 @@
     - Un mode de recherche et de sélection d'objets ou de familles d'objets de la carte
     - Un affichage clignotant des objets sélectionnés sur la carte
     - Un cadre de couleurs indiquant la direction des objets hors de l'emprise actuelle
-    - Un mode de lecture vocale, qui lit à haute voix le noms des options choisies par l'utilisateur.
     - Un mode de reconnaissance vocale, qui reconnaît des commandes prononcées à haute voix. (*ex: nord, sud, zoom, activer cadre*) 
+    - Un mode de lecture vocale, qui lit à haute voix le noms des options choisies par l'utilisateur
+   
     
 ## Guide d'utilisation : 
 
