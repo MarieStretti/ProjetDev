@@ -1,6 +1,8 @@
 # Projet Développement : Cartographie pour les daltoniens et malvoyants
 
 ### BOULZE Hugo, CAMPBELL Ridley, SCHLEICH Anouk, STRETTI Marie
+### Commanditaires : Francis Dhée (ENSG), Laurie GOBLED (Institut d'Aménagement et d'Urbanisme d'IDF)
+
 
 ## Objectif du projet : 
   Creation de 2 cartes web, respectivement pour personnes daltoniennes et malvoyantes.
