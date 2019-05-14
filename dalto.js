@@ -1,3 +1,7 @@
+var zoomlevel = 10;
+var lng_c = 2.4;
+var lat_c = 48.8;
+
 // import modules d'esri et fcts
 require([
   "esri/Map",
@@ -21,13 +25,34 @@ require([
   var view = new MapView({
     container: "viewDiv",
     map: webmap,
-    center: [2.4,48.8], //longlats
-    zoom: 11,
+    center: [lng_c,lat_c], //longlats
+    zoom: zoomlevel,
     constraints: {
-      maxZoom: 15,
       minZoom: 9,
     }
   });
+
+  /**
+   * Permet de limiter la carte observable a l'IDF
+   *
+   */
+  view.on( "pointer-move", function(){
+     if((view.extent.xmin < -20000) ||
+       (view.extent.ymin < 6000000)  ||
+       (view.extent.xmax > 600000) ||
+       (view.extent.ymax > 6500000)
+     ){
+
+     view.center.latitude = lat_c;
+     view.center.longitude = lng_c;
+     view.goTo({
+       animate : false,
+       target: view.center,
+     });
+
+     }
+
+ });
 
   view.when(function() {
     var featureLayer = webmap.layers.getItemAt(0);
@@ -95,6 +120,7 @@ require([
   var colorEtude;
   var param;
 
+  // activation ou desactivation du mode 'couleurs personnalisables'
   var btnPP = document.getElementById("btnPP");
   btnPP.addEventListener("click", function(){
     var pp = document.getElementById("PP");
@@ -107,7 +133,7 @@ require([
     }
   });
 
-
+  // activation ou desactivation du mode 'couleurs personnalisables'
   var items = document.getElementsByClassName('btnparam');
   for (var i = 0; i < items.length; i++) {
     items[i].addEventListener("change",function() {
@@ -141,12 +167,14 @@ require([
   });
 
 
-  /*
-  * Met a jour les couleurs des surfaces representant les amenagements (renderer)
-  * param color0 = couleur des projets 'en cours'
-  * param color1 = couleur des projets 'programmes'
-  * param color2 = couleur des projets 'a l'etude'
-  * return le renderer modifie
+
+ /**
+  * Fonction qui met a jour les couleurs des surfaces representant les amenagements sur la carte
+  *
+  * @param {*} color0 : couleur des projets 'en cours'
+  * @param {*} color1 : couleur des projets 'programmes'
+  * @param {*} color2 : couleur des projets 'a l'etude'
+  * @return le renderer modifie
   */
   function maj(color0,color1,color2){
     var param = {
@@ -182,11 +210,13 @@ require([
     return param;
   };
 
-  /*
-  * Convertir les couleurs en hexadecimales en rgb +- la transparence
-  * param hex = couleur en hexadecimales
-  * param alpha = transparence
-  * return la liste rgb +- la transparence
+
+ /**
+  * Fonction qui convertit les couleurs du hexadecimal en rgb (+- la transparence)
+  *
+  * @param {*} hex : couleur en hexadecimales
+  * @param {*} alpha  : la transparence
+  * @returns la liste rgb +- la transparence
   */
   function hexToRGB(hex, alpha) {
     var r = parseInt(hex.slice(1, 3), 16),

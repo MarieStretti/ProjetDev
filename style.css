@@ -269,6 +269,7 @@ hr {
   top: 95px;
   padding: 7px 7px 4px 42px;
   border-radius: 10px;
+  font-size: 1.2em;
 }
 
 #topog input {
@@ -288,7 +289,7 @@ hr {
   height: 30px;
   width: 30px;
   background-color: white;
-  margin: 7px 2px auto 7px;
+  margin: 10.5px 2px auto 7px;
   border-radius: 10px;
 }
 
@@ -359,7 +360,7 @@ hr {
   position: relative;
   padding-left: 60px;
   cursor: pointer;
-  font-size: 2em;
+  font-size: 2.3em;
   border-left: 2px solid white;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -502,6 +503,9 @@ hr {
   height: 100%;
 }
 
+
+/* CSS Aide - Malvoyants */
+
 #popup {
   display: none;
   flex-flow: column nowrap;
@@ -527,24 +531,38 @@ hr {
 }
 
 #aide {
-  display: flex;
-  align-items: center;
-  font-size: 20px;
+  font-size: 70px;
   font-weight: bold;
   margin: 0;
+  text-align: center;
 }
 
 #title {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 50px;
   margin-bottom: 10px;
   margin-top: 30px;
 }
 
 #textes {
   margin: 0;
+  font-size: 50px;
 }
 
-#resume>p i {
-  margin-right: 5px;
+#resume {
+  overflow-y: scroll;
+  color: #470907;
+    text-align: center;
+}
+
+::-webkit-scrollbar {
+  width: 50px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #470907;
 }

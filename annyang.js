@@ -1,4 +1,10 @@
- function commande_voc (view,map){
+/**
+ *
+ *
+ * @param {*} view
+ * @param {*} map
+ */
+function commande_voc (view,map){
 
    console.log('annyang commande going');
 
@@ -35,31 +41,27 @@
 
      //Déplacement de la vue pour voir la partie plus à gauche
      var commandegauche1 = {'gauche': gaucheFunction};
-     var commandegauche2 = {'vers l Ouest': gaucheFunction};
-     var commandegauche3 = {'Ouest': gaucheFunction};
-     var commandegauche4 = {'vers la gauche': gaucheFunction};
+     var commandegauche2 = {'vers la gauche': gaucheFunction};
+
      function gaucheFunction(){
-         console.log("gauche");
-         var xmin = view.extent.xmin.toFixed(2);
-         var xmax = view.extent.xmax.toFixed(2);
-         var x_range = xmax - xmin;
-         var x_new = xmin - (x_range/6);
-         view.center.x = x_new;
-         view.goTo({
-           target: view.center,
-         });
-       };
+        console.log("gauche");
+        var xmin = view.extent.xmin.toFixed(2);
+        var xmax = view.extent.xmax.toFixed(2);
+        var x_range = xmax - xmin;
+        var x_new = xmin - (x_range/6);
+        view.center.x = x_new;
+        view.goTo({
+          target: view.center,
+        });
+    };
+
      annyang.addCommands(commandegauche1);
      annyang.addCommands(commandegauche2);
-     annyang.addCommands(commandegauche3);
-     annyang.addCommands(commandegauche4);
 
 
      //Déplacement de la vue pour voir la partie plus à droite
      var commandedroite1 = {'droite': droiteFunction};
-     var commandedroite2 = {'vers l Est': droiteFunction};
-     var commandedroite3 = {'Est': droiteFunction};
-     var commandedroite4 = {'vers la droite': droiteFunction};
+     var commandedroite2 = {'vers la droite': droiteFunction};
      function droiteFunction(){
         console.log("droite");
         var xmin = view.extent.xmin.toFixed(2);
@@ -73,8 +75,6 @@
       };
       annyang.addCommands(commandedroite1);
       annyang.addCommands(commandedroite2);
-      annyang.addCommands(commandedroite3);
-      annyang.addCommands(commandedroite4);
 
 
   //Déplacement de la vue pour voir la partie plus en haut
@@ -192,6 +192,10 @@
 
  }
 
+ /**
+  *
+  * @param {*} checkboxElem
+  */
  function alertannyang(checkboxElem) {
   if (checkboxElem.checked) {
     annyang.start({autoRestart : true});

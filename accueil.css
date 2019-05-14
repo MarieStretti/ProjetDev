@@ -28,6 +28,15 @@ h1 {
   position: absolute;
 }
 
+#bas{
+  position: absolute;
+
+  width: 100%;
+  text-align: center;
+  padding-top: 715px;
+  z-index:0;
+}
+
 .logos {
   display: flex;
   justify-content: space-between;
@@ -57,11 +66,13 @@ h1 {
   width: 800px;
   height: 500px;
   background-color: white;
+  border-radius:10px;
   display: flex;
   justify-content: space-between;
   top: 210px;
   position: relative;
   z-index: 1;
+
 }
 
 .carre {
@@ -79,6 +90,7 @@ h1 {
   align-items: center;
   justify-content: center;
   /* border: 2px solid black; */
+
 }
 
 .btn {
@@ -95,6 +107,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+
 }
 
 .btn:hover {

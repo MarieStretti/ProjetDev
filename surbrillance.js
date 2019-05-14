@@ -1,3 +1,13 @@
+
+
+
+/**
+ *
+ * @param {*} view
+ * @param {*} map
+ * @param {*} layerGare
+ * @param {*} gareRenderer_defaut
+ */
 function executeSurbrillance(view, map, layerGare, gareRenderer_defaut){
 
 require([
@@ -22,7 +32,7 @@ require([
 
 
 
-//definition de la projection Lmabert93
+//definition de la projection Lambert93
 
 var wgs84 = proj4.Proj('EPSG:4326');
 proj4.defs("EPSG:2154","+proj=lcc +lat_1=49 +lat_2=44 +lat_0=46.5 +lon_0=3 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
@@ -132,6 +142,13 @@ for (var i = 0; i < classMETRO.length; i++) {
         // la couche potentiellement interogee par le cadre change
         gare_surbrillance = gare;
 
+
+        // on enleve la couche des gares de bases
+        if(origine_layer_onmap ==1){
+          map.remove(layerGare);
+          origine_layer_onmap = 0;
+        }
+
         map.add(gare);
         renderer_encours = 1;
         clignoter(gare);
@@ -167,7 +184,7 @@ function voletRecherche(event){
 
 
 
-// permet de proposer a l'utilisateur les 3 gares les plus proches (semantiquement) de celle qui 'l'est en train de chercher
+// permet de proposer a l'utilisateur les 3 gares les plus proches (semantiquement) de celle qui l'est en train de chercher
 
 function nomDeGare(event){
 
@@ -222,7 +239,7 @@ function trouverGare(event){
   var liste = [];
   var query = layerGare.createQuery();
 
-  query.where = "nom_long LIKE '" + gare_recherchee +"'";
+  query.where = "nom_long LIKE '" + gare_recherchee +"'"; // requete SQL du nom des gares
 
   query.outFields = ["x","y"];
   layerGare.queryFeatures(query).features;
@@ -262,6 +279,11 @@ function trouverGare(event){
       // la couche potentiellement interogee par le cadre change
       gare_surbrillance = gare;
 
+      // on enleve la couche des gares de bases
+      if(origine_layer_onmap ==1){
+        map.remove(layerGare);
+        origine_layer_onmap = 0;
+      }
 
       map.add(gare);
       clignoter(gare);
@@ -334,14 +356,24 @@ var boutonRecherche= document.getElementById("boutonRecherche");
 var volet = document.getElementById("volet");
 
 
-// Reaction de la div RER en fonction du click sur le boutonRER
-
+/**
+ *
+ * Reaction de la div RER en fonction du click sur le boutonRER
+ */
 document.getElementById("boutonRER").addEventListener("click", function(){
-
+  // si on clique sur le bouton rer alors qu'il est affiche, il faut donc le fermer
   if (rer.style.display == "flex") {
+    // on eneleve la couche des gares selectionnees
     map.remove(gare);
     gare_surbrillance = 0;
     gare = 0;
+
+    // on reaffiche la layer de base de l'ensemble des gares
+    if(origine_layer_onmap ==0){
+      map.add(layerGare);
+      origine_layer_onmap = 1;
+    }
+
     rer.style.display = "none";
     boutonMetro.style.display ="block";
     boutonRecherche.style.display ="block";
@@ -365,6 +397,13 @@ document.getElementById("boutonMetro").addEventListener("click", function(){
     map.remove(gare);
     gare_surbrillance = 0;
     gare = 0;
+
+
+    if(origine_layer_onmap ==0){
+      map.add(layerGare);
+      origine_layer_onmap = 1;
+    }
+
     metro.style.display = "none";
     boutonRER.style.display ="block";
     boutonRecherche.style.display ="block";
@@ -390,6 +429,12 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
     map.remove(gare);
     gare_surbrillance = 0;
     gare = 0;
+
+    if(origine_layer_onmap ==0){
+      map.add(layerGare);
+      origine_layer_onmap = 1;
+    }
+
     volet.style.width = "400px";
     rech.style.display = "none";
     boutonRER.style.display ="block";
@@ -405,6 +450,10 @@ document.getElementById("boutonRecherche").addEventListener("click", function(){
 
   }
 });
+
+
+// lorsque l'outil surbrillance est active, la couche des gares d'origine est necessairement presente
+origine_layer_onmap = 1;
 
 
 // ################ Reinitialisation de l'outil Surbrillance ################ //
@@ -430,6 +479,11 @@ else {
       boutonRecherche.style.display = "block";
       boutonRER.style.display ="block";
       boutonMetro.style.display ="block";
+
+      if(origine_layer_onmap ==0){
+        map.add(layerGare);
+        origine_layer_onmap = 1;
+      }
     }
 
 }, false);

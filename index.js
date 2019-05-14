@@ -16,26 +16,12 @@ require([
     "esri/renderers/UniqueValueRenderer",
     "esri/Color",
     "esri/symbols/WebStyleSymbol",
-    "esri/geometry/Extent",
     "esri/core/watchUtils",
     "dojo/domReady!"
 
   ], function(Map, MapView, WebMap, FeatureLayer, Query, QueryTask, Graphic, GraphicsLayer, SimpleLineSymbol, SimpleFillSymbol,
-        UniqueValueRenderer, Color, WebStyleSymbol,Extent, watchUtils) {
+        UniqueValueRenderer, Color, WebStyleSymbol, watchUtils) {
 
-
-   var extentMap = new Extent({
-     xmax:1000000, //768211,
-     xmin:-10000, //530887,
-     ymin:6000000,//6750430,
-     ymax:6500000,//6942667,
-
-   });
-
-   var webStyleSymbol = new WebStyleSymbol({
-     name: "Train",
-     styleName: "EsriIconsStyle"
-   });
 
   var map = new WebMap({
     portalItem: {
@@ -85,15 +71,16 @@ map.add(gare);
     }
   });
 
-  var maxExtent = extentMap;
 
-  // Permet de limiter la carte observable à l'IDF
-
+  /**
+   * Permet de limiter la carte observable a l'IDF
+   *
+   */
   view.on( "pointer-move", function(){
-     if((view.extent.xmin < maxExtent.xmin) ||
-       (view.extent.ymin < maxExtent.ymin)  ||
-       (view.extent.xmax > maxExtent.xmax) ||
-       (view.extent.ymax > maxExtent.ymax)
+     if((view.extent.xmin < -20000) ||
+       (view.extent.ymin < 6000000)  ||
+       (view.extent.xmax > 600000) ||
+       (view.extent.ymax > 6500000)
      ){
 
      view.center.latitude = lat_c;
@@ -107,10 +94,9 @@ map.add(gare);
 
  });
 
-
   view.ui.move([ "zoom", map ], "top-right");
 
-  view.zoom=zoomlevel;
+  view.zoom = zoomlevel;
   zoomlevel = view.zoom;
 
   // permet de ne pas pouvoir afficher les attributs qui parasitent la vue
@@ -120,7 +106,11 @@ surbrillance.addEventListener("change",executeSurbrillanceEvent,false);
 executeSurbrillance(view, map, gare, gareRenderer_defaut);
 var voletclos = document.getElementById("volet_clos");
 
-// on peut passer cette fonction dans surbrillance.js a la maniere du cadre et de la commande vocal avec un alertsurbrillance
+//
+/**
+ * on peut passer cette fonction dans surbrillance.js a la maniere du cadre et de la commande vocale avec un alertsurbrillance
+ * @param {*} event : evenement 'change' du bouton Surbrillance
+ */
 function executeSurbrillanceEvent(event){
   if (surbrillance.checked) {
     volet_clos.style.display = "flex";
