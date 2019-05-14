@@ -22,7 +22,7 @@
 ## Guide d'utilisation : 
 
  Depuis la page d'accueil, cliquer sur les liens pour accéder vers les deux cartes web. 
- Une fois sur les cartes web, le bandeau supérieur permet d'activer les différentes fonctionnalités. La maison dans le coin supérieur gauche permet de revenir à la page d'acceuil, et le point d'interrogation à sa droite permet d'ouvrir un tuto d'utilisation pour la carte des malvoyants.
+ Une fois sur les cartes web, le bandeau supérieur permet d'activer les différentes fonctionnalités. La maison dans le coin supérieur gauche permet de revenir à la page d'accueil, et le point d'interrogation à sa droite permet d'ouvrir un tuto d'utilisation pour la carte des malvoyants.
  Les fonctionnalités de la carte sont toutes activables avec la souris. Pour la partie aide vocale, il faut énoncer clairement les commandes dans le micro de l'ordinateur. L'utilisation d'un microphone externe peut grandement aider la reconnaissance des commandes.
  
  Le fonctionnement du code est détaillé dans la documentation développeur, référencée ci-dessous.
